@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajay's Embedded Systems Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #0F6E56;
+            --primary-light: #1D9E75;
+            --secondary: #00B4E0;
+            --accent: #FF6B35;
+            --gold: #C9960C;
+            --gold-light: #F5C842;
+            --gold-pale: #FFF8E1;
+            --bg: #F4F7F5;
+            --card: #FFFFFF;
+            --text: #1A2332;
+            --muted: #667788;
+            --border: #E2EAE6;
+            --shadow-sm: 0 2px 8px rgba(15,110,86,0.08);
+            --shadow-md: 0 6px 24px rgba(15,110,86,0.12);
+            --shadow-lg: 0 12px 40px rgba(15,110,86,0.18);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        nav { display: flex; gap: 0.8rem; }
+
+        .nav-btn {
+            padding: 0.5rem 1.2rem;
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ===== PAGES ===== */
+        .page { display: none; padding-top: 72px; }
+        .page.active { display: block; animation: fadeIn 0.4s ease-in; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #homePage { padding-top: 72px; min-height: 100vh; }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            position: relative;
+            min-height: calc(100vh - 72px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem 3rem;
+        }
+
+        .hero-bg-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                160deg,
+                rgba(244,247,245,0.97) 0%,
+                rgba(232,242,237,0.93) 50%,
+                rgba(244,247,245,0.97) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 700px;
+            padding: 0 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary);
+            background: rgba(15,110,86,0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1.4rem;
+            border: 1px solid rgba(15,110,86,0.2);
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+        }
+
+        .hero-title span { color: var(--primary); }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--muted);
+            margin-bottom: 2.2rem;
+            line-height: 1.7;
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(15,110,86,0.3);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(15,110,86,0.35);
+        }
+
+        /* ===== HIGHLIGHTS STRIP ===== */
+        .highlights-strip {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .highlights-label {
+            text-align: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+        }
+
+        .highlights-label::before,
+        .highlights-label::after {
+            content: '';
+            height: 1px;
+            width: 50px;
+            background: linear-gradient(90deg, transparent, var(--gold));
+        }
+        .highlights-label::after {
+            background: linear-gradient(270deg, transparent, var(--gold));
+        }
+
+        .hl-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+        }
+
+        .hl-track {
+            display: flex;
+            transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hl-card {
+            min-width: 100%;
+            padding: 1.4rem 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.6rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,248,225,0.9));
+            border: 1px solid rgba(201,150,12,0.25);
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(201,150,12,0.12);
+            user-select: none;
+        }
+
+        .hl-icon-wrap {
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 3px 12px rgba(201,150,12,0.35);
+        }
+
+        .hl-text { flex: 1; }
+
+        .hl-meta {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.25rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hl-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+            line-height: 1.3;
+        }
+
+        .hl-desc {
+            font-size: 0.88rem;
+            color: var(--muted);
+        }
+
+        .hl-badge {
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #5A3E00;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .hl-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .hl-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(201,150,12,0.25);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .hl-dot.active {
+            background: var(--gold);
+            width: 22px;
+            border-radius: 4px;
+        }
+
+        /* ===== FEATURED EXPERTISE ===== */
+        .expertise-section {
+            background: var(--card);
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .expertise-visual {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .expertise-content h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .expertise-content h2 span { color: var(--primary); }
+
+        .expertise-content p {
+            font-size: 1rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .feature-list { display: flex; flex-direction: column; gap: 0.7rem; }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.7rem 1rem;
+            background: rgba(15,110,86,0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            font-size: 0.93rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .feature-item span:first-child {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 0.8rem; padding: 0.8rem 1rem; }
+            nav { flex-wrap: wrap; gap: 0.4rem; }
+            .nav-btn { padding: 0.4rem 0.8rem; font-size: 0.82rem; }
+            .expertise-grid { grid-template-columns: 1fr; }
+            .expertise-visual { height: 200px; font-size: 2.5rem; }
+            .hl-card { flex-direction: column; text-align: center; padding: 1.2rem 1.5rem; }
+            .hl-badge { align-self: center; }
+        }
+
+        /* ===== CONTENT SECTIONS ===== */
+        .content-section { display: none; padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .content-section.active { display: block; animation: fadeIn 0.4s ease-in; }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 2.5rem;
+            text-align: center;
+            letter-spacing: -0.8px;
+        }
+
+        .section-title span { color: var(--primary); }
+
+        .close-btn {
+            position: fixed;
+            top: 80px;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.25s ease;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn.active { display: flex; }
+        .close-btn:hover { background: var(--primary-light); transform: scale(1.1); }
+
+        /* ===== ABOUT ===== */
+        .about-content { background: var(--card); padding: 3rem; border-radius: 12px; box-shadow: var(--shadow-md); max-width: 800px; margin: 0 auto; }
+        .about-intro { font-size: 1rem; color: var(--muted); line-height: 1.9; margin-bottom: 2rem; }
+        .about-intro strong { color: var(--primary); font-weight: 700; }
+        .about-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .about-item { padding: 1.4rem; background: var(--bg); border-radius: 8px; border-left: 3px solid var(--secondary); }
+        .about-item h4 { color: var(--primary); margin-bottom: 0.6rem; font-size: 1rem; font-weight: 700; }
+        .about-item p { color: var(--muted); font-size: 0.93rem; line-height: 1.7; }
+        @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+
+        /* ===== SKILLS ===== */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+        .skill-card { background: var(--card); padding: 1.8rem; border-radius: 12px; border: 1.5px solid var(--border); transition: all 0.3s ease; box-shadow: var(--shadow-sm); }
+        .skill-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+        .skill-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+        .skill-card h4 { color: var(--primary); margin-bottom: 0.7rem; font-size: 1.05rem; font-weight: 700; }
+        .skill-items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .skill-tag { background: var(--bg); color: var(--text); padding: 0.35rem 0.7rem; border-radius: 4px; font-size: 0.82rem; border: 1px solid var(--border); font-weight: 500; }
+
+        /* ===== PROJECTS — PROFESSIONAL ENGINEERING STYLE ===== */
+        .projects-view {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-folder {
+            background: #FFFFFF;
+            border: 1px solid #E4E7EC;
+            border-radius: 12px;
+            padding: 0;
+            cursor: pointer;
+            transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05), 0 2px 8px rgba(0,0,0,0.03);
+            text-align: left;
+            color: var(--text);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-folder:hover {
+            border-color: #9CBFB5;
+            box-shadow: 0 8px 28px rgba(15,110,86,0.12), 0 2px 8px rgba(0,0,0,0.06);
+            transform: translateY(-4px);
+        }
+
+        .pf-top-bar {
+            height: 3px;
+            width: 100%;
+            background: #E4E7EC;
+            transition: background 0.22s ease;
+            flex-shrink: 0;
+        }
+
+        .project-folder:hover .pf-top-bar {
+            background: var(--primary);
+        }
+
+        .pf-body {
+            padding: 1.8rem 1.8rem 1.6rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .pf-icon-wrap {
+            width: 52px;
+            height: 52px;
+            background: #F5F7FA;
+            border: 1px solid #E4E7EC;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.4rem;
+            transition: background 0.22s ease, border-color 0.22s ease;
+        }
+
+        .project-folder:hover .pf-icon-wrap {
+            background: #EAF3EF;
+            border-color: #B8D8CF;
+        }
+
+        .pf-icon-wrap svg {
+            width: 26px;
+            height: 26px;
+            stroke: #667788;
+            fill: none;
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.22s ease;
+        }
+
+        .project-folder:hover .pf-icon-wrap svg {
+            stroke: var(--primary);
+        }
+
+        .pf-category {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #98A5B0;
+            margin-bottom: 0.45rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .folder-name {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: #101828;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+        }
+
+        .folder-subtitle {
+            font-size: 0.855rem;
+            color: #6B7A8D;
+            line-height: 1.6;
+            margin-bottom: 1.6rem;
+            font-weight: 400;
+            flex: 1;
+        }
+
+        .pf-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid #F0F2F5;
+        }
+
+        .folder-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #475467;
+            background: #F5F7FA;
+            border: 1px solid #E4E7EC;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            letter-spacing: 0.1px;
+        }
+
+        .pf-arrow {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid #E4E7EC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.22s ease;
+        }
+
+        .pf-arrow svg {
+            width: 13px;
+            height: 13px;
+            stroke: #98A5B0;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.22s ease;
+        }
+
+        .project-folder:hover .pf-arrow {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .project-folder:hover .pf-arrow svg {
+            stroke: white;
+        }
+
+        /* ===== PROJECT LIST & DETAIL ===== */
+        .project-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+        .project-card { background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.3s ease; cursor: pointer; border: 1.5px solid #E4E7EC; }
+        .project-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: var(--shadow-lg); }
+
+        /* Card thumbnail — image fills the slot, fallback bg is neutral gray */
+        .project-image {
+            width: 100%;
+            height: 180px;
+            background: #F0F2F5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+        .project-card:hover .project-image img { transform: scale(1.04); }
+
+        /* Thin green accent bar at bottom of image */
+        .project-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .project-card:hover .project-image::after { opacity: 1; }
+
+        .project-info { padding: 1.3rem; }
+        .project-title { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem; }
+        .project-caption { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+
+        /* Detail view */
+        .project-detail { background: var(--card); padding: 2.5rem; border-radius: 12px; max-width: 860px; margin: 0 auto; box-shadow: var(--shadow-md); }
+        .project-detail-image {
+            width: 100%;
+            height: 240px;
+            background: #F0F2F5;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 1px solid #E4E7EC;
+        }
+        .project-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .project-detail h2 { color: var(--primary); font-size: 1.6rem; margin-bottom: 0.8rem; font-weight: 800; }
+        .project-detail-text { color: var(--muted); font-size: 0.97rem; line-height: 1.9; margin-bottom: 1.5rem; }
+        .tech-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+        .tech-badge { background: var(--primary); color: white; padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+
+        .internship-block { background: var(--bg); border-radius: 8px; padding: 1.2rem 1.4rem; margin-top: 1.2rem; border-left: 3px solid var(--gold); }
+        .internship-block h5 { color: var(--gold); font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.5rem; }
+        .internship-block p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+
+        .certs-list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 1rem; }
+        .cert-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: var(--muted); }
+        .cert-item::before { content: '🏅'; font-size: 1rem; flex-shrink: 0; }
+
+        /* ===== CONTACT ===== */
+        .contact-content { background: var(--card); padding: 3rem; border-radius: 12px; max-width: 560px; margin: 0 auto; box-shadow: var(--shadow-md); text-align: center; }
+        .contact-text { font-size: 1rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.8; }
+        .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .contact-link { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.4rem; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.25s ease; }
+        .contact-link:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .contact-info { margin-top: 1.5rem; font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+        .contact-info strong { color: var(--text); }
+
+        /* ===== FOOTER ===== */
+        footer { background: var(--card); padding: 1.8rem; text-align: center; color: var(--muted); border-top: 1px solid var(--border); font-size: 0.9rem; }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.65rem 1.3rem;
+            background: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 1.8rem;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.25s ease;
+        }
+
+        .btn-back:hover { background: var(--primary); color: white; }
+
+        @media (max-width: 768px) {
+            .close-btn { top: 70px; right: 1rem; }
+            .project-detail { padding: 1.5rem; }
+            .projects-view { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Ajay.c</div>
+        <nav>
+            <button class="nav-btn" onclick="showPage('home')">Home</button>
+            <button class="nav-btn" onclick="showContent('about')">About</button>
+            <button class="nav-btn" onclick="showContent('skills')">Skills</button>
+            <button class="nav-btn" onclick="showContent('projects')">Projects</button>
+            <button class="nav-btn" onclick="showContent('contact')">Contact</button>
+        </nav>
+    </header>
+
+    <button class="close-btn" onclick="closeContent()">✕</button>
+
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page active">
+        <div class="hero-section">
+            <div class="hero-bg-overlay"></div>
+
+            <div class="hero-content">
+                <span class="hero-eyebrow">⚡ Aspiring Embedded Software Developer</span>
+                <h1 class="hero-title">
+                    Engineering the <span>Edge</span><br>of Real Hardware
+                </h1>
+                <p class="hero-subtitle">
+                    STM32 · FreeRTOS · CAN Bus · TinyML · Bare-Metal C<br>
+                    Third-year ECE student building real firmware from register level to RTOS — targeting Tier-1 automotive internships.
+                </p>
+                <button class="hero-btn" onclick="showContent('about')">
+                    Know About Me →
+                </button>
+            </div>
+
+            <div class="highlights-strip">
+                <div class="highlights-label">✦ HIGHLIGHTS ✦</div>
+
+                <div class="hl-carousel">
+                    <div class="hl-track" id="hlTrack">
+                        <div class="hl-card">
+                            <div class="hl-icon-wrap">🦾</div>
+                            <div class="hl-text">
+                                <div class="hl-meta">Robotics Project</div>
+                                <div class="hl-title">5-DOF Robotic Arm — STM32 + ESP32</div>
+                                <div class="hl-desc">Mobile App → Wi-Fi → ESP32 (UART) → STM32 F411RE (PWM) → 5× Servo Motors</div>
+                            </div>
+                            <div class="hl-badge">🚀 Built</div>
+                        </div>
+                        <div class="hl-card">
+                            <div class="hl-icon-wrap">🚗</div>
+                            <div class="hl-text">
+                                <div class="hl-meta">Automotive Protocols</div>
+                                <div class="hl-title">CAN Bus — STM32F407 with MCP2551 Transceivers</div>
+                                <div class="hl-desc">CAN1↔CAN2 inter-node communication, bare-metal loopback, interrupt mailbox handling</div>
+                            </div>
+                            <div class="hl-badge">🎖️ Working</div>
+                        </div>
+                        <div class="hl-card">
+                            <div class="hl-icon-wrap">🧠</div>
+                            <div class="hl-text">
+                                <div class="hl-meta">Edge AI / TinyML</div>
+                                <div class="hl-title">TensorFlow Lite Micro on STM32F407</div>
+                                <div class="hl-desc">Sine-wave model trained, quantized &amp; deployed — on-device inference in CCMRAM</div>
+                            </div>
+                            <div class="hl-badge">✅ Deployed</div>
+                        </div>
+                        <div class="hl-card">
+                            <div class="hl-icon-wrap">📡</div>
+                            <div class="hl-text">
+                                <div class="hl-meta">Multi-Protocol</div>
+                                <div class="hl-title">UART · I2C · SPI · CAN · DMA · Interrupts</div>
+                                <div class="hl-desc">MPU6050, GSM 800L, LoRa SX1278 — all integrated and benchmarked</div>
+                            </div>
+                            <div class="hl-badge">📡 Verified</div>
+                        </div>
+                        <div class="hl-card">
+                            <div class="hl-icon-wrap">🔁</div>
+                            <div class="hl-text">
+                                <div class="hl-meta">RTOS</div>
+                                <div class="hl-title">FreeRTOS on STM32 — Native API (Active Learning)</div>
+                                <div class="hl-desc">Tasks, binary semaphores, ISR-safe APIs, vTaskDelayUntil, NVIC priority rules</div>
+                            </div>
+                            <div class="hl-badge">🌟 In Progress</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hl-dots" id="hlDots">
+                    <button class="hl-dot active" onclick="goToSlide(0)"></button>
+                    <button class="hl-dot" onclick="goToSlide(1)"></button>
+                    <button class="hl-dot" onclick="goToSlide(2)"></button>
+                    <button class="hl-dot" onclick="goToSlide(3)"></button>
+                    <button class="hl-dot" onclick="goToSlide(4)"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEATURED EXPERTISE -->
+        <div class="expertise-section">
+            <div class="expertise-grid">
+                <div class="expertise-visual">🖥️</div>
+                <div class="expertise-content">
+                    <h2>Featured <span>Expertise</span></h2>
+                    <p>Specializing in embedded firmware development on ARM Cortex-M4 — from zero-HAL bare-metal register programming to HAL-based multi-peripheral integration, CAN bus automotive protocols, and on-device TinyML inference.</p>
+                    <div class="feature-list">
+                        <div class="feature-item"><span>✓</span> Bare-Metal &amp; HAL Firmware — STM32 Nucleo F411RE, STM32F407 Discovery</div>
+                        <div class="feature-item"><span>✓</span> CAN Bus (ISO 11898) — MCP2551 Transceivers, Mailbox TX/RX, Filter Banks</div>
+                        <div class="feature-item"><span>✓</span> Multi-Protocol — UART, I2C, SPI, DMA, Timers, ADC, RTC, Watchdog</div>
+                        <div class="feature-item"><span>✓</span> FreeRTOS — Tasks, Semaphores, Queues, ISR-safe APIs (Learning)</div>
+                        <div class="feature-item"><span>✓</span> TinyML — TFLite Micro &amp; X-CUBE-AI on STM32F407</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <div id="aboutContent" class="content-section">
+        <h2 class="section-title">About <span>Me</span></h2>
+        <div class="about-content">
+            <p class="about-intro">
+                Third-year <strong>Electronics and Communication Engineering</strong> student at <strong>KPR Institute of Engineering &amp; Technology, Coimbatore</strong> — aspiring to become an Embedded Software Developer.<br><br>
+                I have strong hands-on experience in STM32 Nucleo-F411RE and STM32F407 Discovery microcontrollers, proficient in both <strong>Bare-Metal and HAL-based firmware development</strong>. I'm familiar with GNU Toolchain workflows, debugging using ST-Link and Logic Analyzers, and actively learning FreeRTOS. I'm targeting <strong>Tier-1 automotive internships</strong> at companies like Bosch RBEI and Continental.
+            </p>
+            <div class="about-grid">
+                <div class="about-item">
+                    <h4>🎯 Personal Info</h4>
+                    <p>
+                        <strong>Name:</strong> Ajay C<br>
+                        <strong>College:</strong> KPR Institute of Engineering &amp; Technology<br>
+                        <strong>Stream:</strong> B.E. ECE (2024–2028)<br>
+                        <strong>Place:</strong> Tiruppur, Tamil Nadu<br>
+                        <strong>Phone:</strong> +91 8608334383
+                    </p>
+                </div>
+                <div class="about-item">
+                    <h4>📊 Academic Performance</h4>
+                    <p>
+                        <strong>CGPA:</strong> 7.5 / 10<br>
+                        <strong>12th Grade:</strong> 84.16%<br>
+                        <strong>10th Grade:</strong> 75.8%<br>
+                        <strong>Year:</strong> 3rd Year (Pursuing)
+                    </p>
+                </div>
+                <div class="about-item">
+                    <h4>💡 Current Focus</h4>
+                    <p>
+                        → FreeRTOS on STM32 (Native API)<br>
+                        → Ethernet in Embedded Systems<br>
+                        → Advanced C &amp; Bare-Metal<br>
+                        → Ubuntu 24.04 Development<br>
+                        → Automotive Protocols (CAN/LIN)
+                    </p>
+                </div>
+                <div class="about-item">
+                    <h4>🚀 Target Roles</h4>
+                    <p>
+                        Actively seeking <strong>Embedded Software Internships</strong> at Tier-1 automotive companies.<br><br>
+                        <strong>Target:</strong> Bosch RBEI, Continental<br>
+                        <strong>Focus:</strong> Firmware, RTOS, CAN, AUTOSAR
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SKILLS SECTION -->
+    <div id="skillsContent" class="content-section">
+        <h2 class="section-title">Skills &amp; <span>Technologies</span></h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">⚙️</div>
+                <h4>Microcontrollers</h4>
+                <div class="skill-items">
+                    <span class="skill-tag">STM32 Nucleo F411RE</span>
+                    <span class="skill-tag">STM32F407 Discovery</span>
+                    <span class="skill-tag">ARM Cortex-M4</span>
+                    <span class="skill-tag">ESP32</span>
+                    <span class="skill-tag">Arduino</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <h4>Programming Languages</h4>
+                <div class="skill-items">
+                    <span class="skill-tag">C — Bare-Metal</span>
+                    <span class="skill-tag">C — HAL</span>
+                    <span class="skill-tag">C++ (Basics)</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">GNU Toolchain</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📡</div>
+                <h4>Communication Protocols</h4>
+                <div class="skill-items">
+                    <span class="skill-tag">CAN Bus</span>
+                    <span class="skill-tag">UART</span>
+                    <span class="skill-tag">I2C</span>
+                    <span class="skill-tag">SPI</span>
+                    <span class="skill-tag">DMA</span>
+                    <span class="skill-tag">EXTI / Interrupts</span>
+                    <span class="skill-tag">Timers / PWM</span>
+                    <span class="skill-tag">ADC</span>
+                    <span class="skill-tag">RTC</span>
+                    <span class="skill-tag">Watchdog</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🔁</div>
+                <h4>RTOS</h4>
+                <div class="skill-items">
+                    <span class="skill-tag">FreeRTOS (Native API)</span>
+                    <span class="skill-tag">Tasks &amp; Scheduler</span>
+                    <span class="skill-tag">Binary Semaphores</span>
+                    <span class="skill-tag">Mutexes &amp; Queues</span>
+                    <span class="skill-tag">ISR-safe APIs</span>
+                    <span class="skill-tag">vTaskDelayUntil</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🔧</div>
+                <h4>Tools &amp; IDEs</h4>
+                <div class="skill-items">
+                    <span class="skill-tag">STM32CubeIDE</span>
+                    <span class="skill-tag">Keil MDK</span>
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">Git &amp; GitHub</span>
+                    <span class="skill-tag">Proteus</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🔬</div>
+                <h4>Debugging &amp; Analysis</h4>
+                <div class="skill-items">
+                    <span class="skill-tag">ST-Link Debugger</span>
+                    <span class="skill-tag">Logic Analyzer</span>
+                    <span class="skill-tag">SWD / Live Expressions</span>
+                    <span class="skill-tag">Datasheet Analysis</span>
+                    <span class="skill-tag">Reference Manual</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🧠</div>
+                <h4>Edge AI / TinyML</h4>
+                <div class="skill-items">
+                    <span class="skill-tag">TensorFlow Lite Micro</span>
+                    <span class="skill-tag">X-CUBE-AI</span>
+                    <span class="skill-tag">Model Quantization</span>
+                    <span class="skill-tag">CCMRAM Inference</span>
+                    <span class="skill-tag">Python (Training)</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">⚡</div>
+                <h4>Automation &amp; Other</h4>
+                <div class="skill-items">
+                    <span class="skill-tag">Python Automations</span>
+                    <span class="skill-tag">Bot Development</span>
+                    <span class="skill-tag">N8N Workflow</span>
+                    <span class="skill-tag">Ethernet (Learning)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROJECTS SECTION -->
+    <div id="projectsContent" class="content-section">
+        <h2 class="section-title">My <span>Projects</span></h2>
+
+        <!-- FOLDER VIEW — 3 professional engineering cards -->
+        <div id="projectsFolderView" class="projects-view">
+
+            <!-- Firmware Development -->
+            <div class="project-folder" onclick="openFolder('embedded')">
+                <div class="pf-top-bar"></div>
+                <div class="pf-body">
+                    <div class="pf-icon-wrap">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="14" rx="2"/>
+                            <path d="M8 10l2 2-2 2"/>
+                            <path d="M12 14h4"/>
+                            <path d="M7 20h10"/>
+                            <path d="M12 18v2"/>
+                        </svg>
+                    </div>
+                    <div class="pf-category">Embedded Systems</div>
+                    <div class="folder-name">Firmware Development</div>
+                    <div class="folder-subtitle">Bare-metal register programming, HAL-based firmware, RTOS integration, and peripheral control on ARM Cortex-M4 microcontrollers.</div>
+                    <div class="pf-footer">
+                        <span class="folder-count">4 projects</span>
+                        <div class="pf-arrow">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M13 6l6 6-6 6"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Protocols & Hardware -->
+            <div class="project-folder" onclick="openFolder('protocols')">
+                <div class="pf-top-bar"></div>
+                <div class="pf-body">
+                    <div class="pf-icon-wrap">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="5" cy="12" r="2.2"/>
+                            <circle cx="19" cy="6" r="2.2"/>
+                            <circle cx="19" cy="18" r="2.2"/>
+                            <path d="M7.1 11.3l9.7-4.6"/>
+                            <path d="M7.1 12.7l9.7 4.6"/>
+                            <path d="M7 12h5"/>
+                        </svg>
+                    </div>
+                    <div class="pf-category">Automotive &amp; Communication</div>
+                    <div class="folder-name">Protocols &amp; Hardware</div>
+                    <div class="folder-subtitle">CAN Bus (ISO 11898), UART, I2C, SPI, DMA — multi-protocol hardware integration, bus analysis, and automotive-grade validation.</div>
+                    <div class="pf-footer">
+                        <span class="folder-count">3 projects</span>
+                        <div class="pf-arrow">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M13 6l6 6-6 6"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI & Automation -->
+            <div class="project-folder" onclick="openFolder('ai')">
+                <div class="pf-top-bar"></div>
+                <div class="pf-body">
+                    <div class="pf-icon-wrap">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2a5 5 0 0 1 5 5v1h.5a2.5 2.5 0 0 1 0 5H17v1a5 5 0 0 1-10 0v-1h-.5a2.5 2.5 0 0 1 0-5H7V7a5 5 0 0 1 5-5z"/>
+                            <path d="M10 10h4"/>
+                            <path d="M10 14h4"/>
+                            <circle cx="10" cy="10" r="0.6" fill="currentColor"/>
+                            <circle cx="14" cy="10" r="0.6" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="pf-category">Edge AI &amp; Automation</div>
+                    <div class="folder-name">AI &amp; Automation</div>
+                    <div class="folder-subtitle">TinyML inference on STM32 with TFLite Micro and X-CUBE-AI, model quantization, and Python-based workflow automation pipelines.</div>
+                    <div class="pf-footer">
+                        <span class="folder-count">3 projects</span>
+                        <div class="pf-arrow">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14M13 6l6 6-6 6"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- LIST VIEW -->
+        <div id="projectsListView" style="display:none;">
+            <button class="btn-back" onclick="closeFolder()">← Back to Folders</button>
+            <div id="projectsList" class="project-list"></div>
+        </div>
+
+        <!-- DETAIL VIEW -->
+        <div id="projectDetailView" style="display:none;">
+            <button class="btn-back" onclick="closeProject()">← Back to Projects</button>
+            <div id="projectDetail" class="project-detail"></div>
+        </div>
+    </div>
+
+    <!-- CONTACT SECTION -->
+    <div id="contactContent" class="content-section">
+        <h2 class="section-title">Let's <span>Connect</span></h2>
+        <div class="contact-content">
+            <p class="contact-text">
+                Actively looking for <strong>Embedded Systems Internship</strong> opportunities — especially in automotive firmware (Bosch RBEI, Continental) or any hands-on MCU/RTOS role. Feel free to reach out!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:ajay360x@gmail.com" class="contact-link">📧 Email</a>
+                <a href="https://linkedin.com/in/mr-aj" target="_blank" class="contact-link">🔗 LinkedIn</a>
+                <a href="https://github.com/aj-0" target="_blank" class="contact-link">💻 GitHub</a>
+            </div>
+            <div class="contact-info">
+                <strong>Ajay C</strong> &nbsp;·&nbsp; +91 8608334383<br>
+                Tiruppur, Tamil Nadu &nbsp;·&nbsp; ajay360x@gmail.com
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Ajay C — B.E. ECE | Embedded Software Developer</p>
+    </footer>
+
+    <script>
+        // ===== PROJECTS DATA =====
+        // HOW TO CHANGE IMAGES LATER:
+        // Each project has an `img` field. Replace the URL with:
+        //   - A hosted URL:  img: 'https://i.ibb.co/yourimage.jpg'
+        //   - A local file:  img: 'images/robotic-arm.jpg'  (put the file in the same folder as this HTML)
+        //   - A GitHub raw:  img: 'https://raw.githubusercontent.com/aj-0/repo/main/imgs/project.jpg'
+        // The image will fill the card header (object-fit: cover, 180px tall on list, 240px on detail).
+        // Recommended image size: 800×450px (16:9 ratio works best).
+
+        const projectsData = {
+            embedded: [
+                {
+                    id: 'e1',
+                    img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+                    // ↑ CHANGE THIS — your robotic arm project photo
+                    title: '5-DOF Robotic Arm',
+                    caption: 'Real-time controlled robotic arm — STM32 + ESP32',
+                    details: 'Designed and implemented a real-time controlled robotic arm system. Architecture: Mobile App (Wi-Fi) → ESP32 (UART bridge) → STM32 F411RE (PWM generation) → 5× Servo Motors. Optimized servo actuation precision and minimized command latency across the full communication stack.',
+                    tech: ['STM32F411RE', 'ESP32', 'UART', 'PWM', 'Wi-Fi', 'C']
+                },
+                {
+                    id: 'e2',
+                    img: 'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=800&q=80',
+                    // ↑ CHANGE THIS — bare-metal / register programming screenshot or board photo
+                    title: 'Bare-Metal Programming Suite',
+                    caption: 'Zero-HAL register-level firmware on STM32 Nucleo F411RE',
+                    details: 'Programmed user-input LED control using external interrupts (EXTI) at register level. Generated PWM signals using Timer registers with pure bare-metal implementation — no HAL dependency. Also implemented CAN1 loopback covering RCC/PLL, FLASH latency, GPIO AF, CAN1 BTR, filter banks, and TX/RX via mailbox registers.',
+                    tech: ['STM32F411RE', 'Bare-Metal C', 'EXTI', 'Timers/PWM', 'CAN1 Mailbox', 'RCC/PLL', 'GPIO AF']
+                },
+                {
+                    id: 'e3',
+                    img: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=800&q=80',
+                    // ↑ CHANGE THIS — FreeRTOS task diagram or CubeIDE screenshot
+                    title: 'FreeRTOS on STM32 (In Progress)',
+                    caption: 'Migrated from CMSIS-RTOS v2 to native FreeRTOS APIs',
+                    details: 'Actively learning FreeRTOS on STM32 Nucleo F411RE. Migrated from CMSIS-RTOS v2 wrappers to native FreeRTOS API in STM32CubeIDE. Building expertise in: binary semaphores (xSemaphoreGiveFromISR / xSemaphoreTake), ISR-safe API patterns, vTaskDelay vs vTaskDelayUntil, task synchronization, and NVIC priority rules (must be ≥5 for ISR-calling FreeRTOS APIs).',
+                    tech: ['FreeRTOS', 'STM32F411RE', 'STM32CubeIDE', 'Binary Semaphores', 'Queues', 'ISR-safe APIs', 'NVIC']
+                },
+                {
+                    id: 'e4',
+                    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+                    // ↑ CHANGE THIS — Ethernet/networking hardware photo
+                    title: 'Ethernet in Embedded Systems (Learning)',
+                    caption: 'Exploring MAC/PHY, frame structure and network communication on MCUs',
+                    details: 'Currently learning Ethernet communication in embedded systems — including hardware-level working mechanisms, protocol architecture, and layered communication models. Exploring Ethernet MAC/PHY interaction, frame structure, data flow, and network-based communication on microcontrollers.',
+                    tech: ['Ethernet MAC/PHY', 'Frame Structure', 'Network Protocols', 'Embedded C', 'Active Learning']
+                }
+            ],
+            protocols: [
+                {
+                    id: 'p1',
+                    img: 'https://images.unsplash.com/photo-1601132359864-c974e79890ac?w=800&q=80',
+                    // ↑ CHANGE THIS — CAN bus wiring / oscilloscope capture photo
+                    title: 'CAN Protocol Projects',
+                    caption: 'CAN loopback + CAN1↔CAN2 inter-node on STM32F407',
+                    details: 'Two-part CAN project: (1) CAN internal loopback testing on STM32F407 Discovery for self-diagnostic validation of CAN frame transmission and reception. (2) Real-time CAN1↔CAN2 communication between two STM32 nodes using dual MCP2551 CAN transceivers on a shared bus with 120Ω termination — configured CAN bit timing, filter banks (via hcan1), TX/RX mailboxes, and interrupt-based message handling. Debugged HSE bypass→crystal issue, prescaler/TimeSeg values, and MCP2551 voltage compatibility.',
+                    tech: ['STM32F407', 'CAN Bus', 'MCP2551', 'ISO 11898', 'Bare-Metal C', 'Interrupt Mailbox', '120Ω Termination']
+                },
+                {
+                    id: 'p2',
+                    img: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d4?w=800&q=80',
+                    // ↑ CHANGE THIS — breadboard with modules (MPU6050 / LoRa / GSM)
+                    title: 'Multi-Protocol Communication Engine',
+                    caption: 'UART · I2C · SPI — real hardware integration and benchmarking',
+                    details: 'Implemented and verified UART, I2C, and SPI communication protocols with comparative analysis of transmission speeds and operational efficiency. Integrated hardware components: MPU6050 Gyroscope (I2C), GSM 800L Modem (UART), and LoRa SX1278 Transceiver (SPI). Demonstrated multi-protocol hardware compatibility and protocol performance evaluation across all three buses.',
+                    tech: ['UART', 'I2C', 'SPI', 'MPU6050', 'GSM 800L', 'LoRa SX1278', 'STM32', 'HAL']
+                },
+                {
+                    id: 'p3',
+                    img: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=800&q=80',
+                    // ↑ CHANGE THIS — oscilloscope / logic analyzer capture
+                    title: 'Peripheral Deep-Dives',
+                    caption: 'DMA, ADC, RTC, Watchdog — hands-on peripheral integration',
+                    details: 'Hands-on exploration and implementation of key STM32 peripherals including DMA for memory-to-peripheral transfers, ADC for analog signal acquisition, RTC for timekeeping, and Watchdog for firmware reliability. All implemented with a focus on peripheral workflows, low-level hardware operation, and power optimization.',
+                    tech: ['DMA', 'ADC', 'RTC', 'Watchdog', 'STM32', 'HAL', 'Bare-Metal C', 'Power Optimization']
+                }
+            ],
+            ai: [
+                {
+                    id: 'a1',
+                    img: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80',
+                    // ↑ CHANGE THIS — TFLite Micro output / UART terminal screenshot
+                    title: 'TinyML on STM32F407',
+                    caption: 'Sine-wave prediction — TFLite Micro deployed on STM32F407',
+                    details: 'Developed a TinyML-based sine-wave prediction application on STM32F407 Discovery using TensorFlow Lite Micro and X-CUBE-AI. Pipeline: Python model training → quantization → TFLite conversion → C header array → deployed to STM32F407 with tensor arena in CCMRAM. UART output at 115200 baud. Debugged X-CUBE-AI wrapper issues and undefined ai_input/ai_output globals.',
+                    tech: ['TFLite Micro', 'X-CUBE-AI', 'STM32F407', 'CCMRAM', 'Python', 'Model Quantization', 'UART 115200']
+                },
+                {
+                    id: 'a2',
+                    img: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80',
+                    // ↑ CHANGE THIS — Python script / automation workflow screenshot
+                    title: 'Python Automation & Bots',
+                    caption: 'Workflow automation scripts and bot development',
+                    details: 'Built Python-based automation scripts and bots for workflow optimization. Explored N8N workflow automation for connecting services and automating repetitive tasks. Developed practical understanding of automation pipelines and API integrations.',
+                    tech: ['Python', 'Bot Development', 'N8N Automation', 'API Integration', 'Workflow Scripts']
+                },
+                {
+                    id: 'a3',
+                    img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80',
+                    // ↑ CHANGE THIS — internship / office / code photo
+                    title: 'System Software Internship — Appin Technology',
+                    caption: 'System-level C development and embedded tools',
+                    details: 'Strengthened C programming fundamentals through system-level development tasks and problem-solving exercises. Gained practical experience with embedded systems software tools and utilities. Developed understanding of software-hardware interaction and debugging methodologies.',
+                    tech: ['C Programming', 'System Software', 'Embedded Tools', 'Debugging', 'Software-Hardware Interaction']
+                }
+            ]
+        };
+
+        // ===== CAROUSEL =====
+        let currentSlide = 0;
+        let autoplayTimer;
+        const totalSlides = 5;
+
+        function goToSlide(index) {
+            stopAutoplay();
+            currentSlide = index;
+            document.getElementById('hlTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.hl-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+            startAutoplay();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            document.getElementById('hlTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.hl-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+        }
+
+        function startAutoplay() { autoplayTimer = setInterval(nextSlide, 3200); }
+        function stopAutoplay() { clearInterval(autoplayTimer); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.querySelector('.hl-carousel');
+            if (carousel) {
+                carousel.addEventListener('mouseenter', stopAutoplay);
+                carousel.addEventListener('mouseleave', startAutoplay);
+            }
+            startAutoplay();
+        });
+
+        // ===== NAV =====
+        function showPage(pageName) {
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+            document.getElementById('homePage').classList.remove('active');
+            if (pageName === 'home') {
+                document.getElementById('homePage').classList.add('active');
+                document.querySelector('.close-btn').classList.remove('active');
+            }
+        }
+
+        function showContent(contentName) {
+            document.getElementById('homePage').classList.remove('active');
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(contentName + 'Content').classList.add('active');
+            document.querySelector('.close-btn').classList.add('active');
+            if (contentName === 'projects') {
+                document.getElementById('projectsFolderView').style.display = 'grid';
+                document.getElementById('projectsListView').style.display = 'none';
+                document.getElementById('projectDetailView').style.display = 'none';
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function closeContent() { showPage('home'); }
+
+        function openFolder(folderName) {
+            const projects = projectsData[folderName];
+            const projectsList = document.getElementById('projectsList');
+            projectsList.innerHTML = '';
+            projects.forEach(project => {
+                projectsList.innerHTML += `
+                    <div class="project-card" onclick="openProject('${folderName}', '${project.id}')">
+                        <div class="project-image">
+                            <img src="${project.img}" alt="${project.title}" loading="lazy" onerror="this.style.display='none'">
+                        </div>
+                        <div class="project-info">
+                            <div class="project-title">${project.title}</div>
+                            <div class="project-caption">${project.caption}</div>
+                        </div>
+                    </div>`;
+            });
+            document.getElementById('projectsFolderView').style.display = 'none';
+            document.getElementById('projectsListView').style.display = 'block';
+            document.getElementById('projectDetailView').style.display = 'none';
+        }
+
+        function closeFolder() {
+            document.getElementById('projectsFolderView').style.display = 'grid';
+            document.getElementById('projectsListView').style.display = 'none';
+            document.getElementById('projectDetailView').style.display = 'none';
+        }
+
+        function openProject(folderName, projectId) {
+            const project = projectsData[folderName].find(p => p.id === projectId);
+            document.getElementById('projectDetail').innerHTML = `
+                <div class="project-detail-image">
+                    <img src="${project.img}" alt="${project.title}" loading="lazy" onerror="this.style.display='none'">
+                </div>
+                <h2>${project.title}</h2>
+                <p class="project-detail-text">${project.details}</p>
+                <div><strong>Technologies Used:</strong>
+                    <div class="tech-list">${project.tech.map(t => `<span class="tech-badge">${t}</span>`).join('')}</div>
+                </div>`;
+            document.getElementById('projectsFolderView').style.display = 'none';
+            document.getElementById('projectsListView').style.display = 'none';
+            document.getElementById('projectDetailView').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function closeProject() { closeFolder(); window.scrollTo(0, 0); }
+    </script>
+</body>
+</html>
