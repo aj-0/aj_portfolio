@@ -1,1 +1,1 @@
-https://tiny.cc/aj_
+link;https://tiny.cc/aj_
