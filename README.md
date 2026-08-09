@@ -1,1 +1,1 @@
-tiny.cc/aj_
+https://tiny.cc/aj_
