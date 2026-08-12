@@ -232,31 +232,58 @@
 
         .hl-card {
             min-width: 100%;
-            padding: 1.4rem 2.5rem;
+            padding: 0;
             display: flex;
-            align-items: center;
-            gap: 1.6rem;
+            flex-direction: column;
+            align-items: stretch;
             background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,248,225,0.9));
             border: 1px solid rgba(201,150,12,0.25);
             border-radius: 14px;
             box-shadow: 0 2px 16px rgba(201,150,12,0.12);
             user-select: none;
+            overflow: hidden;
         }
 
-        .hl-icon-wrap {
-            flex-shrink: 0;
-            width: 52px;
-            height: 52px;
+        .hl-image-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 8;
             background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 3px 12px rgba(201,150,12,0.35);
+            overflow: hidden;
         }
 
-        .hl-text { flex: 1; }
+        .hl-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hl-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #5A3E00;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+        }
+
+        .hl-text {
+            flex: 1;
+            padding: 1.3rem 2rem 1.6rem;
+        }
+
+        @media (max-width: 768px) {
+            .hl-image-wrap { aspect-ratio: 16 / 10; }
+            .hl-text { padding: 1.1rem 1.4rem 1.4rem; text-align: center; }
+        }
 
         .hl-meta {
             font-size: 0.72rem;
@@ -279,18 +306,6 @@
         .hl-desc {
             font-size: 0.88rem;
             color: var(--muted);
-        }
-
-        .hl-badge {
-            flex-shrink: 0;
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            color: #5A3E00;
-            font-size: 0.78rem;
-            font-weight: 800;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
         }
 
         .hl-dots {
@@ -391,8 +406,7 @@
             .nav-btn { padding: 0.4rem 0.8rem; font-size: 0.82rem; }
             .expertise-grid { grid-template-columns: 1fr; }
             .expertise-visual { height: 200px; font-size: 2.5rem; }
-            .hl-card { flex-direction: column; text-align: center; padding: 1.2rem 1.5rem; }
-            .hl-badge { align-self: center; }
+            .hl-badge { top: 0.7rem; right: 0.7rem; }
         }
 
         /* ===== CONTENT SECTIONS ===== */
@@ -931,54 +945,62 @@
             </div>
 
             <div class="highlights-strip">
-                <div class="highlights-label">✦ HIGHLIGHTS ✦</div>
+                <div class="highlights-label">✦ DEBUGGING & ANALYSIS  ✦</div>
 
                 <div class="hl-carousel">
                     <div class="hl-track" id="hlTrack">
                         <div class="hl-card">
-                            <div class="hl-icon-wrap">🦾</div>
-                            <div class="hl-text">
-                                <div class="hl-meta">Robotics Project</div>
-                                <div class="hl-title">5-DOF Robotic Arm — STM32 + ESP32</div>
-                                <div class="hl-desc">Mobile App → Wi-Fi → ESP32 (UART) → STM32 F411RE (PWM) → 5× Servo Motors</div>
+                            <div class="hl-image-wrap">
+                                <img src="https://github.com/user-attachments/assets/42536e3b-b265-4830-aa64-24c414ce7cd0" alt="Robotic Arm">
                             </div>
-                            <div class="hl-badge">🚀 Built</div>
+                            <div class="hl-text">
+                                <div class="hl-meta">ETHERNET PACKETS </div>
+                                <!--<div class="hl-title">5-DOF Robotic Arm — STM32 + ESP32</div>-->
+                                <div class="hl-desc">TX/RX Packets • ICMP Echo • IPv4 • TCP • HTTP/1.1 • Packet Capture • Payload Data • ARP • Checksum</div>
+                            </div>
                         </div>
                         <div class="hl-card">
-                            <div class="hl-icon-wrap">🚗</div>
-                            <div class="hl-text">
-                                <div class="hl-meta">Automotive Protocols</div>
-                                <div class="hl-title">CAN Bus — STM32F407 with MCP2551 Transceivers</div>
-                                <div class="hl-desc">CAN1↔CAN2 inter-node communication, bare-metal loopback, interrupt mailbox handling</div>
+                            <div class="hl-image-wrap">
+                                <img src="https://github.com/user-attachments/assets/a3aaac9b-3558-45c7-9137-c73fb86afffe" alt="CAN Bus">
+                                <!--<div class="hl-badge">🎖️ Working</div>-->
                             </div>
-                            <div class="hl-badge">🎖️ Working</div>
+                            <div class="hl-text">
+                                <div class="hl-meta">CAN FRAMES</div>
+                                <!--<div class="hl-title">CAN Bus — STM32F407 with MCP2551 Transceivers</div>-->
+                                <div class="hl-desc">TX/RX Frames • Standard ID • Extended ID • DLC • Data Payload • Arbitration • Bit Timing • Mailbox</div>
+                            </div>
                         </div>
                         <div class="hl-card">
-                            <div class="hl-icon-wrap">🧠</div>
-                            <div class="hl-text">
-                                <div class="hl-meta">Edge AI / TinyML</div>
-                                <div class="hl-title">TensorFlow Lite Micro on STM32F407</div>
-                                <div class="hl-desc">Sine-wave model trained, quantized &amp; deployed — on-device inference in CCMRAM</div>
+                            <div class="hl-image-wrap">
+                                <img src="https://github.com/user-attachments/assets/bc840bb7-c1a1-46b4-8bcb-0370da4b4d49" alt="TinyML">
+                                <!--<div class="hl-badge">✅ Deployed</div>-->
                             </div>
-                            <div class="hl-badge">✅ Deployed</div>
+                            <div class="hl-text">
+                                <div class="hl-meta">UART FRAME</div>
+                                <!--<div class="hl-title">TensorFlow Lite Micro on STM32F407</div>-->
+                                <div class="hl-desc">TX/RX • Baud Rate Validation • Start/Stop Bits </div>
+                            </div>
                         </div>
                         <div class="hl-card">
-                            <div class="hl-icon-wrap">📡</div>
-                            <div class="hl-text">
-                                <div class="hl-meta">Multi-Protocol</div>
-                                <div class="hl-title">UART · I2C · SPI · CAN · DMA · Interrupts</div>
-                                <div class="hl-desc">MPU6050, GSM 800L, LoRa SX1278 — all integrated and benchmarked</div>
+                            <div class="hl-image-wrap">
+                                <img src="https://github.com/user-attachments/assets/0d1a1da8-76dc-4b1c-a4b0-f36af1a508a3">
                             </div>
-                            <div class="hl-badge">📡 Verified</div>
+                            <div class="hl-text">
+                                <div class="hl-meta">SPI PROTOCOL</div>
+                                <!--<div class="hl-title">UART · I2C · SPI </div>-->
+                                <div class="hl-desc">MOSI • MISO • SCK • Chip Select (CS/NSS)</div>
+                            </div>
                         </div>
                         <div class="hl-card">
-                            <div class="hl-icon-wrap">🔁</div>
+                            <div class="hl-image-wrap">
+                                <img src="https://github.com/user-attachments/assets/a7c40b6b-5a6c-418f-a519-3bd8e4bfd165">
+                                <!--<div class="hl-badge">🌟 In Progress</div>-->
+                            </div>
                             <div class="hl-text">
                                 <div class="hl-meta">FREERTOS (Native API)</div>
                                 <div class="hl-desc">Tasks, Semaphores, ISR-safe APIs, Mutexes & Queues
 ,NVIC priority rules</div>
                             </div>
-                            <div class="hl-badge">🌟 In Progress</div>
                         </div>
                     </div>
                 </div>
@@ -999,29 +1021,23 @@
     <div id="aboutContent" class="content-section">
         <h2 class="section-title">About <span>Me</span></h2>
         <div class="about-content">
-            <p class="about-intro">
+            <div class="about-intro">
                 <p>
-To build a career in Embedded Software Development by gaining practical experience and developing skills that meet industry standards. With extensive hands-on experience on the <strong>STM32 NUCLEO-F411RE</strong> and <strong>STM32F407 Discovery</strong> platforms, I focus on strengthening my expertise in Embedded C, STM32, RTOS, debugging, and system-level programming through real-world projects and continuous learning. I leverage  <strong> AI-assisted tools</strong> to support debugging, analysis, and problem-solving while developing reliable, production-quality embedded software..<br><br>
-                <p>
- 
-<b>My Core Engineering Mindset</b>
-</p>
+To build a career in Embedded Software Development by gaining practical experience and developing skills that meet industry standards. With extensive hands-on experience on the <strong>STM32 NUCLEO-F411RE</strong> and <strong>STM32F407 Discovery</strong> platforms, I focus on strengthening my expertise in Embedded C, STM32, RTOS, debugging, and system-level programming through real-world projects and continuous learning. I leverage <strong>AI-assisted tools</strong> to support debugging, analysis, and problem-solving while developing reliable, production-quality embedded software.
+                </p>
 
-<ul>
-    <li>Practical Skills &gt; Collecting Certificates</li>
-    <li>Debugging &amp; Root Cause Analysis &gt; Trial-and-Error Coding</li>
-    <li>Understanding Logic &gt; Copy-Paste Programming</li>
-    <li>Learning by Building &gt; Learning by Watching Tutorials</li>
-    <li>System-Level Thinking &gt; Isolated Feature Development</li>
-    <li>Reliability &amp; Quality &gt; Quick Output</li>
-        <li> Debugging Process: Observe System Behavior → Analyze Runtime Data → Identify Root Cause → Implement Solution → Verify System Stability Output</li>
+                <p><b>My Core Engineering Mindset</b></p>
 
-    
-</ul>
-
-
-                
-            </p>
+                <ul>
+                    <li>Practical Skills &gt; Collecting Certificates</li>
+                    <li>Debugging &amp; Root Cause Analysis &gt; Trial-and-Error Coding</li>
+                    <li>Understanding Logic &gt; Copy-Paste Programming</li>
+                    <li>Learning by Building &gt; Learning by Watching Tutorials</li>
+                    <li>System-Level Thinking &gt; Isolated Feature Development</li>
+                    <li>Reliability &amp; Quality &gt; Quick Output</li>
+                    <li>Debugging Process: Observe System Behavior → Analyze Runtime Data → Identify Root Cause → Implement Solution → Verify System Stability Output</li>
+                </ul>
+            </div>
             <div class="about-grid">
                 <div class="about-item">
                     <h4>🎯 Personal Info</h4>
@@ -1279,13 +1295,6 @@ To build a career in Embedded Software Development by gaining practical experien
     <!-- RESOURCES SECTION -->
     <div id="resourcesContent" class="content-section">
         <h2 class="section-title">My <span>Resources</span></h2>
-        <!--
-          HOW TO LINK YOUR REAL FILES:
-          Replace each href="#" below with the actual file link, e.g.:
-            - Hosted URL:  href="https://drive.google.com/file/d/xxxx/view"
-            - GitHub raw:  href="https://raw.githubusercontent.com/aj-0/repo/main/docs/Nucleo_Reference_Manual.pdf"
-          Until then these are placeholders and won't open a real file.
-        -->
         <div class="resources-box">
             <a class="resource-item" href="https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf" target="_blank" rel="noopener noreferrer">
                 <span class="resource-index">1</span>
@@ -1368,18 +1377,6 @@ I am currently seeking opportunities for an
     </footer>
 
     <script>
-        // ===== PROJECTS DATA =====
-        // Each project's `url` points to its EXACT folder on GitHub — clicking a card
-        // opens that repo/subfolder directly in a new tab (no in-site detail page).
-        // HOW TO SWAP IMAGES: replace `img` with a hosted URL, a local file (images/xyz.jpg),
-        // or (once you commit screenshots into the repo itself) a permanent link like:
-        //   https://raw.githubusercontent.com/aj-0/<repo>/main/<path-to-image>
-        // Demo placeholders are used below until real screenshots are committed to the repos.
-        //
-        // ORGANIZATION RULE:
-        //  - "embedded" (Bare Metal Projects) = everything NOT using FreeRTOS and NOT AI/TinyML
-        //  - "freertos" = ONLY projects that actually run under FreeRTOS tasks/scheduler
-        //  - "ai" = Edge AI / TinyML only
         const projectsData = {
             embedded: [
                 {
@@ -1398,7 +1395,7 @@ I am currently seeking opportunities for an
                     tech: ['W5500', 'SPI', 'Bare-Metal C', 'Ethernet'],
                      url: 'https://github.com/aj-0/STM32_Interfacing/tree/main/Spi_to_Ethernet_ping'
                 },
-                {     id: 'p10',
+                {     id: 'p12',
                     img: 'https://github.com/user-attachments/assets/240f431b-070c-4c79-b2e3-e3a5da34b962',
                     title: 'Fingerprint Enrollment & Authentication using R307S',
                     caption: 'Fingerprint enrollment and matching using the R307S Fingerprint Sensor interfaced with an STM32F407 via UART',
@@ -1524,13 +1521,6 @@ I am currently seeking opportunities for an
             ]
         };
 
-        // ===== CERTIFICATIONS DATA =====
-        // HOW TO ADD YOUR REAL CERTIFICATE IMAGES:
-        // Replace each `img` URL below with your own scanned/exported certificate image.
-        //   - Hosted URL:   img: 'https://i.ibb.co/yourcert.jpg'
-        //   - Local file:   img: 'images/certs/etalvis.jpg'  (put file next to this HTML)
-        //   - GitHub raw:   img: 'https://raw.githubusercontent.com/aj-0/repo/main/certs/etalvis.jpg'
-        // These are demo placeholder images — swap them out with your actual certificates.
         const certsData = [
             {
                 issuer: 'Etalvis Learning',
