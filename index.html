@@ -4,87 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajay's Embedded Systems Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
         :root {
-            --primary: #0F6E56;
-            --primary-light: #1D9E75;
-            --secondary: #00B4E0;
-            --accent: #FF6B35;
-            --gold: #C9960C;
-            --gold-light: #F5C842;
-            --gold-pale: #FFF8E1;
-            --bg: #F4F7F5;
-            --card: #FFFFFF;
+            --primary: #004AAD;
+            --gradient: linear-gradient(135deg, #004AAD, #00c6ff);
+            --bg-light: #f0f4fa;
+            --card-bg: #ffffff;
             --text: #1A2332;
-            --muted: #667788;
+            --muted: #5b6b80;
             --border: #E2EAE6;
-            --shadow-sm: 0 2px 8px rgba(15,110,86,0.08);
-            --shadow-md: 0 6px 24px rgba(15,110,86,0.12);
-            --shadow-lg: 0 12px 40px rgba(15,110,86,0.18);
+            --shadow: 0 6px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 30px rgba(0,74,173,0.18);
+            --gold: #ff9800;
+        }
+
+        body.dark-mode {
+            --bg-light: #121212;
+            --card-bg: #1e1e1e;
+            --primary: #66b3ff;
+            --gradient: linear-gradient(135deg, #0d3b73, #00344d);
+            --text: #eee;
+            --muted: #aab3c0;
+            --border: #2a2f38;
+            --shadow: none;
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-light);
             color: var(--text);
-            background: var(--bg);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
         }
 
-        /* ===== HEADER ===== */
+        /* ===== NAV ===== */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
+            background: var(--gradient);
+            padding: 18px 32px;
             z-index: 1000;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
         }
 
         .logo {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 800;
-            color: var(--primary);
-            letter-spacing: -0.5px;
-            font-family: 'JetBrains Mono', monospace;
+            color: #fff;
+            letter-spacing: 0.5px;
         }
 
-        nav { display: flex; gap: 0.8rem; }
+        nav { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
 
         .nav-btn {
-            padding: 0.5rem 1.2rem;
+            padding: 0.4rem 0;
             background: transparent;
-            border: 1.5px solid var(--primary);
-            color: var(--primary);
-            border-radius: 6px;
-            font-size: 0.88rem;
+            border: none;
+            color: #fff;
+            font-size: 0.92rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s ease;
-            text-decoration: none;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            opacity: 0.92;
         }
 
-        .nav-btn:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-sm);
+        .nav-btn:hover { opacity: 1; text-decoration: underline; }
+
+        .toggle-btn {
+            cursor: pointer;
+            font-size: 15px;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 5px 11px;
+            border-radius: 8px;
+            transition: 0.3s;
         }
+        .toggle-btn:hover { background-color: rgba(255,255,255,0.2); }
 
         /* ===== PAGES ===== */
-        .page { display: none; padding-top: 72px; }
+        .page { display: none; padding-top: 90px; }
         .page.active { display: block; animation: fadeIn 0.4s ease-in; }
 
         @keyframes fadeIn {
@@ -92,39 +104,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        #homePage { padding-top: 72px; min-height: 100vh; }
+        #homePage { padding-top: 90px; min-height: 100vh; }
 
-        /* ===== HERO SECTION ===== */
+        /* ===== HERO / DASHBOARD INTRO ===== */
         .hero-section {
-            position: relative;
-            min-height: calc(100vh - 72px);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem 3rem;
-        }
-
-        .hero-bg-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                160deg,
-                rgba(244,247,245,0.97) 0%,
-                rgba(232,242,237,0.93) 50%,
-                rgba(244,247,245,0.97) 100%
-            );
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 3;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 20px 1rem;
             text-align: center;
-            max-width: 700px;
-            padding: 0 1.5rem;
-            margin-bottom: 4rem;
         }
 
         .hero-eyebrow {
@@ -135,154 +122,121 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--primary);
-            background: rgba(15,110,86,0.1);
+            background: rgba(0,74,173,0.08);
             padding: 0.4rem 1rem;
             border-radius: 20px;
-            margin-bottom: 1.4rem;
-            border: 1px solid rgba(15,110,86,0.2);
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(0,74,173,0.2);
         }
 
-        .hero-title {
-            font-size: clamp(2.4rem, 5vw, 3.8rem);
+        .dashboard-title {
+            font-size: clamp(2.1rem, 4.5vw, 3.2rem);
             font-weight: 800;
             color: var(--text);
-            margin-bottom: 1rem;
-            line-height: 1.1;
-            letter-spacing: -1.5px;
+            margin-bottom: 0.8rem;
+            letter-spacing: -1px;
         }
 
-        .hero-title span { color: var(--primary); }
+        .dashboard-title span { color: var(--primary); }
 
         .hero-subtitle {
-            font-size: 1.05rem;
+            font-size: 1.02rem;
             color: var(--muted);
-            margin-bottom: 2.2rem;
-            line-height: 1.7;
+            margin-bottom: 0;
             max-width: 540px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .hero-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.9rem 2rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
+        /* ===== CARD GRID (EffiTrack dashboard-style) ===== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin: 2.5rem 0 3.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(15,110,86,0.3);
-            font-family: 'Space Grotesk', sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border);
         }
 
-        .hero-btn:hover {
-            background: var(--primary-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(15,110,86,0.35);
-        }
+        .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .card i { font-size: 36px; margin-bottom: 15px; color: var(--primary); }
+        .card h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+        .card p { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
 
-        /* ===== HIGHLIGHTS STRIP ===== */
-        .highlights-strip {
-            position: relative;
-            z-index: 3;
-            width: 100%;
-            max-width: 900px;
+        .card a, .card-link {
+            display: inline-block;
+            padding: 8px 18px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .card a:hover, .card-link:hover { background-color: #002c73; }
+
+        /* ===== HIGHLIGHTS CAROUSEL ===== */
+        .chart-container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+            border: 1px solid var(--border);
         }
 
         .highlights-label {
             text-align: center;
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.7rem;
+            margin-bottom: 1.2rem;
         }
 
-        .highlights-label::before,
-        .highlights-label::after {
-            content: '';
-            height: 1px;
-            width: 50px;
-            background: linear-gradient(90deg, transparent, var(--gold));
-        }
-        .highlights-label::after {
-            background: linear-gradient(270deg, transparent, var(--gold));
-        }
+        .hl-carousel { position: relative; overflow: hidden; border-radius: 12px; }
 
-        .hl-carousel {
-            position: relative;
-            overflow: hidden;
-            border-radius: 14px;
-        }
-
-        .hl-track {
-            display: flex;
-            transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .hl-track { display: flex; transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
 
         .hl-card {
             min-width: 100%;
-            padding: 0;
             display: flex;
             flex-direction: column;
-            align-items: stretch;
-            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,248,225,0.9));
-            border: 1px solid rgba(201,150,12,0.25);
-            border-radius: 14px;
-            box-shadow: 0 2px 16px rgba(201,150,12,0.12);
-            user-select: none;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             overflow: hidden;
+            user-select: none;
         }
 
         .hl-image-wrap {
             position: relative;
             width: 100%;
             aspect-ratio: 16 / 8;
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            background: var(--gradient);
             overflow: hidden;
         }
 
-        .hl-image-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        .hl-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        .hl-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            flex-shrink: 0;
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            color: #5A3E00;
-            font-size: 0.78rem;
-            font-weight: 800;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.25);
-        }
-
-        .hl-text {
-            flex: 1;
-            padding: 1.3rem 2rem 1.6rem;
-        }
+        .hl-text { padding: 1.2rem 1.6rem 1.4rem; }
 
         @media (max-width: 768px) {
             .hl-image-wrap { aspect-ratio: 16 / 10; }
-            .hl-text { padding: 1.1rem 1.4rem 1.4rem; text-align: center; }
+            .hl-text { padding: 1rem 1.2rem 1.2rem; text-align: center; }
         }
 
         .hl-meta {
@@ -290,621 +244,259 @@
             font-weight: 700;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 0.25rem;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
             font-family: 'JetBrains Mono', monospace;
         }
 
-        .hl-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.2rem;
-            line-height: 1.3;
-        }
+        .hl-desc { font-size: 0.88rem; color: var(--muted); }
 
-        .hl-desc {
-            font-size: 0.88rem;
-            color: var(--muted);
-        }
-
-        .hl-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
+        .hl-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
 
         .hl-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(201,150,12,0.25);
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 0;
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(0,74,173,0.25); border: none; cursor: pointer;
+            transition: all 0.3s ease; padding: 0;
         }
-
-        .hl-dot.active {
-            background: var(--gold);
-            width: 22px;
-            border-radius: 4px;
-        }
-
-        /* ===== FEATURED EXPERTISE ===== */
-        .expertise-section {
-            background: var(--card);
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto 3rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .expertise-visual {
-            width: 100%;
-            height: 380px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .expertise-content h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 1rem;
-            letter-spacing: -0.5px;
-        }
-
-        .expertise-content h2 span { color: var(--primary); }
-
-        .expertise-content p {
-            font-size: 1rem;
-            color: var(--muted);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .feature-list { display: flex; flex-direction: column; gap: 0.7rem; }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.7rem 1rem;
-            background: rgba(15,110,86,0.05);
-            border-radius: 8px;
-            border-left: 3px solid var(--primary);
-            font-size: 0.93rem;
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        .feature-item span:first-child {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1rem;
-        }
+        .hl-dot.active { background: var(--primary); width: 22px; border-radius: 4px; }
 
         @media (max-width: 768px) {
-            header { flex-direction: column; gap: 0.8rem; padding: 0.8rem 1rem; }
-            nav { flex-wrap: wrap; gap: 0.4rem; }
-            .nav-btn { padding: 0.4rem 0.8rem; font-size: 0.82rem; }
-            .expertise-grid { grid-template-columns: 1fr; }
-            .expertise-visual { height: 200px; font-size: 2.5rem; }
-            .hl-badge { top: 0.7rem; right: 0.7rem; }
+            header { flex-direction: column; align-items: flex-start; padding: 14px 18px; }
+            nav { width: 100%; justify-content: flex-start; }
+            .page, #homePage { padding-top: 128px; }
         }
 
         /* ===== CONTENT SECTIONS ===== */
-        .content-section { display: none; padding: 100px 2rem 3rem; max-width: 1200px; margin: 0 auto; }
+        .content-section { display: none; padding: 110px 20px 3rem; max-width: 1200px; margin: 0 auto; }
         .content-section.active { display: block; animation: fadeIn 0.4s ease-in; }
-        @media (max-width: 768px) {
-    .content-section { padding-top: 140px; }
-}
+        @media (max-width: 768px) { .content-section { padding-top: 150px; } }
+
         .section-title {
-            font-size: 2.2rem;
+            font-size: 2.1rem;
             font-weight: 800;
             color: var(--text);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2.2rem;
             text-align: center;
-            letter-spacing: -0.8px;
+            letter-spacing: -0.6px;
         }
-
         .section-title span { color: var(--primary); }
 
-        /* Certifications sub-heading note (small + black, sits right under the title) */
-          /* Sub-heading note (small + black, sits right under the title) */
-#certificationsContent .section-title,
-#projectsContent .section-title { margin-bottom: 0.5rem; }
+        #certificationsContent .section-title,
+        #projectsContent .section-title { margin-bottom: 0.5rem; }
+
         .cert-note {
             text-align: center;
             font-size: 0.85rem;
-            color: #000000;
+            color: var(--muted);
             font-weight: 400;
             font-style: italic;
             margin-top: 0;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2.2rem;
         }
 
         .close-btn {
             position: fixed;
-            top: 80px;
-            right: 2rem;
+            top: 96px;
+            right: 24px;
             background: var(--primary);
             color: white;
             border: none;
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
             z-index: 1001;
             transition: all 0.25s ease;
             display: none;
             align-items: center;
             justify-content: center;
+            box-shadow: var(--shadow);
         }
-
         .close-btn.active { display: flex; }
-        .close-btn:hover { background: var(--primary-light); transform: scale(1.1); }
+        .close-btn:hover { background-color: #002c73; transform: scale(1.1); }
 
         /* ===== ABOUT ===== */
-        .about-content { background: var(--card); padding: 3rem; border-radius: 12px; box-shadow: var(--shadow-md); max-width: 800px; margin: 0 auto; }
-        .about-intro { font-size: 1rem; color: var(--muted); line-height: 1.9; margin-bottom: 2rem; }
+        .about-content { background: var(--card-bg); padding: 2.6rem; border-radius: 16px; box-shadow: var(--shadow); max-width: 800px; margin: 0 auto; border: 1px solid var(--border); }
+        .about-intro { font-size: 1rem; color: var(--muted); line-height: 1.9; margin-bottom: 1.5rem; }
         .about-intro strong { color: var(--primary); font-weight: 700; }
-        .about-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2rem; }
-        .about-item { padding: 1.4rem; background: var(--bg); border-radius: 8px; border-left: 3px solid var(--secondary); }
-        .about-item h4 { color: var(--primary); margin-bottom: 0.6rem; font-size: 1rem; font-weight: 700; }
-        .about-item p { color: var(--muted); font-size: 0.93rem; line-height: 1.7; }
+        .about-intro ul { padding-left: 1.2rem; margin-top: 0.6rem; }
+        .about-intro li { margin-bottom: 0.35rem; }
+        .about-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; margin-top: 1.6rem; }
+        .about-item { padding: 1.3rem; background: var(--bg-light); border-radius: 10px; border-left: 4px solid var(--primary); }
+        .about-item h4 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem; font-weight: 700; }
+        .about-item p { color: var(--muted); font-size: 0.92rem; line-height: 1.7; }
+        .about-item a { color: var(--primary); }
         @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
 
         /* ===== SKILLS ===== */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; align-items: stretch; }
-        .skill-card { background: var(--card); padding: 1.8rem; border-radius: 12px; border: 1.5px solid var(--border); transition: all 0.3s ease; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; height: 100%; }
-        .skill-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-4px); }
-        .skill-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
-        .skill-card h4 { color: var(--primary); margin-bottom: 0.7rem; font-size: 1.05rem; font-weight: 700; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.4rem; align-items: stretch; }
+        .skill-card { background: var(--card-bg); padding: 1.7rem; border-radius: 16px; border: 1px solid var(--border); transition: all 0.3s ease; box-shadow: var(--shadow); display: flex; flex-direction: column; height: 100%; }
+        .skill-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .skill-icon { font-size: 1.9rem; margin-bottom: 0.7rem; color: var(--primary); }
+        .skill-card h4 { color: var(--primary); margin-bottom: 0.7rem; font-size: 1.02rem; font-weight: 700; }
         .skill-items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-        .skill-tag { background: var(--bg); color: var(--text); padding: 0.35rem 0.7rem; border-radius: 4px; font-size: 0.82rem; border: 1px solid var(--border); font-weight: 500; }
+        .skill-tag { background: var(--bg-light); color: var(--text); padding: 0.35rem 0.7rem; border-radius: 6px; font-size: 0.8rem; border: 1px solid var(--border); font-weight: 500; }
 
-        /* ===== PROJECTS — PROFESSIONAL ENGINEERING STYLE ===== */
-        .projects-view {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
+        /* ===== PROJECTS FOLDER CARDS ===== */
+        .projects-view { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
 
         .project-folder {
-            background: #FFFFFF;
-            border: 1px solid #E4E7EC;
-            border-radius: 12px;
-            padding: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
             cursor: pointer;
-            transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.05), 0 2px 8px rgba(0,0,0,0.03);
-            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow);
+            text-align: center;
             color: var(--text);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
-
-        .project-folder:hover {
-            border-color: #9CBFB5;
-            box-shadow: 0 8px 28px rgba(15,110,86,0.12), 0 2px 8px rgba(0,0,0,0.06);
-            transform: translateY(-4px);
-        }
-
-        .pf-top-bar {
-            height: 3px;
-            width: 100%;
-            background: #E4E7EC;
-            transition: background 0.22s ease;
-            flex-shrink: 0;
-        }
-
-        .project-folder:hover .pf-top-bar {
-            background: var(--primary);
-        }
-
-        .pf-body {
-            padding: 1.8rem 1.8rem 1.6rem;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        .pf-icon-wrap {
-            width: 52px;
-            height: 52px;
-            background: #F5F7FA;
-            border: 1px solid #E4E7EC;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.4rem;
-            transition: background 0.22s ease, border-color 0.22s ease;
-        }
-
-        .project-folder:hover .pf-icon-wrap {
-            background: #EAF3EF;
-            border-color: #B8D8CF;
-        }
-
-        .pf-icon-wrap svg {
-            width: 26px;
-            height: 26px;
-            stroke: #667788;
-            fill: none;
-            stroke-width: 1.6;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: stroke 0.22s ease;
-        }
-
-        .project-folder:hover .pf-icon-wrap svg {
-            stroke: var(--primary);
-        }
-
+        .project-folder:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .project-folder i { font-size: 34px; margin-bottom: 14px; color: var(--primary); }
         .pf-category {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: #98A5B0;
-            margin-bottom: 0.45rem;
-            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 0.4rem; font-family: 'JetBrains Mono', monospace;
         }
-
-        .folder-name {
-            font-size: 1.08rem;
-            font-weight: 700;
-            color: #101828;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.3px;
-            line-height: 1.3;
-        }
-
-        .folder-subtitle {
-            font-size: 0.855rem;
-            color: #6B7A8D;
-            line-height: 1.6;
-            margin-bottom: 1.6rem;
-            font-weight: 400;
-            flex: 1;
-        }
-
-        .pf-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 1rem;
-            border-top: 1px solid #F0F2F5;
-        }
-
+        .folder-name { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+        .folder-subtitle { font-size: 0.87rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
         .folder-count {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            font-size: 0.78rem;
+            display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 700;
+            color: #fff; background: var(--primary); padding: 0.3rem 0.9rem; border-radius: 20px;
+        }
+
+        /* ===== FILTER TABS ===== */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin: 1.6rem 0 2.4rem;
+        }
+        .filter-tab {
+            padding: 0.55rem 1.3rem;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
             font-weight: 600;
-            color: #475467;
-            background: #F5F7FA;
-            border: 1px solid #E4E7EC;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            letter-spacing: 0.1px;
+            cursor: pointer;
+            transition: all 0.25s ease;
         }
+        .filter-tab:hover { border-color: var(--primary); color: var(--primary); }
+        .filter-tab.active { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: var(--shadow); }
 
-        .pf-arrow {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: transparent;
-            border: 1px solid #E4E7EC;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.22s ease;
-        }
-
-        .pf-arrow svg {
-            width: 13px;
-            height: 13px;
-            stroke: #98A5B0;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: stroke 0.22s ease;
-        }
-
-        .project-folder:hover .pf-arrow {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .project-folder:hover .pf-arrow svg {
-            stroke: white;
-        }
-
-        /* ===== PROJECT LIST & DETAIL ===== */
+        /* ===== PROJECT LIST ===== */
         .project-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
-        .project-card { background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.3s ease; cursor: pointer; border: 1.5px solid #E4E7EC; }
-        .project-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: var(--shadow-lg); }
+        .project-card { background: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s ease; border: 1px solid var(--border); }
+        .project-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
 
-        /* Card thumbnail — image fills the slot, fallback bg is neutral gray */
-        .project-image {
-            width: 100%;
-            height: 180px;
-            background: #F0F2F5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
+        .project-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            padding: 0.9rem 1.3rem 0;
         }
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.35s ease;
-        }
+
+        .project-image { width: 100%; height: 180px; background: var(--bg-light); overflow: hidden; position: relative; margin-top: 0.5rem; cursor: pointer; }
+        .project-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
         .project-card:hover .project-image img { transform: scale(1.04); }
 
-        /* Thin green accent bar at bottom of image */
-        .project-image::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 3px;
-            background: var(--primary);
-            opacity: 0;
-            transition: opacity 0.25s ease;
-        }
-        .project-card:hover .project-image::after { opacity: 1; }
-
         .project-info { padding: 1.3rem; }
-        .project-title { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem; }
-        .project-caption { font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.9rem; }
-        .project-info .tech-list { margin-top: 0; gap: 0.4rem; }
-        .project-info .tech-badge { padding: 0.25rem 0.65rem; font-size: 0.72rem; font-weight: 600; }
+        .project-title { font-size: 1.03rem; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem; cursor: pointer; }
+        .project-caption { font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.9rem; }
+        .tech-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0; margin-bottom: 1rem; }
+        .tech-badge { background: var(--primary); color: white; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.72rem; font-weight: 600; }
 
-        /* Detail view */
-        .project-detail { background: var(--card); padding: 2.5rem; border-radius: 12px; max-width: 860px; margin: 0 auto; box-shadow: var(--shadow-md); }
-        .project-detail-image {
-            width: 100%;
-            height: 240px;
-            background: #F0F2F5;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 2rem;
-            border: 1px solid #E4E7EC;
+        .project-footer {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding-top: 0.9rem;
+            border-top: 1px solid var(--border);
         }
-        .project-detail-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
         }
-        .project-detail h2 { color: var(--primary); font-size: 1.6rem; margin-bottom: 0.8rem; font-weight: 800; }
-        .project-detail-text { color: var(--muted); font-size: 0.97rem; line-height: 1.9; margin-bottom: 1.5rem; }
-        .tech-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
-        .tech-badge { background: var(--primary); color: white; padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+        .project-link:hover { color: var(--primary); }
 
-        .internship-block { background: var(--bg); border-radius: 8px; padding: 1.2rem 1.4rem; margin-top: 1.2rem; border-left: 3px solid var(--gold); }
-        .internship-block h5 { color: var(--gold); font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.5rem; }
-        .internship-block p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
-
-        .certs-list { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 1rem; }
-        .cert-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: var(--muted); }
-        .cert-item::before { content: '🏅'; font-size: 1rem; flex-shrink: 0; }
+        .no-projects-msg { text-align: center; color: var(--muted); padding: 2rem; grid-column: 1 / -1; }
 
         /* ===== CERTIFICATIONS ===== */
-        .certs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
+        .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
 
         .cert-card {
-            background: var(--card);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            border: 1.5px solid #E4E7EC;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            background: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow);
+            border: 1px solid var(--border); transition: all 0.3s ease; cursor: pointer;
         }
+        .cert-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
 
-        .cert-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .cert-thumb {
-            width: 100%;
-            height: 170px;
-            background: #F0F2F5;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cert-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.35s ease;
-        }
-
+        .cert-thumb { width: 100%; height: 170px; background: var(--bg-light); position: relative; overflow: hidden; }
+        .cert-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
         .cert-card:hover .cert-thumb img { transform: scale(1.05); }
 
         .cert-thumb::after {
-            content: '🔍 View';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            background: linear-gradient(0deg, rgba(15,110,86,0.88), transparent);
-            color: white;
-            font-size: 0.78rem;
-            font-weight: 700;
-            padding: 1.6rem 0.9rem 0.5rem;
-            opacity: 0;
-            transition: opacity 0.25s ease;
+            content: '🔍 View'; position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(0deg, rgba(0,74,173,0.88), transparent);
+            color: white; font-size: 0.78rem; font-weight: 700; padding: 1.6rem 0.9rem 0.5rem;
+            opacity: 0; transition: opacity 0.25s ease;
         }
-
         .cert-card:hover .cert-thumb::after { opacity: 1; }
 
         .cert-body { padding: 1.2rem 1.3rem 1.4rem; }
+        .cert-issuer { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; font-family: 'JetBrains Mono', monospace; }
+        .cert-name { font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.4; }
 
-        .cert-issuer {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 0.4rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .cert-name {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text);
-            line-height: 1.4;
-        }
-
-        /* Lightbox for enlarged certificate image */
         .cert-lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(15,20,25,0.88);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            cursor: zoom-out;
+            display: none; position: fixed; inset: 0; background: rgba(15,20,25,0.88); z-index: 2000;
+            align-items: center; justify-content: center; padding: 2rem; cursor: zoom-out;
         }
-
         .cert-lightbox.active { display: flex; }
-
-        .cert-lightbox img {
-            max-width: 90vw;
-            max-height: 85vh;
-            border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-        }
-
-        .cert-lightbox-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 2rem;
-            color: white;
-            font-size: 2rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            line-height: 1;
-        }
+        .cert-lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+        .cert-lightbox-close { position: absolute; top: 1.5rem; right: 2rem; color: white; font-size: 2rem; background: none; border: none; cursor: pointer; line-height: 1; }
 
         /* ===== RESOURCES ===== */
-        .resources-box {
-            background: var(--card);
-            border-radius: 12px;
-            box-shadow: var(--shadow-md);
-            max-width: 640px;
-            margin: 0 auto;
-            padding: 1.2rem 1.5rem;
-        }
+        .resources-box { background: var(--card-bg); border-radius: 16px; box-shadow: var(--shadow); max-width: 640px; margin: 0 auto; padding: 1.2rem 1.5rem; border: 1px solid var(--border); }
         .resource-item {
-            display: flex;
-            align-items: center;
-            gap: 0.9rem;
-            padding: 0.75rem 0.4rem;
-            border-bottom: 1px solid var(--border);
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.2s ease;
-            border-radius: 6px;
+            display: flex; align-items: center; gap: 0.9rem; padding: 0.75rem 0.4rem;
+            border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text);
+            transition: all 0.2s ease; border-radius: 6px;
         }
         .resource-item:last-child { border-bottom: none; }
-        .resource-item:hover { background: var(--bg); color: var(--primary); padding-left: 0.7rem; }
+        .resource-item:hover { background: var(--bg-light); color: var(--primary); padding-left: 0.7rem; }
         .resource-index {
-            flex-shrink: 0;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--primary);
-            font-family: 'JetBrains Mono', monospace;
+            flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--primary);
+            display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700;
+            color: #fff; font-family: 'JetBrains Mono', monospace;
         }
-        .resource-name {
-            flex: 1;
-            font-size: 0.92rem;
-            font-weight: 600;
-        }
+        .resource-name { flex: 1; font-size: 0.92rem; font-weight: 600; }
         .resource-arrow { color: var(--muted); font-size: 0.85rem; flex-shrink: 0; }
         .resource-item:hover .resource-arrow { color: var(--primary); }
 
         /* ===== CONTACT ===== */
-        .contact-content { background: var(--card); padding: 3rem; border-radius: 12px; max-width: 560px; margin: 0 auto; box-shadow: var(--shadow-md); text-align: center; }
-        .contact-text { font-size: 1rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.8; }
-        .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-        .contact-link { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.4rem; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.25s ease; }
-        .contact-link:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-        .contact-info { margin-top: 1.5rem; font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+        .contact-content { background: var(--card-bg); padding: 2.6rem; border-radius: 16px; max-width: 560px; margin: 0 auto; box-shadow: var(--shadow); text-align: center; border: 1px solid var(--border); }
+        .contact-text { font-size: 1rem; color: var(--muted); margin-bottom: 1.8rem; line-height: 1.8; }
+        .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+        .contact-link { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.3rem; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.25s ease; }
+        .contact-link:hover { background-color: #002c73; transform: translateY(-2px); }
+        .contact-info { margin-top: 1.3rem; font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
         .contact-info strong { color: var(--text); }
 
         /* ===== FOOTER ===== */
-        footer { background: var(--card); padding: 1.8rem; text-align: center; color: var(--muted); border-top: 1px solid var(--border); font-size: 0.9rem; }
-
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.65rem 1.3rem;
-            background: transparent;
-            color: var(--primary);
-            border: 1.5px solid var(--primary);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-bottom: 1.8rem;
-            font-family: 'Space Grotesk', sans-serif;
-            transition: all 0.25s ease;
-        }
-
-        .btn-back:hover { background: var(--primary); color: white; }
+        footer { background: var(--gradient); padding: 1.6rem; text-align: center; color: #fff; font-size: 0.9rem; font-weight: 500; }
 
         @media (max-width: 768px) {
-            .close-btn { top: 70px; right: 1rem; }
-            .project-detail { padding: 1.5rem; }
+            .close-btn { top: 84px; right: 1rem; }
             .projects-view { grid-template-columns: 1fr; }
         }
     </style>
@@ -912,7 +504,7 @@
 <body>
 
     <header>
-        <div class="logo">𝗔𝗝𝗔𝗬 </div>
+        <div class="logo">𝗔𝗝𝗔𝗬</div>
         <nav>
             <button class="nav-btn" onclick="showPage('home')">Home</button>
             <button class="nav-btn" onclick="showContent('about')">About</button>
@@ -921,6 +513,7 @@
             <button class="nav-btn" onclick="showContent('certifications')">Certifications</button>
             <button class="nav-btn" onclick="showContent('resources')">Resources</button>
             <button class="nav-btn" onclick="showContent('contact')">Contact</button>
+            <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
         </nav>
     </header>
 
@@ -929,24 +522,53 @@
     <!-- HOME PAGE -->
     <div id="homePage" class="page active">
         <div class="hero-section">
-            <div class="hero-bg-overlay"></div>
+            <span class="hero-eyebrow">⚡ Aspiring Embedded Software Developer</span>
+            <h1 class="dashboard-title">Engineering the <span>Embedded</span> World</h1>
+            <p class="hero-subtitle">Small Chips. Massive Impact.</p>
+        </div>
 
-            <div class="hero-content">
-                <span class="hero-eyebrow">⚡ Aspiring Embedded Software Developer</span>
-                <h1 class="hero-title">
-                    Engineering the <span>Embedded </span>World
-                </h1>
-                <p class="hero-subtitle">
-                   Small Chips. Massive Impact.<br>
-                </p>
-                <button class="hero-btn" onclick="showContent('about')">
-                    Know About Me →
-                </button>
+        <div class="container">
+            <div class="card-grid">
+                <div class="card" onclick="showContent('about')">
+                    <i class="fas fa-user"></i>
+                    <h3>About</h3>
+                    <p>Background, mindset, and academic profile</p>
+                    <span class="card-link">View About</span>
+                </div>
+                <div class="card" onclick="showContent('skills')">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Skills</h3>
+                    <p>Microcontrollers, protocols, RTOS & tools</p>
+                    <span class="card-link">View Skills</span>
+                </div>
+                <div class="card" onclick="showContent('projects')">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>Projects</h3>
+                    <p>Bare metal, FreeRTOS & TinyML builds</p>
+                    <span class="card-link">View Projects</span>
+                </div>
+                <div class="card" onclick="showContent('certifications')">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Certifications</h3>
+                    <p>Courses that reinforced my learning</p>
+                    <span class="card-link">View Certs</span>
+                </div>
+                <div class="card" onclick="showContent('resources')">
+                    <i class="fas fa-book"></i>
+                    <h3>Resources</h3>
+                    <p>Reference manuals & datasheets I use</p>
+                    <span class="card-link">View Resources</span>
+                </div>
+                <div class="card" onclick="showContent('contact')">
+                    <i class="fas fa-paper-plane"></i>
+                    <h3>Contact</h3>
+                    <p>Let's connect for internship opportunities</p>
+                    <span class="card-link">Get in Touch</span>
+                </div>
             </div>
 
-            <div class="highlights-strip">
-                <div class="highlights-label">✦ DEBUGGING & ANALYSIS  ✦</div>
-
+            <div class="chart-container">
+                <div class="highlights-label">✦ DEBUGGING &amp; ANALYSIS ✦</div>
                 <div class="hl-carousel">
                     <div class="hl-track" id="hlTrack">
                         <div class="hl-card">
@@ -954,30 +576,25 @@
                                 <img src="https://github.com/user-attachments/assets/71f5ce95-e4b9-401e-b2a4-340197902caf">
                             </div>
                             <div class="hl-text">
-                                <div class="hl-meta">ETHERNET PACKETS </div>
-                                <!--<div class="hl-title">5-DOF Robotic Arm — STM32 + ESP32</div>-->
+                                <div class="hl-meta">ETHERNET PACKETS</div>
                                 <div class="hl-desc">TX/RX Packets • ICMP Echo • IPv4 • TCP • HTTP/1.1 • Packet Capture • Payload Data • ARP • Checksum</div>
                             </div>
                         </div>
                         <div class="hl-card">
                             <div class="hl-image-wrap">
                                 <img src="https://github.com/user-attachments/assets/a3aaac9b-3558-45c7-9137-c73fb86afffe" alt="CAN Bus">
-                                <!--<div class="hl-badge">🎖️ Working</div>-->
                             </div>
                             <div class="hl-text">
                                 <div class="hl-meta">CAN FRAMES</div>
-                                <!--<div class="hl-title">CAN Bus — STM32F407 with MCP2551 Transceivers</div>-->
                                 <div class="hl-desc">TX/RX Frames • Standard ID • Extended ID • DLC • Data Payload • Arbitration • Bit Timing • Mailbox</div>
                             </div>
                         </div>
                         <div class="hl-card">
                             <div class="hl-image-wrap">
                                 <img src="https://github.com/user-attachments/assets/bc840bb7-c1a1-46b4-8bcb-0370da4b4d49" alt="TinyML">
-                                <!--<div class="hl-badge">✅ Deployed</div>-->
                             </div>
                             <div class="hl-text">
                                 <div class="hl-meta">UART FRAME</div>
-                                <!--<div class="hl-title">TensorFlow Lite Micro on STM32F407</div>-->
                                 <div class="hl-desc">TX/RX • Baud Rate Validation • Start/Stop Bits </div>
                             </div>
                         </div>
@@ -987,24 +604,21 @@
                             </div>
                             <div class="hl-text">
                                 <div class="hl-meta">SPI PROTOCOL</div>
-                                <!--<div class="hl-title">UART · I2C · SPI </div>-->
                                 <div class="hl-desc">MOSI • MISO • SCK • Chip Select (CS/NSS)</div>
                             </div>
                         </div>
                         <div class="hl-card">
                             <div class="hl-image-wrap">
                                 <img src="https://github.com/user-attachments/assets/a7c40b6b-5a6c-418f-a519-3bd8e4bfd165">
-                                <!--<div class="hl-badge">🌟 In Progress</div>-->
                             </div>
                             <div class="hl-text">
                                 <div class="hl-meta">FREERTOS (Native API)</div>
-                                <div class="hl-desc">Tasks, Semaphores, ISR-safe APIs, Mutexes & Queues
+                                <div class="hl-desc">Tasks, Semaphores, ISR-safe APIs, Mutexes &amp; Queues
 ,NVIC priority rules</div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="hl-dots" id="hlDots">
                     <button class="hl-dot active" onclick="goToSlide(0)"></button>
                     <button class="hl-dot" onclick="goToSlide(1)"></button>
@@ -1014,7 +628,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- ABOUT SECTION -->
@@ -1080,7 +693,7 @@ To build a career in Embedded Software Development by gaining practical experien
         <h2 class="section-title">Skills &amp; <span>Technologies</span></h2>
         <div class="skills-grid">
             <div class="skill-card">
-                <div class="skill-icon">⚙️</div>
+                <div class="skill-icon"><i class="fas fa-microchip"></i></div>
                 <h4>Microcontrollers</h4>
                 <div class="skill-items">
                     <span class="skill-tag">STM32 Nucleo F411RE</span>
@@ -1091,7 +704,7 @@ To build a career in Embedded Software Development by gaining practical experien
                 </div>
             </div>
             <div class="skill-card">
-                <div class="skill-icon">💻</div>
+                <div class="skill-icon"><i class="fas fa-code"></i></div>
                 <h4>Programming Languages / Software Development</h4>
                 <div class="skill-items">
                     <span class="skill-tag">C</span>
@@ -1101,7 +714,7 @@ To build a career in Embedded Software Development by gaining practical experien
                 </div>
             </div>
             <div class="skill-card">
-                <div class="skill-icon">📡</div>
+                <div class="skill-icon"><i class="fas fa-satellite-dish"></i></div>
                 <h4>Peripherals & Communication Protocols</h4>
                 <div class="skill-items">
                     <span class="skill-tag">RCC clock Tree</span>
@@ -1120,7 +733,7 @@ To build a career in Embedded Software Development by gaining practical experien
                 </div>
             </div>
             <div class="skill-card">
-                <div class="skill-icon">🔁</div>
+                <div class="skill-icon"><i class="fas fa-arrows-spin"></i></div>
                 <h4>FreeRTOS (Native API)</h4>
                 <div class="skill-items">
                     <span class="skill-tag">Task Management &amp; Scheduler</span>
@@ -1131,7 +744,7 @@ To build a career in Embedded Software Development by gaining practical experien
                 </div>
             </div>
             <div class="skill-card">
-                <div class="skill-icon">🔧</div>
+                <div class="skill-icon"><i class="fas fa-screwdriver-wrench"></i></div>
                 <h4>Tools &amp; IDEs</h4>
                 <div class="skill-items">
                     <span class="skill-tag">STM32CubeIDE</span>
@@ -1142,7 +755,7 @@ To build a career in Embedded Software Development by gaining practical experien
                 </div>
             </div>
             <div class="skill-card">
-                <div class="skill-icon">🔬</div>
+                <div class="skill-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
                 <h4>Debugging &amp; Analysis</h4>
                 <div class="skill-items">
                     <span class="skill-tag">ST-Link Debugger (V2)</span>
@@ -1155,7 +768,7 @@ To build a career in Embedded Software Development by gaining practical experien
                 </div>
             </div>
             <div class="skill-card">
-                <div class="skill-icon">🧠</div>
+                <div class="skill-icon"><i class="fas fa-brain"></i></div>
                 <h4>Edge AI / TinyML</h4>
                 <div class="skill-items">
                     <span class="skill-tag">TensorFlow Lite Micro</span>
@@ -1166,7 +779,7 @@ To build a career in Embedded Software Development by gaining practical experien
                 </div>
             </div>
             <div class="skill-card">
-                <div class="skill-icon">⚡</div>
+                <div class="skill-icon"><i class="fas fa-bolt"></i></div>
                 <h4>Automation &amp; Other</h4>
                 <div class="skill-items">
                     <span class="skill-tag">Python Automations</span>
@@ -1178,104 +791,21 @@ To build a career in Embedded Software Development by gaining practical experien
 
     <!-- PROJECTS SECTION -->
     <div id="projectsContent" class="content-section">
-    <h2 class="section-title">My <span>Projects</span></h2>
-    <p class="cert-note" style="color: red;">
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <p class="cert-note" style="color: #d32f2f;">
         (Click any project to view the source code and project details on Github..)
     </p>
 
-
-        <!-- FOLDER VIEW — 3 professional engineering cards -->
-        <div id="projectsFolderView" class="projects-view">
-
-            <!-- Bare Metal Projects -->
-            <div class="project-folder" onclick="openFolder('embedded')">
-                <div class="pf-top-bar"></div>
-                <div class="pf-body">
-                    <div class="pf-icon-wrap">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <rect x="3" y="4" width="18" height="14" rx="2"/>
-                            <path d="M8 10l2 2-2 2"/>
-                            <path d="M12 14h4"/>
-                            <path d="M7 20h10"/>
-                            <path d="M12 18v2"/>
-                        </svg>
-                    </div>
-                    <div class="pf-category">STM32 Projects</div>
-                    <div class="folder-name">Bare Metal Projects</div>
-                    <div class="folder-subtitle">STM32 HAL-based projects covering polling, interrupts, communication protocols, peripheral interfacing, middleware integration, and embedded debugging. </div>
-                    <div class="pf-footer">
-                        <span class="folder-count">11 projects</span>
-                        <div class="pf-arrow">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M5 12h14M13 6l6 6-6 6"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FreeRTOS -->
-            <div class="project-folder" onclick="openFolder('freertos')">
-                <div class="pf-top-bar"></div>
-                <div class="pf-body">
-                    <div class="pf-icon-wrap">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <circle cx="5" cy="12" r="2.2"/>
-                            <circle cx="19" cy="6" r="2.2"/>
-                            <circle cx="19" cy="18" r="2.2"/>
-                            <path d="M7.1 11.3l9.7-4.6"/>
-                            <path d="M7.1 12.7l9.7 4.6"/>
-                            <path d="M7 12h5"/>
-                        </svg>
-                    </div>
-                    <div class="pf-category">STM32 Projects</div>
-                    <div class="folder-name">FreeRTOS</div>
-                    <div class="folder-subtitle">FreeRTOS-based,with real-time task scheduling and synchronization implemented without the CMSIS-RTOS layer..</div>
-                    <div class="pf-footer">
-                        <span class="folder-count">4 projects</span>
-                        <div class="pf-arrow">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M5 12h14M13 6l6 6-6 6"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI & Automation -->
-            <div class="project-folder" onclick="openFolder('ai')">
-                <div class="pf-top-bar"></div>
-                <div class="pf-body">
-                    <div class="pf-icon-wrap">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 2a5 5 0 0 1 5 5v1h.5a2.5 2.5 0 0 1 0 5H17v1a5 5 0 0 1-10 0v-1h-.5a2.5 2.5 0 0 1 0-5H7V7a5 5 0 0 1 5-5z"/>
-                            <path d="M10 10h4"/>
-                            <path d="M10 14h4"/>
-                            <circle cx="10" cy="10" r="0.6" fill="currentColor"/>
-                            <circle cx="14" cy="10" r="0.6" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <div class="pf-category">(Learning)</div>
-                    <div class="folder-name"> Tiny ML</div>
-                    <div class="folder-subtitle">TinyML inference on STM32 with TFLite Micro and X-CUBE-AI, model quantization.</div>
-                    <div class="pf-footer">
-                        <span class="folder-count">1 project</span>
-                        <div class="pf-arrow">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M5 12h14M13 6l6 6-6 6"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <!-- FILTER TABS -->
+        <div class="filter-tabs" id="filterTabs">
+            <button class="filter-tab active" data-filter="all" onclick="filterProjects('all', this)">All</button>
+            <button class="filter-tab" data-filter="embedded" onclick="filterProjects('embedded', this)">Bare Metal</button>
+            <button class="filter-tab" data-filter="freertos" onclick="filterProjects('freertos', this)">FreeRTOS</button>
+            <button class="filter-tab" data-filter="ai" onclick="filterProjects('ai', this)">Tiny ML</button>
         </div>
 
-        <!-- LIST VIEW -->
-        <div id="projectsListView" style="display:none;">
-            <button class="btn-back" onclick="closeFolder()">← Back to Folders</button>
-            <div id="projectsList" class="project-list"></div>
-        </div>
+        <!-- PROJECT GRID -->
+        <div id="projectsGrid" class="project-list"></div>
 
     </div>
 
@@ -1286,7 +816,7 @@ To build a career in Embedded Software Development by gaining practical experien
         <div id="certsGrid" class="certs-grid"></div>
     </div>
 
-    <!-- CERT LIGHTBOX (click a card to enlarge) -->
+    <!-- CERT LIGHTBOX -->
     <div class="cert-lightbox" id="certLightbox" onclick="closeCertLightbox()">
         <button class="cert-lightbox-close" onclick="closeCertLightbox(event)">✕</button>
         <img id="certLightboxImg" src="" alt="Certificate">
@@ -1596,6 +1126,13 @@ I am currently seeking opportunities for an
             document.getElementById('certLightbox').classList.remove('active');
         }
 
+        // ===== DARK MODE =====
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.toggle-btn');
+            btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+
         // ===== CAROUSEL =====
         let currentSlide = 0;
         let autoplayTimer;
@@ -1644,38 +1181,53 @@ I am currently seeking opportunities for an
             document.getElementById(contentName + 'Content').classList.add('active');
             document.querySelector('.close-btn').classList.add('active');
             if (contentName === 'projects') {
-                document.getElementById('projectsFolderView').style.display = 'grid';
-                document.getElementById('projectsListView').style.display = 'none';
+                filterProjects('all', document.querySelector('.filter-tab[data-filter="all"]'));
             }
             window.scrollTo(0, 0);
         }
 
         function closeContent() { showPage('home'); }
 
-        function openFolder(folderName) {
-            const projects = projectsData[folderName];
-            const projectsList = document.getElementById('projectsList');
-            projectsList.innerHTML = '';
-            projects.forEach(project => {
-                projectsList.innerHTML += `
-                    <div class="project-card" onclick="window.open('${project.url}', '_blank', 'noopener')">
-                        <div class="project-image">
-                            <img src="${project.img}" alt="${project.title}" loading="lazy" onerror="this.style.display='none'">
-                        </div>
-                        <div class="project-info">
-                            <div class="project-title">${project.title}</div>
-                            <div class="project-caption">${project.caption}</div>
-                            <div class="tech-list">${project.tech.map(t => `<span class="tech-badge">${t}</span>`).join('')}</div>
-                        </div>
-                    </div>`;
+        // ===== PROJECTS: FILTER + RENDER =====
+        const categoryLabels = { embedded: 'Bare Metal', freertos: 'FreeRTOS', ai: 'Tiny ML' };
+
+        function renderProjectsGrid(filter) {
+            const grid = document.getElementById('projectsGrid');
+            if (!grid) return;
+
+            const categories = filter === 'all' ? Object.keys(projectsData) : [filter];
+            let cards = '';
+            let counter = 0;
+
+            categories.forEach(cat => {
+                projectsData[cat].forEach(project => {
+                    counter++;
+                    const num = String(counter).padStart(2, '0');
+                    cards += `
+                        <div class="project-card">
+                            <div class="project-id">#${num} · ${categoryLabels[cat]}</div>
+                            <div class="project-image" onclick="window.open('${project.url}', '_blank', 'noopener')">
+                                <img src="${project.img}" alt="${project.title}" loading="lazy" onerror="this.style.display='none'">
+                            </div>
+                            <div class="project-info">
+                                <div class="project-title" onclick="window.open('${project.url}', '_blank', 'noopener')">${project.title}</div>
+                                <div class="project-caption">${project.caption}</div>
+                                <div class="tech-list">${project.tech.map(t => `<span class="tech-badge">${t}</span>`).join('')}</div>
+                                <div class="project-footer">
+                                    <a class="project-link" href="${project.url}" target="_blank" rel="noopener"><i class="fab fa-github"></i> Code</a>
+                                </div>
+                            </div>
+                        </div>`;
+                });
             });
-            document.getElementById('projectsFolderView').style.display = 'none';
-            document.getElementById('projectsListView').style.display = 'block';
+
+            grid.innerHTML = cards || '<p class="no-projects-msg">No projects in this category yet.</p>';
         }
 
-        function closeFolder() {
-            document.getElementById('projectsFolderView').style.display = 'grid';
-            document.getElementById('projectsListView').style.display = 'none';
+        function filterProjects(filter, btn) {
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            renderProjectsGrid(filter);
         }
     </script>
 </body>
