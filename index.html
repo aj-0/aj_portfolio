@@ -4,8 +4,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ajay C · Embedded Systems Engineer</title>
-    <meta name="description" content="Portfolio of Ajay C — B.E. ECE | Embedded Software Developer specializing in STM32, ARM Cortex-M, FreeRTOS, CAN Bus & TinyML." />
+    <title>Ajay C · Embedded Firmware Engineer</title>
+    <meta name="description" content="Ajay C — Embedded Firmware Engineer with industry internship experience in OTA firmware updates, dual-bank flash, FreeRTOS and Modbus industrial gateways. STM32, CAN/UDS, QNX Neutrino RTOS." />
+
+    <!-- Link preview (LinkedIn / WhatsApp / X). TODO: replace og:url and og:image with your hosted URL + a 1200x630 preview image -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ajay C · Embedded Firmware Engineer" />
+    <meta property="og:description" content="OTA firmware, FreeRTOS, CAN/UDS, QNX Neutrino — STM32 firmware with industry internship experience." />
+    <meta property="og:url" content="https://example.com/portfolio" />
+    <meta property="og:image" content="https://example.com/preview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1536,8 +1544,309 @@
 
         .skill-tag:hover {
             border-color: var(--color-accent);
-            color: #fff;
+            color: var(--color-text);
             background: var(--color-accent-dim);
+        }
+
+        .skill-module .used-in {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--color-border-strong);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--color-text-3);
+            line-height: 1.5;
+        }
+
+        .skill-module .used-in b {
+            color: var(--color-accent-2);
+            font-weight: 600;
+        }
+
+        .skill-module .skill-tags { margin-top: 0; }
+
+        /* ─── Skills sub-section switch ─── */
+        .skills-switch {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 auto 32px;
+            padding: 6px;
+            width: fit-content;
+            max-width: 100%;
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 40px;
+        }
+
+        .skills-switch-btn {
+            padding: 10px 22px;
+            border: none;
+            border-radius: 40px;
+            background: transparent;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-text-3);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .skills-switch-btn:hover { color: var(--color-text); }
+
+        .skills-switch-btn.active {
+            background: var(--gradient-primary);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(56, 132, 255, 0.25);
+        }
+
+        .skills-panel { display: none; }
+        .skills-panel.active { display: block; animation: panelIn 0.4s var(--ease-out); }
+
+        @keyframes panelIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: none; }
+        }
+
+        /* ─── Experience card ─── */
+        .exp-card {
+            position: relative;
+            background: var(--color-surface-glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--color-border);
+            border-left: 3px solid var(--color-accent-2);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .exp-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .exp-role {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-text);
+        }
+
+        .exp-company {
+            margin-top: 4px;
+            font-size: 0.95rem;
+            color: var(--color-text-2);
+        }
+
+        .exp-company a { color: var(--color-accent-2); text-decoration: none; font-weight: 600; }
+        .exp-company a:hover { text-decoration: underline; }
+
+        .exp-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .exp-meta span {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: var(--color-accent-dim);
+            border: 1px solid var(--color-border-strong);
+            color: var(--color-text-2);
+        }
+
+        .exp-meta span.paid {
+            border-color: var(--color-accent-2);
+            color: var(--color-accent-2);
+        }
+
+        .exp-product {
+            font-size: 0.9rem;
+            color: var(--color-text-2);
+            margin-bottom: 18px;
+        }
+
+        .exp-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 24px;
+        }
+
+        .exp-points {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .exp-points li {
+            display: flex;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--color-text-2);
+            line-height: 1.55;
+        }
+
+        .exp-points li i {
+            color: var(--color-accent-2);
+            margin-top: 4px;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .exp-points strong { color: var(--color-text); }
+
+        .exp-side {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .exp-sub-title {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-3);
+            margin-bottom: 10px;
+        }
+
+        /* OTA flow */
+        .ota-flow {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        .ota-steps {
+            list-style: none;
+            counter-reset: ota;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .ota-steps li {
+            counter-increment: ota;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            color: var(--color-text-2);
+        }
+
+        .ota-steps li::before {
+            content: counter(ota);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #fff;
+            background: var(--gradient-primary);
+        }
+
+        .ota-steps li.fail::before { background: var(--color-accent-3); }
+
+        /* Engineering win */
+        .exp-win {
+            background: var(--color-accent-dim);
+            border: 1px solid var(--color-accent-3);
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        .exp-win .exp-sub-title { color: var(--color-accent-3); }
+
+        .exp-win p {
+            font-size: 0.84rem;
+            color: var(--color-text-2);
+            line-height: 1.55;
+        }
+
+        .exp-stack {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px dashed var(--color-border-strong);
+        }
+
+        /* Exploring */
+        .exploring-box {
+            margin-top: 24px;
+            padding: 18px 22px;
+            border: 1px dashed var(--color-border-strong);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .exploring-title {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--color-text-3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exploring-title i { color: var(--color-accent-2); }
+
+        @media (max-width: 900px) {
+            .exp-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .exp-card { padding: 20px 16px; }
+            .skills-switch { width: 100%; }
+            .skills-switch-btn { flex: 1; justify-content: center; padding: 10px 12px; font-size: 0.72rem; }
+        }
+
+        /* Project placeholder media (no image yet) */
+        .project-card .media.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+            background: var(--color-surface-2);
+            color: var(--color-accent-2);
+            font-size: 2.4rem;
+        }
+
+        .project-card .media.placeholder small {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--color-text-4);
+        }
+
+        .project-card .highlight-badge {
+            margin-left: 6px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: var(--color-accent-3);
+            border: 1px solid var(--color-accent-3);
         }
 
         /* ═══════════════════════════════════════════════════
@@ -2131,7 +2440,7 @@
                 <li><a href="#home" class="active"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
                 <li><a href="#debugging"><i class="fas fa-wave-square"></i> Debug</a></li>
-                <li><a href="#skills"><i class="fas fa-microchip"></i> Skills</a></li>
+                <li><a href="#skills"><i class="fas fa-briefcase"></i> Experience</a></li>
                 <li><a href="#projects"><i class="fas fa-folder-open"></i> Projects</a></li>
                 <li><a href="#certifications"><i class="fas fa-certificate"></i> Certs</a></li>
                 <li><a href="#resources"><i class="fas fa-book"></i> Resources</a></li>
@@ -2160,19 +2469,19 @@
                 <div class="hero-content">
                     <div class="hero-status">
                         <span class="dot"></span>
-                        <span>ARM Cortex-M4 · 168 MHz · ACTIVE</span>
+                        <span>OPEN TO EMBEDDED FIRMWARE ROLES</span>
                     </div>
                     <h1 class="hero-headline">
                         Engineering the<br />
                         <span class="highlight">Embedded</span> World
                     </h1>
                     <div class="hero-tagline">
-                        <i class="fas fa-bolt"></i> Small Chips. Massive Impact.
+                        <i class="fas fa-bolt"></i> Embedded Firmware Engineer · Industry Experienced
                     </div>
                     <p class="hero-desc">
-                        Aspiring Embedded Software Developer passionate about bare-metal firmware,
-                        deterministic FreeRTOS architectures, automotive CAN bus, and Edge AI on
-                        STM32 microcontrollers.
+                        I build and debug real-time firmware on STM32. During my internship I shipped
+                        <strong>OTA firmware updates with dual-bank flash and CRC-32/SHA-256 verification</strong>
+                        for an industrial Modbus-to-GSM gateway. I also work with FreeRTOS, CAN/UDS and QNX Neutrino.
                     </p>
                     <div class="hero-actions">
                         <a href="#projects" class="btn-primary">
@@ -2182,7 +2491,7 @@
                             <i class="fas fa-magnifying-glass-chart"></i> Debugging
                         </a>
                         <!-- Resume button with glow animation & bouncing download icon -->
-                        <a href="https://raw.githubusercontent.com/aj-0/testing/main/AJ.pdf" target="_blank" download class="btn-resume" title="Download Official Resume PDF">
+                        <a href="AJAY_C_RESUME%20.pdf" target="_blank" download class="btn-resume" title="Download Official Resume PDF">
                             <i class="fas fa-file-arrow-down resume-icon"></i>
                             <span>Download Resume</span>
                             <span class="resume-badge">PDF</span>
@@ -2206,7 +2515,7 @@
                         <div class="orbit-tag tag-1"><i class="fas fa-microchip"></i> Cortex-M4 @ 168MHz</div>
                         <div class="orbit-tag tag-2"><i class="fas fa-network-wired"></i> CAN 2.0B / ETH</div>
                         <div class="orbit-tag tag-3"><i class="fas fa-cubes"></i> FreeRTOS Core</div>
-                        <div class="orbit-tag tag-4"><i class="fas fa-brain"></i> TinyML / AI</div>
+                        <div class="orbit-tag tag-4"><i class="fas fa-cloud-arrow-down"></i> OTA · Dual-Bank</div>
                         <div class="orbit-tag tag-5"><i class="fas fa-bug"></i> SWD / ST-Link</div>
                     </div>
                 </div>
@@ -2223,14 +2532,14 @@
             </a>
             <a href="#skills" class="hub-tile">
                 <div class="icon"><i class="fas fa-microchip"></i></div>
-                <div class="label">Skills</div>
-                <div class="desc">MCUs, protocols, tools</div>
+                <div class="label">Experience &amp; Skills</div>
+                <div class="desc">Internship, MCUs, protocols</div>
                 <div class="arrow">→ View</div>
             </a>
             <a href="#projects" class="hub-tile">
                 <div class="icon"><i class="fas fa-folder-open"></i></div>
                 <div class="label">Projects</div>
-                <div class="desc">Bare metal, RTOS, TinyML</div>
+                <div class="desc">CAN/UDS, QNX, RTOS</div>
                 <div class="arrow">→ View</div>
             </a>
             <a href="#certifications" class="hub-tile">
@@ -2274,7 +2583,10 @@
 
                     <div class="about-text">
                         <p>
-                            To build a career in Embedded Software Development by gaining practical experience and developing skills that meet industry standards. With extensive hands-on experience on the <strong>STM32 NUCLEO-F411RE</strong> and <strong>STM32F407 Discovery</strong> platforms, I focus on strengthening my expertise in Embedded C, STM32, RTOS, debugging, and system-level programming through real-world projects and continuous learning. I leverage <strong>AI-assisted tools</strong> to support debugging, analysis, and problem-solving while developing reliable, production-quality embedded software.
+                            I'm an industry-experienced fresher in real-time embedded systems. As an <strong>Embedded Intern at MachDatum (ThingConnect)</strong>, I worked on firmware for industrial gateway products: OTA updates, dual-bank flash management, FreeRTOS task design and PCB-level functional testing.
+                        </p>
+                        <p style="margin-top:12px;">
+                            I work mostly on the <strong>STM32 NUCLEO-F411RE</strong>, <strong>STM32F407 Discovery</strong> and <strong>STM32G0</strong> platforms, plus <strong>QNX Neutrino</strong> on Raspberry Pi 5. I look at firmware at the system level: how the hardware and software interact, and how to trace a bug across that boundary with a debugger and logic analyzer until I find the root cause.
                         </p>
                     </div>
 
@@ -2338,9 +2650,12 @@
                         <div class="spec-item">
                             <div class="label"><i class="fas fa-briefcase"></i> Industry Internship</div>
                             <div class="value">
-<a href="https://machdatum.com" target="_blank" style="color: inherit; text-decoration: none;">
-    Machdatum.com
-</a>                            </div>
+                                <strong>Embedded Intern</strong> ·
+                                <a href="https://machdatum.com" target="_blank" rel="noopener">MachDatum (ThingConnect)</a>, Coimbatore<br />
+                                <!-- TODO: replace with real dates -->
+                                MMM 2026 – MMM 2026 · 2 Months · Paid<br />
+                                <a href="#skills" onclick="window.showSkillsTab &amp;&amp; window.showSkillsTab('exp')">View internship work →</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2377,10 +2692,31 @@
             <div class="section-header">
                 <div class="section-badge"><i class="fas fa-microchip"></i> Silicon &amp; Tools</div>
                 <h2 class="section-title">Skills &amp; <span>Technologies</span></h2>
-                <p class="section-sub">Modular hardware architectures, low-level drivers, real-time operating systems, and edge intelligence.</p>
+                <p class="section-sub">Where I've used these skills in industry, and the technical knowledge behind them.</p>
             </div>
 
-            <div class="skills-grid" id="skillsGrid"></div>
+            <div class="skills-switch" role="tablist" aria-label="Skills sub-sections">
+                <button class="skills-switch-btn active" role="tab" aria-selected="true" aria-controls="skillsPanelExp" data-tab="exp">
+                    <i class="fas fa-briefcase"></i> Industry Experience
+                </button>
+                <button class="skills-switch-btn" role="tab" aria-selected="false" aria-controls="skillsPanelKnow" data-tab="know">
+                    <i class="fas fa-layer-group"></i> Technical Knowledge
+                </button>
+            </div>
+
+            <!-- Sub-section A: Industry Experience -->
+            <div class="skills-panel active" id="skillsPanelExp" role="tabpanel">
+                <div id="experienceList"></div>
+            </div>
+
+            <!-- Sub-section B: Technical Knowledge -->
+            <div class="skills-panel" id="skillsPanelKnow" role="tabpanel">
+                <div class="skills-grid" id="skillsGrid"></div>
+                <div class="exploring-box">
+                    <div class="exploring-title"><i class="fas fa-seedling"></i> Currently Exploring</div>
+                    <div class="skill-tags" id="exploringTags"></div>
+                </div>
+            </div>
         </section>
 
         <!-- ─── PROJECTS ─── -->
@@ -2430,21 +2766,19 @@
             <div class="section-header">
                 <div class="section-badge"><i class="fas fa-satellite"></i> Communication Bus</div>
                 <h2 class="section-title">Let's <span>Connect</span></h2>
-                <p class="section-sub">Open for Embedded Systems Internships, automotive firmware engineering, and MCU projects.</p>
+                <p class="section-sub">Open to Embedded Firmware roles in automotive, industrial IoT and real-time systems.</p>
             </div>
 
             <div class="contact-box">
                 <p class="message">
-                    I am currently seeking opportunities for an
-                    <strong>Embedded Systems Internship</strong>, particularly in the
-                    automotive domain or other hands-on roles involving
-                    <strong>MCUs and RTOS</strong>. I would be grateful for the opportunity
-                    to learn, contribute, and gain practical industry experience.
-                    Please feel free to reach out!
+                    I'm looking for <strong>Embedded Firmware</strong> roles (internship or full-time) where I can
+                    work on <strong>MCUs, RTOS and communication stacks</strong>, especially in
+                    automotive or industrial products. I've shipped OTA and gateway firmware in industry,
+                    and I'm ready to contribute from day one. Feel free to reach out!
                 </p>
 
                 <div class="contact-channels">
-                    <a href="mailto:ajay360x@gmail.com" class="primary">
+                    <a href="mailto:connect.ajayc@gmail.com" class="primary">
                         <i class="fas fa-envelope"></i> Email Transmission
                     </a>
                     <a href="https://linkedin.com/in/mr-aj" target="_blank" rel="noopener">
@@ -2458,7 +2792,7 @@
                 <div class="signature">
                     <strong>Ajay C</strong><br />
                     Tiruppur, Tamil Nadu &nbsp;·&nbsp;
-                    <a href="mailto:ajay360x@gmail.com">ajay360x@gmail.com</a>
+                    <a href="mailto:connect.ajayc@gmail.com">connect.ajayc@gmail.com</a>
                 </div>
             </div>
         </section>
@@ -2688,52 +3022,119 @@
             img: 'https://github.com/user-attachments/assets/a7c40b6b-5a6c-418f-a519-3bd8e4bfd165'
         }];
 
+        // Industry Experience (Skills → sub-section A)
+        // TODO: replace `dates` with real internship dates
+        const experienceData = [{
+            role: 'Embedded Intern',
+            company: 'MachDatum (ThingConnect)',
+            companyUrl: 'https://machdatum.com',
+            location: 'Coimbatore',
+            dates: 'MMM 2026 – MMM 2026',
+            duration: '2 Months',
+            type: 'Paid Internship',
+            product: 'Firmware for industrial gateway products: a SIMCom A7672S-based Modbus RTU-to-GSM gateway, plus Modbus-to-Wi-Fi and Modbus-to-Ethernet gateways.',
+            points: [
+                'Developed <strong>OTA firmware updates</strong> and <strong>user configuration features</strong> for a SIMCom A7672S-based Modbus RTU-to-GSM gateway.',
+                'Implemented <strong>dual-bank flash management</strong>, firmware image verification (<strong>CRC-32 / SHA-256</strong>) and bank switching for controlled OTA updates.',
+                'Structured <strong>FreeRTOS tasks, priorities and queues</strong> to keep Modbus polling responsive while OTA ran in the background.',
+                'Flashed firmware and performed <strong>functional testing</strong> on industrial Modbus-to-Wi-Fi and Modbus-to-Ethernet gateway PCBs.',
+                'Managed firmware branches, commits and collaborative development workflows using <strong>Git &amp; GitHub</strong>.'
+            ],
+            ota: [
+                { t: 'Download image over GSM (A7672S)' },
+                { t: 'Write to inactive flash bank' },
+                { t: 'Verify CRC-32 / SHA-256' },
+                { t: 'Switch bank & reboot' },
+                { t: 'Verification fails → keep running image', fail: true }
+            ],
+            win: 'Found that the <strong>STM32G0B0RET6</strong>\'s documentation didn\'t match what the hardware actually supports for <strong>flash bank swapping</strong>. I confirmed it through the official ST Community and redesigned the OTA bootloader around it.',
+            stack: ['STM32G0', 'SIMCom A7672S', 'FreeRTOS', 'Modbus RTU', 'GSM / HTTPS', 'Dual-Bank Flash', 'Bootloader', 'CRC-32', 'SHA-256', 'ST-LINK', 'Git / GitHub']
+        }];
+
+        // Technical Knowledge (Skills → sub-section B)
         const skillsData = [{
+            icon: 'fa-code',
+            title: 'Languages & Firmware',
+            tags: ['Embedded C', 'Python', 'STM32 HAL / LL', 'Bootloader (Dual-Bank)', 'OTA Updates'],
+            used: 'Internship · all projects'
+        }, {
             icon: 'fa-microchip',
             title: 'Microcontrollers',
-            tags: ['STM32 Nucleo F411RE & G0BORE', 'STM32F407 Discovery', 'ARM Cortex- M0+ & M4', 'ESP32', 'Arduino']
-        }, {
-            icon: 'fa-code',
-            title: 'Programming Languages / Firmware development',
-            tags: ['C', 'HAL Programming', 'Bootloader(Dual Banks Flashing)', 'Rust & C++ (Basics)']
+            tags: ['STM32F411RE', 'STM32F407', 'STM32F030', 'STM32G0B0RE / G0C1', 'STM32C5', 'ARM Cortex-M0+ & M4', 'ESP32', 'Arduino'],
+            used: 'Internship (STM32G0) · Robotic Arm · ECU Network · Sonar'
         }, {
             icon: 'fa-satellite-dish',
-            title: 'Peripherals & Protocols',
-            tags: ['RCC Clock Tree', 'Timers/PWM', 'EXTI/Interrupts', 'ADC', 'DAC', 'DMA', 'RTC', 'Watchdog', 'UART',
-                'I2C', 'SPI', 'CAN Bus (2.0)', 'Ethernet','Modbus','MQTT'
-            ]
+            title: 'Protocols & Networking',
+            tags: ['UART', 'I2C', 'SPI', 'CAN 2.0', 'UDS', 'Modbus RTU / TCP', 'Ethernet (TCP, HTTPS)', 'MQTT', 'GSM'],
+            used: 'Internship (Modbus, GSM) · ECU Network (CAN, UDS)'
+        }, {
+            icon: 'fa-sliders',
+            title: 'Peripherals',
+            tags: ['GPIO', 'EXTI', 'DMA', 'ADC', 'DAC', 'Timers / PWM', 'RTC', 'Watchdog', 'RCC Clock Tree', 'Flash'],
+            used: 'Sonar (Timer + DAC + DMA) · Robotic Arm (PWM) · ECU (RTC)'
         }, {
             icon: 'fa-arrows-spin',
             title: 'FreeRTOS (Native API)',
-            tags: ['Task Management', 'Inter-Task Comm', 'Synchronization', 'RTOS Timers', 'Memory Management']
+            tags: ['Task Scheduling', 'Queues', 'Semaphores', 'Mutexes', 'Software Timers', 'ISR Sync', 'Stack & Heap'],
+            used: 'Internship (OTA + Modbus tasks) · ECU Network'
         }, {
-            icon: 'fa-screwdriver-wrench',
-            title: 'Tools & IDEs',
-            tags: ['STM32CubeIDE', 'ARM GNU Toolchain', 'VS Code', 'Git/GitHub', 'Kicad']
+            icon: 'fa-shield-halved',
+            title: 'QNX Neutrino RTOS',
+            tags: ['Priority Scheduling', 'Message-Passing IPC', 'Process Sync', 'Watchdog / Heartbeat', 'Memory Locking'],
+            used: 'Autonomous Vehicle Safety Supervisor (QNX eHACK 2026)'
         }, {
             icon: 'fa-magnifying-glass-chart',
             title: 'Debugging & Analysis',
-            tags: ['ST-Link Debugger', 'Logic Analyzer', 'SWD/Live Expressions', 'Schematic Docs', 'Errata Docs',
-                'Datasheet Analysis', 'Reference Manual'
-            ]
+            tags: ['ST-LINK', 'Breakpoints & Step', 'Register / Memory View', 'SWV Trace', 'Logic Analyzer (PulseView)', 'Multimeter', 'Datasheets & Errata'],
+            used: 'Internship (G0B0 bank-swap finding) · every project'
         }, {
-            icon: 'fa-brain',
-            title: 'Edge AI / TinyML',
-            tags: ['TensorFlow Lite Micro', 'X-CUBE-AI', 'Python (Training)']
-        }, {
-            icon: 'fa-bolt',
-            title: 'Automation & Other',
-            tags: ['Python Automations', 'Bot Development']
+            icon: 'fa-screwdriver-wrench',
+            title: 'Tools & IDEs',
+            tags: ['STM32CubeIDE', 'Keil', 'QNX Momentics', 'VS Code', 'ARM GNU Toolchain', 'Git / GitHub', 'KiCad'],
+            used: 'Internship · all projects'
         }];
 
+        const exploringData = ['Rust (basics)', 'C++ (basics)', 'TinyML / TFLite Micro', 'X-CUBE-AI'];
+
+        // TODO: replace `url: '#'` and missing `img` on featured projects with real repo links / photos
         const projectsData = {
-            embedded: [{
-                domain: 'Bare Metal & PWM',
+            featured: [{
+                domain: 'Automotive · CAN + UDS',
+                icon: 'fa-car',
+                title: 'Distributed ECU Network with CAN, FreeRTOS & UDS',
+                caption: '2-ECU network on STM32F407 with sensor fault detection, DTC management, CAN data exchange, and a UDS diagnostic ECU that reads/clears DTCs and logs events to SD card with RTC timestamps.',
+                tech: ['STM32F407', 'FreeRTOS', 'CAN (MCP2551)', 'UDS', 'DTC', 'SD Card', 'RTC'],
+                url: '#'
+            }, {
+                domain: 'Safety-Critical · QNX',
+                icon: 'fa-shield-halved',
+                badge: 'QNX eHACK 2026',
+                title: 'Autonomous Vehicle Safety Supervisor',
+                caption: '10-process QNX system: a high-priority supervisor checks navigation commands against braking distance and sensor data. Includes watchdogs, heartbeat monitoring, 2-of-3 sensor voting and automatic process restart.',
+                tech: ['QNX Neutrino 8.0', 'C', 'Raspberry Pi 5', 'IPC', 'Priority Scheduling'],
+                url: '#'
+            }, {
+                domain: 'Signal Generation · DMA',
+                icon: 'fa-water',
+                title: 'Adaptive Software-Defined Sonar Transmitter',
+                caption: 'LFM chirp waveforms generated by timer-triggered DAC with DMA sample transfer. Rule-based firmware adapts frequency, bandwidth and pulse duration to underwater conditions.',
+                tech: ['STM32F407', 'DAC', 'DMA', 'Timers', 'LFM Chirp'],
+                url: '#'
+            }, {
+                domain: 'Real-Time Control',
                 img: 'https://github.com/user-attachments/assets/1f93de42-c650-40ee-b934-581321ac7240',
                 title: '5-DOF Robotic Arm',
-                caption: 'Mobile App → ESP32 (UART) → STM32 F411RE (PWM) → Servos',
+                caption: 'Real-time control from a mobile app: App → Wi-Fi → ESP32 → UART → STM32F411RE → PWM → 5 servos. Tuned servo precision and reduced command latency.',
                 tech: ['STM32F411RE', 'ESP32', 'UART', 'PWM'],
                 url: 'https://github.com/aj-0/4-Dof-Robotic-ARM-Using-STM32'
+            }],
+            embedded: [{
+                domain: 'Automotive Bus',
+                img: 'https://github.com/user-attachments/assets/59cdc9cd-e8e5-474f-9f6d-47ca57fb574b',
+                title: 'CAN Bus Driver Suite',
+                caption: 'CAN on STM32F407 with MCP2551 in four modes: loopback self-test, interrupt-driven TX, RX FIFO0 interrupt reception, and polled mailboxes.',
+                tech: ['STM32F407', 'CAN 2.0', 'MCP2551', 'Interrupts', 'RX FIFO0'],
+                url: 'https://github.com/aj-0/CAN-Bus-Projects'
             }, {
                 domain: 'Bare Metal Networking',
                 img: 'https://github.com/user-attachments/assets/a538bc55-2f39-4900-b84d-0d1f3a99ab69',
@@ -2748,34 +3149,6 @@
                 caption: 'Fingerprint enrollment and matching using the R307S Fingerprint Sensor interfaced with an STM32F407 via UART',
                 tech: ['UART', 'R307s', 'STM32F407', 'Security'],
                 url: 'https://github.com/aj-0/STM32_Interfacing/tree/main/Fingerprint_reader_R307s'
-            }, {
-                domain: 'Automotive Diagnostics',
-                img: 'https://github.com/user-attachments/assets/93ec8c0e-f855-4198-a89a-4b24f6e58dee',
-                title: 'CAN Bus — Loopback Self-Test',
-                caption: 'Internal CAN loopback for TX/RX self-diagnostic validation',
-                tech: ['STM32F407', 'CAN', 'Loopback'],
-                url: 'https://github.com/aj-0/CAN-Bus-Projects/tree/main/Can_Loopback'
-            }, {
-                domain: 'Automotive Bus',
-                img: 'https://github.com/user-attachments/assets/59cdc9cd-e8e5-474f-9f6d-47ca57fb574b',
-                title: 'CAN Bus — TX (Interrupt)',
-                caption: 'Periodic CAN frame TX via MCP2551, interrupt-driven',
-                tech: ['CAN', 'MCP2551', 'Interrupt'],
-                url: 'https://github.com/aj-0/CAN-Bus-Projects/tree/main/CAN%20Bus_Tx_INT'
-            }, {
-                domain: 'Automotive Bus',
-                img: 'https://github.com/user-attachments/assets/59cdc9cd-e8e5-474f-9f6d-47ca57fb574b',
-                title: 'CAN Bus — RX (Interrupt)',
-                caption: 'RX FIFO0 message-pending callback, mailbox-based reception',
-                tech: ['CAN', 'RX FIFO0', 'HAL'],
-                url: 'https://github.com/aj-0/CAN-Bus-Projects/tree/main/CAN%20Bus%20Rx_INT'
-            }, {
-                domain: 'Automotive Bus',
-                img: 'https://github.com/user-attachments/assets/173f91cc-5ea7-4454-b6c2-b229d9559677',
-                title: 'CAN Bus — Polling Mode',
-                caption: 'CAN TX/RX without interrupts, polled mailbox status',
-                tech: ['CAN', 'Polling', 'STM32'],
-                url: 'https://github.com/aj-0/CAN-Bus-Projects/tree/main/CAN%20Bus_Polling'
             }, {
                 domain: 'Sensor Fusion',
                 img: 'https://github.com/user-attachments/assets/07d0a7e3-f35d-4604-ae80-6dfdc40541c9',
@@ -2799,14 +3172,14 @@
                 url: 'https://github.com/aj-0/STM32_Interfacing/tree/main/SDcard-interfacing-Testing-'
             }, {
                 domain: 'Actuator Control',
-                img: 'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=800&q=80',
+                icon: 'fa-gear',
                 title: 'DC Motor Speed Control',
                 caption: 'PWM-based DC motor speed control via Timers',
                 tech: ['PWM', 'Timers', 'DC Motor'],
                 url: 'https://github.com/aj-0/STM32_Interfacing/tree/main/DC%20Motor%20Speed%20Control'
             }, {
                 domain: 'Timer Modulation',
-                img: 'https://images.unsplash.com/photo-1601132359864-c974e79890ac?w=800&q=80',
+                icon: 'fa-lightbulb',
                 title: 'LED Breathing (PWM)',
                 caption: 'Smooth LED fade via duty-cycle sweep on Timer PWM',
                 tech: ['PWM', 'Timers', 'GPIO'],
@@ -2848,22 +3221,9 @@
                 caption: 'TFLite Micro model deployed on STM32F407 via X-CUBE-AI',
                 tech: ['TFLite Micro', 'X-CUBE-AI', 'CCMRAM'],
                 url: 'https://github.com/aj-0/Tinyml-on-STM32-F407'
-            }],
-            pcb: [{
-                domain: 'Hardware Design',
-                img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
-                title: 'STM32F407 4-Layer Controller Board',
-                caption: 'High-speed 4-layer PCB design with impedance-controlled differential CAN/USB routing and ground planes.',
-                tech: ['KiCad', '4-Layer PCB', 'Impedance Control', 'STM32'],
-                url: 'https://github.com/aj-0'
-            }, {
-                domain: 'Power & Interface',
-                img: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80',
-                title: 'Industrial Sensor & Power Interface Module',
-                caption: 'Buck converter power stage, optoisolated I/O channels, and ESD protection circuits for harsh environments.',
-                tech: ['Schematic Capture', 'Power Supply', 'Optoisolation', 'Protection'],
-                url: 'https://github.com/aj-0'
             }]
+            // PCB projects removed: they used stock photos and had no repo.
+            // Add back as `pcb: [...]` with real KiCad screenshots + repo links when ready.
         };
 
         const certsData = [{
@@ -2880,7 +3240,7 @@
             img: 'https://media.licdn.com/dms/image/v2/D562DAQF7NTjNGoNmYQ/profile-treasury-image-shrink_1280_1280/B56Z21vt_FJgAQ-/0/1776870679348?e=1788321600&v=beta&t=MPUiAefMwd639aYjqKsJhxG1Amr1G8xKr7K97oU8o9A'
         }, {
             issuer: 'PI SQUARE',
-            name: 'Realtime Programmming for QNX OS',
+            name: 'Real-Time Programming for QNX OS',
             img: 'https://media.licdn.com/dms/image/v2/D562DAQFPvi07cjUCkA/profile-treasury-image-shrink_1280_1280/B56Z_Ry7vJJgAY-/0/1785931218150?e=1788321600&v=beta&t=fSvObyUwPKhKMM0JGdzUMwkMtWLhvG3lvpXvqMrle0c'
         }, {
             issuer: 'Infineon Technologies',
@@ -3012,7 +3372,54 @@
             window.diagGo = goTo;
         })();
 
-        // 5b. Skills
+        // 5b. Skills — sub-section A: Industry Experience
+        (function renderExperience() {
+            const box = document.getElementById('experienceList');
+            if (!box) return;
+            box.innerHTML = experienceData.map(e => `
+                <article class="exp-card">
+                    <div class="exp-head">
+                        <div>
+                            <div class="exp-role">${e.role}</div>
+                            <div class="exp-company">
+                                <a href="${e.companyUrl}" target="_blank" rel="noopener">${e.company}</a> · ${e.location}
+                            </div>
+                        </div>
+                        <div class="exp-meta">
+                            <span><i class="far fa-calendar"></i> ${e.dates}</span>
+                            <span>${e.duration}</span>
+                            <span class="paid">${e.type}</span>
+                        </div>
+                    </div>
+                    <p class="exp-product">${e.product}</p>
+                    <div class="exp-grid">
+                        <ul class="exp-points">
+                            ${e.points.map(p => `<li><i class="fas fa-chevron-right"></i><span>${p}</span></li>`).join('')}
+                        </ul>
+                        <div class="exp-side">
+                            <div class="ota-flow">
+                                <div class="exp-sub-title"><i class="fas fa-cloud-arrow-down"></i> OTA Update Flow</div>
+                                <ol class="ota-steps">
+                                    ${e.ota.map(s => `<li class="${s.fail ? 'fail' : ''}">${s.t}</li>`).join('')}
+                                </ol>
+                            </div>
+                            <div class="exp-win">
+                                <div class="exp-sub-title"><i class="fas fa-trophy"></i> Engineering Win</div>
+                                <p>${e.win}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="exp-stack">
+                        <div class="exp-sub-title">Tech used on the job</div>
+                        <div class="skill-tags">
+                            ${e.stack.map(t => `<span class="skill-tag">${t}</span>`).join('')}
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        })();
+
+        // 5b. Skills — sub-section B: Technical Knowledge
         (function renderSkills() {
             const grid = document.getElementById('skillsGrid');
             if (!grid) return;
@@ -3025,12 +3432,33 @@
                     <div class="skill-tags">
                         ${s.tags.map(t => `<span class="skill-tag">${t}</span>`).join('')}
                     </div>
+                    ${s.used ? `<div class="used-in"><b>Used in →</b> ${s.used}</div>` : ''}
                 </div>
             `).join('');
+
+            const ex = document.getElementById('exploringTags');
+            if (ex) ex.innerHTML = exploringData.map(t => `<span class="skill-tag">${t}</span>`).join('');
+        })();
+
+        // 5b. Skills — sub-section switch
+        (function skillsSwitch() {
+            const btns = document.querySelectorAll('.skills-switch-btn');
+            const panels = { exp: 'skillsPanelExp', know: 'skillsPanelKnow' };
+            function show(tab) {
+                btns.forEach(b => {
+                    const on = b.dataset.tab === tab;
+                    b.classList.toggle('active', on);
+                    b.setAttribute('aria-selected', on);
+                });
+                Object.entries(panels).forEach(([k, id]) =>
+                    document.getElementById(id)?.classList.toggle('active', k === tab));
+            }
+            btns.forEach(b => b.addEventListener('click', () => show(b.dataset.tab)));
+            window.showSkillsTab = show;
         })();
 
         // 5c. Projects (Cleaned without #01 E1 numbers)
-        const catLabels = { embedded: 'Bare Metal', freertos: 'FreeRTOS', ai: 'Tiny ML', pcb: 'PCB Design' };
+        const catLabels = { featured: 'Featured', embedded: 'Bare Metal', freertos: 'FreeRTOS', ai: 'Edge AI' };
         let currentFilter = 'all';
 
         function renderProjects(filter) {
@@ -3046,10 +3474,15 @@
                             <div class="project-card" data-cat="${cat}">
                                 <div class="meta">
                                     <span class="project-domain-tag"><i class="fas fa-layer-group"></i> ${p.domain || badge}</span>
+                                    ${p.badge ? `<span class="highlight-badge"><i class="fas fa-trophy"></i> ${p.badge}</span>` : ''}
                                 </div>
-                                <div class="media" onclick="window.open('${p.url}','_blank','noopener')">
-                                    <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'" />
-                                </div>
+                                ${p.img
+                                    ? `<div class="media" onclick="window.open('${p.url}','_blank','noopener')">
+                                           <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'" />
+                                       </div>`
+                                    : `<div class="media placeholder" onclick="window.open('${p.url}','_blank','noopener')">
+                                           <i class="fas ${p.icon || 'fa-microchip'}"></i>
+                                       </div>`}
                                 <div class="body">
                                     <div class="title" onclick="window.open('${p.url}','_blank','noopener')">${p.title}</div>
                                     <div class="caption">${p.caption}</div>
@@ -3069,8 +3502,8 @@
         function initFilters() {
             const bar = document.getElementById('filterBar');
             if (!bar) return;
-            const filters = ['all', 'embedded', 'freertos', 'ai', 'pcb'];
-            const labels = { all: 'All Modules', embedded: 'Bare Metal', freertos: 'FreeRTOS', ai: 'Tiny ML', pcb: 'PCB Design' };
+            const filters = ['all', 'featured', 'embedded', 'freertos', 'ai'];
+            const labels = { all: 'All Modules', featured: '★ Featured', embedded: 'Bare Metal', freertos: 'FreeRTOS', ai: 'Edge AI' };
             bar.innerHTML = filters.map(f =>
                 `<button class="filter-btn ${f==='all'?'active':''}" data-filter="${f}">${labels[f]||f}</button>`
             ).join('');
