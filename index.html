@@ -45,6 +45,10 @@
             --color-accent-3: #F5A623;
             --color-accent-3-glow: rgba(245, 166, 35, 0.25);
 
+            /* Links — blue = clickable (teal is reserved for labels/info) */
+            --color-link: #4C9AFF;
+            --color-link-hover: #7DB6FF;
+
             /* Text */
             --color-text: #EBF0F8;
             --color-text-2: #B0C8E8;
@@ -1304,10 +1308,12 @@
             background: var(--color-surface-glass);
             backdrop-filter: blur(16px);
             border: 1px solid var(--color-border);
-            border-radius: 28px;
-            padding: 28px 32px 32px;
+            border-radius: 20px;
+            padding: 28px;
             box-shadow: var(--shadow-float);
-            max-width: 880px;
+            /* Medium width, centered (wide enough for capture + info side by side) */
+            width: 100%;
+            max-width: 1080px;
             margin: 0 auto;
         }
 
@@ -1354,7 +1360,7 @@
         }
 
         .diag-tabs button:hover {
-            color: #fff;
+            color: var(--color-accent);
             border-color: var(--color-accent);
         }
 
@@ -1368,9 +1374,7 @@
         .carousel-viewport {
             position: relative;
             overflow: hidden;
-            border-radius: 20px;
-            background: #080F1C;
-            border: 1px solid var(--color-border);
+            border-radius: 16px;
         }
 
         .carousel-track {
@@ -1379,48 +1383,160 @@
             will-change: transform;
         }
 
+        /* Slide = capture window (left) + info panel (right) */
         .carousel-slide {
             min-width: 100%;
+            display: grid;
+            grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        /* Capture "tool window" — always dark, because the screenshots are dark */
+        .scope-window {
             display: flex;
             flex-direction: column;
-            background: #080F1C;
-        }
-
-        .carousel-slide .img-wrap {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background: #080F1C;
+            background: #0B1220;
+            border: 1px solid var(--color-border-strong);
+            border-radius: 14px;
             overflow: hidden;
+            box-shadow: var(--shadow-card);
         }
 
-        .carousel-slide .img-wrap img {
+        .scope-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 14px;
+            background: #111A2B;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: #8FA6C4;
+        }
+
+        .scope-bar .d { width: 9px; height: 9px; border-radius: 50%; }
+        .scope-bar .d.r { background: #FF5F57; }
+        .scope-bar .d.y { background: #FEBC2E; }
+        .scope-bar .d.g { background: #28C840; }
+        .scope-bar .file { margin-left: 10px; }
+        .scope-bar .live { margin-left: auto; color: #00D4AA; font-weight: 700; letter-spacing: 1px; }
+
+        .scope-img {
+            position: relative;
+            flex: 1;
+            aspect-ratio: 16 / 10;
+            background: #0B1220;
+        }
+
+        .scope-img img {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
         }
 
-        .carousel-slide .caption {
-            padding: 16px 24px 20px;
-            background: #0A1428;
-            border-top: 1px solid var(--color-border);
+        /* Info panel — uses theme variables so it is readable in light AND dark */
+        .diag-info {
+            display: flex;
+            flex-direction: column;
+            padding: 6px 4px 4px;
+            min-width: 0;
         }
 
-        .carousel-slide .caption .meta {
+        .diag-info .top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .diag-info .proto {
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
-            color: var(--color-accent-2);
+            letter-spacing: 2px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            color: var(--color-accent-2);
         }
 
-        .carousel-slide .caption .desc {
-            font-size: 0.9rem;
-            color: var(--color-text-2);
+        .diag-info .count {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--color-text-3);
+        }
+
+        .diag-info h4 {
+            margin: 10px 0 6px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            line-height: 1.25;
+            color: var(--color-text);
+        }
+
+        .diag-info .lead {
+            font-size: 0.88rem;
             line-height: 1.6;
-            margin-top: 4px;
+            color: var(--color-text-2);
+            margin-bottom: 16px;
+        }
+
+        .check-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 10px;
+            background: var(--color-accent-dim);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            line-height: 1.35;
+            color: var(--color-text-2);
+        }
+
+        .check-list li i {
+            color: var(--color-accent-2);
+            font-size: 0.78rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .diag-nav {
+            margin-top: auto;
+            padding-top: 18px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .diag-nav button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--color-border-strong);
+            background: var(--color-surface-2);
+            color: var(--color-text-2);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .diag-nav button:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: #fff;
         }
 
         .carousel-dots {
@@ -1455,12 +1571,13 @@
             .diag-header .left h3 {
                 font-size: 1.05rem;
             }
-            .carousel-slide .caption {
-                padding: 12px 16px 16px;
-            }
-            .carousel-slide .caption .desc {
-                font-size: 0.8rem;
-            }
+            .check-list { grid-template-columns: 1fr; }
+            .scope-bar .file { display: none; }
+        }
+
+        @media (max-width: 900px) {
+            /* Stack: capture on top, info below */
+            .carousel-slide { grid-template-columns: minmax(0, 1fr); gap: 16px; }
         }
 
         /* ═══════════════════════════════════════════════════
@@ -1565,6 +1682,20 @@
 
         .skill-module .skill-tags { margin-top: 0; }
 
+        /* Sub-groups inside one card (e.g. RTOS → FreeRTOS / QNX Neutrino) */
+        .skill-group + .skill-group {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--color-border-strong);
+        }
+
+        .skill-group-label {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+
         /* ─── Skills sub-section switch ─── */
         .skills-switch {
             display: flex;
@@ -1581,7 +1712,7 @@
 
         .skills-switch-btn {
             padding: 10px 22px;
-            border: none;
+            border: 1.5px solid transparent;
             border-radius: 40px;
             background: transparent;
             font-family: var(--font-mono);
@@ -1593,9 +1724,47 @@
             align-items: center;
             gap: 8px;
             white-space: nowrap;
+            transition: transform var(--duration-fast) var(--ease-out),
+                        box-shadow var(--duration-fast) var(--ease-out),
+                        background-color var(--duration-fast) var(--ease-out),
+                        color var(--duration-fast) var(--ease-out);
         }
 
-        .skills-switch-btn:hover { color: var(--color-text); }
+        /* Inactive tab: highlighted so it clearly reads as "click me" */
+        /* Same gold outer glow as the theme toggle button */
+        .skills-switch-btn:not(.active) {
+            border-color: rgba(245, 166, 35, 0.6);
+            background: var(--color-accent-dim);
+            color: var(--color-accent);
+            box-shadow: 0 0 12px var(--color-accent-3-glow);
+            animation: theme-glow 3.5s ease-in-out infinite;
+        }
+
+        .skills-switch-btn:not(.active)::after {
+            content: '\2192';
+            font-size: 0.85rem;
+            transition: transform var(--duration-fast) var(--ease-out);
+        }
+
+        .skills-switch-btn:not(.active):hover {
+            background: var(--color-accent);
+            color: #fff;
+            transform: translateY(-1px);
+            animation: none;
+            border-color: var(--color-accent-3);
+            box-shadow: 0 0 20px rgba(245, 166, 35, 0.45);
+        }
+
+        .skills-switch-btn:not(.active):hover::after { transform: translateX(3px); }
+
+        .skills-switch-btn:focus-visible {
+            outline: 2px solid var(--color-accent-2);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .skills-switch-btn:not(.active) { animation: none; }
+        }
 
         .skills-switch-btn.active {
             background: var(--gradient-primary);
@@ -1664,9 +1833,65 @@
             color: var(--color-text-2);
         }
 
+        /* Gold highlight (stronger version of the theme-toggle glow) */
         .exp-meta span.paid {
-            border-color: var(--color-accent-2);
-            color: var(--color-accent-2);
+            border: 1.5px solid var(--color-accent-3);
+            background: rgba(245, 166, 35, 0.14);
+            color: var(--color-accent-3);
+            font-weight: 700;
+            box-shadow: 0 0 16px rgba(245, 166, 35, 0.45);
+            animation: paid-glow 3.5s ease-in-out infinite;
+        }
+
+        @keyframes paid-glow {
+            0%, 100% {
+                border-color: rgba(245, 166, 35, 0.75);
+                box-shadow: 0 0 12px rgba(245, 166, 35, 0.35);
+            }
+            50% {
+                border-color: rgba(245, 166, 35, 1);
+                box-shadow: 0 0 28px rgba(245, 166, 35, 0.7);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .exp-meta span.paid { animation: none; }
+        }
+
+        /* Company + about — one compact blue box */
+        .exp-company-box {
+            margin: 4px 0 18px;
+            padding: 10px 14px;
+            background: var(--color-accent-dim);
+            border: 1px solid var(--color-border-strong);
+            border-left: 3px solid var(--color-accent);
+            border-radius: 10px;
+        }
+
+        .exp-company-box .exp-company {
+            margin: 0;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .exp-company-box .exp-company > i {
+            color: var(--color-accent);
+            font-size: 0.85rem;
+        }
+
+        .exp-about {
+            margin: 2px 0 0;
+            font-size: 0.84rem;
+            line-height: 1.55;
+            color: var(--color-text-3);
+        }
+
+        /* "What I experienced:" heading above the bullets */
+        .exp-label {
+            margin-bottom: 12px;
         }
 
         .exp-product {
@@ -1721,49 +1946,6 @@
             margin-bottom: 10px;
         }
 
-        /* OTA flow */
-        .ota-flow {
-            background: var(--color-surface-2);
-            border: 1px solid var(--color-border);
-            border-radius: 14px;
-            padding: 16px;
-        }
-
-        .ota-steps {
-            list-style: none;
-            counter-reset: ota;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .ota-steps li {
-            counter-increment: ota;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: var(--font-mono);
-            font-size: 0.74rem;
-            color: var(--color-text-2);
-        }
-
-        .ota-steps li::before {
-            content: counter(ota);
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: #fff;
-            background: var(--gradient-primary);
-        }
-
-        .ota-steps li.fail::before { background: var(--color-accent-3); }
-
         /* Engineering win */
         .exp-win {
             background: var(--color-accent-dim);
@@ -1778,12 +1960,6 @@
             font-size: 0.84rem;
             color: var(--color-text-2);
             line-height: 1.55;
-        }
-
-        .exp-stack {
-            margin-top: 22px;
-            padding-top: 18px;
-            border-top: 1px dashed var(--color-border-strong);
         }
 
         /* Exploring */
@@ -1838,16 +2014,27 @@
             color: var(--color-text-4);
         }
 
+        /* Badge sits on the image (top-left) so it never changes card header height */
         .project-card .highlight-badge {
-            margin-left: 6px;
-            padding: 3px 10px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2;
+            padding: 4px 10px;
             border-radius: 20px;
             font-family: var(--font-mono);
-            font-size: 0.62rem;
+            font-size: 0.64rem;
             font-weight: 700;
             color: var(--color-accent-3);
+            background: rgba(10, 20, 40, 0.82);
             border: 1px solid var(--color-accent-3);
+            box-shadow: 0 0 12px var(--color-accent-3-glow);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
+
+        .project-card .media.placeholder .highlight-badge { font-size: 0.64rem; }
 
         /* ═══════════════════════════════════════════════════
            PROJECTS (Cleaned without #01 E1 numbers)
@@ -1910,11 +2097,26 @@
         }
 
         /* ─── Project Card Meta Header ─── */
+        /* Fixed one-line header: every card's image starts at the same height */
         .project-card .meta {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            padding: 12px 18px 8px;
+            height: 46px;
+            padding: 0 18px;
+            overflow: hidden;
+        }
+
+        .project-card .meta .project-domain-tag {
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .project-card .meta .project-domain-tag .txt {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .project-card .meta .project-domain-tag {
@@ -2066,6 +2268,27 @@
             background: var(--color-surface-2);
             overflow: hidden;
         }
+
+        /* Shown when the certificate image file is missing */
+        .cert-card .frame .no-img {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: var(--color-accent-3);
+            font-size: 2.2rem;
+        }
+
+        .cert-card .frame .no-img small {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--color-text-4);
+        }
+
+        .cert-card .frame.missing .no-img { display: flex; }
 
         .cert-card .frame img {
             width: 100%;
@@ -2415,6 +2638,80 @@
                 text-align: center;
             }
         }
+
+        /* ═══════════════════════════════════════════════════
+           LINKS — one consistent "this is clickable" style
+           Blue + dotted underline = link. Solid underline on hover.
+           ↗ marks links that open another site.
+           (Buttons, nav and hub tiles keep their own styles.)
+           ═══════════════════════════════════════════════════ */
+        .spec-item .value a,
+        .exp-company a,
+        .contact-box .signature a,
+        .project-card .body .footer .link {
+            color: var(--color-link);
+            font-weight: 600;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-decoration-thickness: 1.5px;
+            text-underline-offset: 3px;
+            cursor: pointer;
+            transition: color var(--duration-fast) var(--ease-out),
+                        text-decoration-color var(--duration-fast) var(--ease-out),
+                        transform var(--duration-fast) var(--ease-out);
+        }
+
+        .spec-item .value a:hover,
+        .exp-company a:hover,
+        .contact-box .signature a:hover,
+        .project-card .body .footer .link:hover {
+            color: var(--color-link-hover);
+            text-decoration-style: solid;
+        }
+
+        /* External-site marker */
+        .spec-item .value a[target="_blank"]::after,
+        .exp-company a[target="_blank"]::after {
+            content: ' \2197';
+            font-size: 0.85em;
+            text-decoration: none;
+            display: inline-block;
+            margin-left: 2px;
+        }
+
+        /* Project cards: title is clickable → show it */
+        .project-card .body .title:hover {
+            color: var(--color-link);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .project-card .body .footer .link:hover {
+            transform: translateX(4px);
+        }
+
+        /* Resources: each row opens a PDF → file name in link blue */
+        .resource-item .left .info .name {
+            color: var(--color-link);
+        }
+
+        .resource-item:hover .left .info .name {
+            color: var(--color-link-hover);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .resource-item .arrow {
+            color: var(--color-link);
+        }
+
+        /* Keyboard users see where they are */
+        a:focus-visible,
+        .project-card .body .title:focus-visible {
+            outline: 2px solid var(--color-link);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -2467,10 +2764,6 @@
         <section id="home" class="hero">
             <div class="hero-grid">
                 <div class="hero-content">
-                    <div class="hero-status">
-                        <span class="dot"></span>
-                        <span>OPEN TO EMBEDDED FIRMWARE ROLES</span>
-                    </div>
                     <h1 class="hero-headline">
                         Engineering the<br />
                         <span class="highlight">Embedded</span> World
@@ -2712,10 +3005,12 @@
             <!-- Sub-section B: Technical Knowledge -->
             <div class="skills-panel" id="skillsPanelKnow" role="tabpanel">
                 <div class="skills-grid" id="skillsGrid"></div>
+                <!-- Currently Exploring — hidden for now. Uncomment to show again.
                 <div class="exploring-box">
                     <div class="exploring-title"><i class="fas fa-seedling"></i> Currently Exploring</div>
                     <div class="skill-tags" id="exploringTags"></div>
                 </div>
+                -->
             </div>
         </section>
 
@@ -2944,6 +3239,8 @@
                     document.documentElement.style.setProperty('--color-text-4', '#7A94B8');
                     document.documentElement.style.setProperty('--color-border', 'rgba(56,132,255,0.15)');
                     document.documentElement.style.setProperty('--color-border-strong', 'rgba(56,132,255,0.30)');
+                    document.documentElement.style.setProperty('--color-link', '#1A5FD0');
+                    document.documentElement.style.setProperty('--color-link-hover', '#0F4AA8');
                     icon.classList.replace('fa-moon', 'fa-sun');
                 } else {
                     document.documentElement.style.setProperty('--color-bg', '#050B14');
@@ -2957,6 +3254,8 @@
                     document.documentElement.style.setProperty('--color-text-4', '#4A6A8A');
                     document.documentElement.style.setProperty('--color-border', 'rgba(56,132,255,0.12)');
                     document.documentElement.style.setProperty('--color-border-strong', 'rgba(56,132,255,0.28)');
+                    document.documentElement.style.setProperty('--color-link', '#4C9AFF');
+                    document.documentElement.style.setProperty('--color-link-hover', '#7DB6FF');
                     icon.classList.replace('fa-sun', 'fa-moon');
                 }
             }
@@ -2995,30 +3294,51 @@
         // ──────────────────────────────────────────────
         // 4. DATA
         // ──────────────────────────────────────────────
+        // tab: short tab label · file: shown in the capture window title bar
         const debugData = [{
             id: 'eth',
-            meta: 'ETHERNET PACKETS',
-            desc: 'TX/RX Packets • ICMP Echo • IPv4 • TCP • HTTP/1.1 • Packet Capture • Payload Data • ARP • Checksum',
+            tab: 'ETHERNET',
+            meta: 'Ethernet Packets',
+            file: 'eth_capture.pcap',
+            title: 'Ethernet Packet Capture',
+            lead: 'Captured traffic from the W5500 Ethernet controller and checked each layer, from ARP and ICMP up to TCP/HTTP.',
+            checks: ['TX/RX packets', 'ARP resolution', 'ICMP echo (ping)', 'IPv4 / TCP', 'HTTP/1.1 payload', 'Checksum validation'],
             img: 'https://github.com/user-attachments/assets/71f5ce95-e4b9-401e-b2a4-340197902caf'
         }, {
             id: 'can',
-            meta: 'CAN FRAMES',
-            desc: 'TX/RX Frames • Standard ID • Extended ID • DLC • Data Payload • Arbitration • Bit Timing • Mailbox',
+            tab: 'CAN',
+            meta: 'CAN Frames',
+            file: 'can_bus.sr',
+            title: 'CAN Frame Analysis',
+            lead: 'Decoded CAN frames between STM32 nodes (MCP2551) to confirm IDs, DLC and payload on the bus.',
+            checks: ['TX/RX frames', 'Standard & extended ID', 'DLC & data payload', 'Arbitration', 'Bit timing', 'Mailbox handling'],
             img: 'https://github.com/user-attachments/assets/a3aaac9b-3558-45c7-9137-c73fb86afffe'
         }, {
             id: 'uart',
-            meta: 'UART FRAME',
-            desc: 'TX/RX • Baud Rate Validation • Start/Stop Bits • 115200 8N1 Frame Timing & Framing Error Guard',
+            tab: 'UART',
+            meta: 'UART Frame',
+            file: 'uart_115200.sr',
+            title: 'UART Frame Timing',
+            lead: 'Logic-analyzer capture used to verify baud rate, frame structure and bit timing.',
+            checks: ['TX/RX lines', 'Baud rate validation', 'Start / stop bits', '115200 8N1 timing', 'Framing error guard'],
             img: 'https://github.com/user-attachments/assets/bc840bb7-c1a1-46b4-8bcb-0370da4b4d49'
         }, {
             id: 'spi',
-            meta: 'SPI PROTOCOL',
-            desc: 'MOSI • MISO • SCK • Chip Select (CS/NSS) • Full-Duplex Synchronous High-Speed Bus',
+            tab: 'SPI',
+            meta: 'SPI Protocol',
+            file: 'spi_decode.sr',
+            title: 'SPI Bus Decode',
+            lead: 'Decoded full-duplex SPI transfers to check clock, chip-select and data alignment.',
+            checks: ['MOSI / MISO', 'SCK clock', 'Chip select (CS/NSS)', 'Full-duplex transfer', 'Synchronous timing'],
             img: 'https://github.com/user-attachments/assets/0d1a1da8-76dc-4b1c-a4b0-f36af1a508a3'
         }, {
             id: 'rtos',
-            meta: 'FREERTOS (Native API)',
-            desc: 'Tasks, Semaphores, ISR-safe APIs, Mutexes & Queues, NVIC priority rules & Preemptive Scheduler',
+            tab: 'FREERTOS',
+            meta: 'FreeRTOS · Native API',
+            file: 'STM32CubeIDE — debug',
+            title: 'FreeRTOS Runtime Debugging',
+            lead: 'Live debugging in STM32CubeIDE, inspecting task and semaphore/mutex internals alongside SWV ITM console output.',
+            checks: ['Tasks & scheduler', 'Semaphores & mutexes', 'Queues', 'ISR-safe APIs', 'NVIC priority rules', 'SWV ITM trace'],
             img: 'https://github.com/user-attachments/assets/a7c40b6b-5a6c-418f-a519-3bd8e4bfd165'
         }];
 
@@ -3029,69 +3349,55 @@
             company: 'MachDatum (ThingConnect)',
             companyUrl: 'https://machdatum.com',
             location: 'Coimbatore',
+            about: 'MachDatum is a Coimbatore-based industrial technology company specializing in hardware and software development, with a focus on embedded systems, industrial IoT, connectivity solutions and factory maintenance management software.',
             dates: 'MMM 2026 – MMM 2026',
             duration: '2 Months',
             type: 'Paid Internship',
-            product: 'Firmware for industrial gateway products: a SIMCom A7672S-based Modbus RTU-to-GSM gateway, plus Modbus-to-Wi-Fi and Modbus-to-Ethernet gateways.',
             points: [
-                'Developed <strong>OTA firmware updates</strong> and <strong>user configuration features</strong> for a SIMCom A7672S-based Modbus RTU-to-GSM gateway.',
-                'Implemented <strong>dual-bank flash management</strong>, firmware image verification (<strong>CRC-32 / SHA-256</strong>) and bank switching for controlled OTA updates.',
-                'Structured <strong>FreeRTOS tasks, priorities and queues</strong> to keep Modbus polling responsive while OTA ran in the background.',
+                'Developed <strong>MQTT-based OTA firmware updates</strong> and <strong>user configuration features</strong> (Serial, MQTT and 16-slave Modbus settings) for an <strong>STM32G0B0RE-based gateway</strong> using the SIMCom A7672S module.',
+                'Implemented <strong>bootloader memory allocation, dual-bank flash management</strong> and firmware image verification using <strong>CRC-32 / SHA-256</strong> for reliable OTA updates.',
+                'Structured <strong>FreeRTOS tasks, priorities and queues</strong> to maintain responsive Modbus polling while OTA operations ran in the background.',
                 'Flashed firmware and performed <strong>functional testing</strong> on industrial Modbus-to-Wi-Fi and Modbus-to-Ethernet gateway PCBs.',
-                'Managed firmware branches, commits and collaborative development workflows using <strong>Git &amp; GitHub</strong>.'
+                'Managed firmware development workflows, including <strong>Git branching, commits and collaborative development using Git &amp; GitHub</strong>.'
             ],
-            ota: [
-                { t: 'Download image over GSM (A7672S)' },
-                { t: 'Write to inactive flash bank' },
-                { t: 'Verify CRC-32 / SHA-256' },
-                { t: 'Switch bank & reboot' },
-                { t: 'Verification fails → keep running image', fail: true }
-            ],
-            win: 'Found that the <strong>STM32G0B0RET6</strong>\'s documentation didn\'t match what the hardware actually supports for <strong>flash bank swapping</strong>. I confirmed it through the official ST Community and redesigned the OTA bootloader around it.',
-            stack: ['STM32G0', 'SIMCom A7672S', 'FreeRTOS', 'Modbus RTU', 'GSM / HTTPS', 'Dual-Bank Flash', 'Bootloader', 'CRC-32', 'SHA-256', 'ST-LINK', 'Git / GitHub']
+            win: 'Found that the <strong>STM32G0B0RET6</strong>\'s documentation didn\'t match what the hardware actually supports for <strong>flash bank swapping</strong>. I confirmed it through the official ST Community and redesigned the OTA bootloader around it.'
         }];
 
         // Technical Knowledge (Skills → sub-section B)
         const skillsData = [{
             icon: 'fa-code',
             title: 'Languages & Firmware',
-            tags: ['Embedded C', 'Python', 'STM32 HAL / LL', 'Bootloader (Dual-Bank)', 'OTA Updates'],
-            used: 'Internship · all projects'
+            tags: ['C / Embedded C / HAL', 'Python', 'Bootloader (Dual-Bank)', 'OTA Updates'],
         }, {
             icon: 'fa-microchip',
-            title: 'Microcontrollers',
-            tags: ['STM32F411RE', 'STM32F407', 'STM32F030', 'STM32G0B0RE / G0C1', 'STM32C5', 'ARM Cortex-M0+ & M4', 'ESP32', 'Arduino'],
-            used: 'Internship (STM32G0) · Robotic Arm · ECU Network · Sonar'
+            title: 'MCUs & Boards',
+            tags: ['STM32 (F411RE · F407 · F030 · G0B0RE · G0C1 · C5)', 'ARM Cortex-M0+ & M4', 'ESP32 · Arduino', 'Raspberry Pi 5'],
         }, {
             icon: 'fa-satellite-dish',
             title: 'Protocols & Networking',
             tags: ['UART', 'I2C', 'SPI', 'CAN 2.0', 'UDS', 'Modbus RTU / TCP', 'Ethernet (TCP, HTTPS)', 'MQTT', 'GSM'],
-            used: 'Internship (Modbus, GSM) · ECU Network (CAN, UDS)'
         }, {
             icon: 'fa-sliders',
             title: 'Peripherals',
             tags: ['GPIO', 'EXTI', 'DMA', 'ADC', 'DAC', 'Timers / PWM', 'RTC', 'Watchdog', 'RCC Clock Tree', 'Flash'],
-            used: 'Sonar (Timer + DAC + DMA) · Robotic Arm (PWM) · ECU (RTC)'
         }, {
             icon: 'fa-arrows-spin',
-            title: 'FreeRTOS (Native API)',
-            tags: ['Task Scheduling', 'Queues', 'Semaphores', 'Mutexes', 'Software Timers', 'ISR Sync', 'Stack & Heap'],
-            used: 'Internship (OTA + Modbus tasks) · ECU Network'
-        }, {
-            icon: 'fa-shield-halved',
-            title: 'QNX Neutrino RTOS',
-            tags: ['Priority Scheduling', 'Message-Passing IPC', 'Process Sync', 'Watchdog / Heartbeat', 'Memory Locking'],
-            used: 'Autonomous Vehicle Safety Supervisor (QNX eHACK 2026)'
+            title: 'RTOS',
+            groups: [{
+                label: 'FreeRTOS',
+                tags: ['Tasks', 'Queues', 'Semaphores', 'Mutexes', 'ISR Sync', 'Software Timers']
+            }, {
+                label: 'QNX Neutrino',
+                tags: ['Priority Scheduling', 'Message-Passing IPC', 'Watchdog / Heartbeat', 'Memory Locking']
+            }],
         }, {
             icon: 'fa-magnifying-glass-chart',
             title: 'Debugging & Analysis',
             tags: ['ST-LINK', 'Breakpoints & Step', 'Register / Memory View', 'SWV Trace', 'Logic Analyzer (PulseView)', 'Multimeter', 'Datasheets & Errata'],
-            used: 'Internship (G0B0 bank-swap finding) · every project'
         }, {
             icon: 'fa-screwdriver-wrench',
             title: 'Tools & IDEs',
             tags: ['STM32CubeIDE', 'Keil', 'QNX Momentics', 'VS Code', 'ARM GNU Toolchain', 'Git / GitHub', 'KiCad'],
-            used: 'Internship · all projects'
         }];
 
         const exploringData = ['Rust (basics)', 'C++ (basics)', 'TinyML / TFLite Micro', 'X-CUBE-AI'];
@@ -3229,39 +3535,35 @@
         const certsData = [{
             issuer: 'Etalvis Learning',
             name: 'Electronics Foundation Course',
-            img: 'https://media.licdn.com/dms/image/v2/D562DAQFpKOd1vv5Esg/profile-treasury-document-images_1280/B56Z1B1vJ8JsAY-/1/1774926100063?e=1788393600&v=beta&t=wYTdUe9WGW6xBuCMH5-O6Y4kpvnOQ9OViDzUSvEkqhg'
+            img: 'certs/1774926100063.jpeg'
         }, {
             issuer: 'NIELIT Calicut',
             name: 'Embedded Systems for Beginners',
-            img: 'https://media.licdn.com/dms/image/v2/D562DAQFll55sPhjUVQ/profile-treasury-image-shrink_1280_1280/B56Z1B5d3tGwAQ-/0/1774927079239?e=1788321600&v=beta&t=YGfDhFZzV3oIIiPffdp05y1xSvRLzIX-u51z5U7yzhc'
+            img: 'certs/1774927079239.jpeg'
         }, {
             issuer: 'Udemy',
             name: 'ARM Cortex-M3 & M4 Programming',
-            img: 'https://media.licdn.com/dms/image/v2/D562DAQF7NTjNGoNmYQ/profile-treasury-image-shrink_1280_1280/B56Z21vt_FJgAQ-/0/1776870679348?e=1788321600&v=beta&t=MPUiAefMwd639aYjqKsJhxG1Amr1G8xKr7K97oU8o9A'
+            img: 'certs/1776870679348.jpeg'
         }, {
             issuer: 'PI SQUARE',
             name: 'Real-Time Programming for QNX OS',
-            img: 'https://media.licdn.com/dms/image/v2/D562DAQFPvi07cjUCkA/profile-treasury-image-shrink_1280_1280/B56Z_Ry7vJJgAY-/0/1785931218150?e=1788321600&v=beta&t=fSvObyUwPKhKMM0JGdzUMwkMtWLhvG3lvpXvqMrle0c'
+            img: 'certs/1785931218150.jpeg'
         }, {
             issuer: 'Infineon Technologies',
             name: 'Industrial, IoT & Consumer Microcontrollers',
-            img: 'https://media.licdn.com/dms/image/v2/D562DAQEbFnzM-DHG6Q/profile-treasury-document-cover-images_1280/B56Z4c0CjyKUAw-/0/1778599866530?e=1788321600&v=beta&t=81lmIrtgMCqeDb-gj8QFMXYtJW56QTo5MpPzQ-n1j1I'
+            img: 'certs/1778599866548.jpeg'
         }, {
             issuer: 'Udemy',
             name: 'C Programming',
-            img: 'https://media.licdn.com/dms/image/v2/D562DAQFM9JpPGZOFZA/profile-treasury-image-shrink_1280_1280/B56Z1B3Fh7I8AQ-/0/1774926454397?e=1788321600&v=beta&t=PFHVDnZA6hjm28VaQcL0uAqYu-uOIX7x4I93cG4Z4ho'
+            img: 'certs/1774926454397.jpeg'
         }, {
             issuer: 'SKYY SKILL',
             name: 'AUTOMOTIVE APPLICATIONS',
-            img: 'https://media.licdn.com/dms/image/v2/D562DAQEj6ru3sOZY1w/profile-treasury-document-cover-images_1920/B56Z1B4g5hKgBM-/0/1774926833027?e=1788321600&v=beta&t=xUU62yu_RHydAVLCM2Tgr-Yf1bXaWwysbq_liJtztDQ'
-        }, {
-            issuer: 'Microchip University',
-            name: 'PIC:8 bit MCU',
-            img: 'https://media.licdn.com/dms/image/v2/D562DAQGKbsfQRyr5aQ/profile-treasury-document-cover-images_1920/B56Z1Bw9rZHoBM-/0/1774924850242?e=1788321600&v=beta&t=DBXwM8rZyid8niJUR7UYnv_zQ7au3LMTtBfSOVgM3MY'
+            img: 'certs/1774926833027.jpeg'
         }, {
             issuer: 'IIT Alumni — PALS Innowah Cluster',
             name: 'PALS Innowah Cluster Finals (Competition Certificate)',
-            img: 'https://media.licdn.com/dms/image/v2/D562DAQEGKBxUpnjePA/profile-treasury-image-shrink_1280_1280/B56Z1Bzq5qGsAQ-/0/1774925558364?e=1788321600&v=beta&t=LJe2T8p3pEopp9j-oBvmA1QJ-60GVLkVmbYZtXKVXkY'
+            img: 'certs/1774925558364.jpeg'
         }];
 
         const resourcesData = [{
@@ -3320,23 +3622,51 @@
             const total = debugData.length;
             let autoplay;
 
-            track.innerHTML = debugData.map(item => `
+            const pad = n => String(n).padStart(2, '0');
+            track.innerHTML = debugData.map((item, i) => `
                 <div class="carousel-slide">
-                    <div class="img-wrap"><img src="${item.img}" alt="${item.meta}" loading="lazy" /></div>
-                    <div class="caption">
-                        <div class="meta">${item.meta}</div>
-                        <div class="desc">${item.desc}</div>
+                    <div class="scope-window">
+                        <div class="scope-bar">
+                            <span class="d r"></span><span class="d y"></span><span class="d g"></span>
+                            <span class="file">${item.file}</span>
+                            <span class="live">● CAPTURE</span>
+                        </div>
+                        <div class="scope-img"><img src="${item.img}" alt="${item.title}" loading="lazy" /></div>
+                    </div>
+                    <div class="diag-info">
+                        <div class="top">
+                            <span class="proto">${item.meta}</span>
+                            <span class="count">${pad(i + 1)} / ${pad(total)}</span>
+                        </div>
+                        <h4>${item.title}</h4>
+                        <p class="lead">${item.lead}</p>
+                        <ul class="check-list">
+                            ${item.checks.map(c => `<li><i class="fas fa-circle-check"></i><span>${c}</span></li>`).join('')}
+                        </ul>
+                        <div class="diag-nav">
+                            <button type="button" data-step="-1" aria-label="Previous capture"><i class="fas fa-chevron-left"></i></button>
+                            <button type="button" data-step="1" aria-label="Next capture"><i class="fas fa-chevron-right"></i></button>
+                        </div>
                     </div>
                 </div>
             `).join('');
 
-            dots.innerHTML = debugData.map((_, i) =>
-                `<button class="${i===0?'active':''}" data-idx="${i}"></button>`
+            dots.innerHTML = debugData.map((item, i) =>
+                `<button class="${i===0?'active':''}" data-idx="${i}" aria-label="${item.title}"></button>`
             ).join('');
 
             tabs.innerHTML = debugData.map((item, i) =>
-                `<button class="${i===0?'active':''}" data-idx="${i}">${item.meta.split(' ')[0]}</button>`
+                `<button class="${i===0?'active':''}" data-idx="${i}">${item.tab}</button>`
             ).join('');
+
+            // Prev / next buttons inside each slide
+            track.addEventListener('click', e => {
+                const b = e.target.closest('[data-step]');
+                if (!b) return;
+                goTo(current + parseInt(b.dataset.step, 10));
+                stopAuto();
+                startAuto();
+            });
 
             function goTo(idx) {
                 current = (idx + total) % total;
@@ -3348,7 +3678,7 @@
             function next() { goTo(current + 1); }
 
             function startAuto() { if (autoplay) clearInterval(autoplay);
-                autoplay = setInterval(next, 2800); }
+                autoplay = setInterval(next, 6000); }
 
             function stopAuto() { if (autoplay) clearInterval(autoplay);
                 autoplay = null; }
@@ -3381,9 +3711,6 @@
                     <div class="exp-head">
                         <div>
                             <div class="exp-role">${e.role}</div>
-                            <div class="exp-company">
-                                <a href="${e.companyUrl}" target="_blank" rel="noopener">${e.company}</a> · ${e.location}
-                            </div>
                         </div>
                         <div class="exp-meta">
                             <span><i class="far fa-calendar"></i> ${e.dates}</span>
@@ -3391,28 +3718,23 @@
                             <span class="paid">${e.type}</span>
                         </div>
                     </div>
-                    <p class="exp-product">${e.product}</p>
+                    <div class="exp-company-box">
+                        <div class="exp-company">
+                            <i class="fas fa-building"></i>
+                            <a href="${e.companyUrl}" target="_blank" rel="noopener">${e.company}</a> · ${e.location}
+                        </div>
+                        ${e.about ? `<p class="exp-about">${e.about}</p>` : ''}
+                    </div>
+                    <div class="exp-sub-title exp-label">What I experienced:</div>
                     <div class="exp-grid">
                         <ul class="exp-points">
                             ${e.points.map(p => `<li><i class="fas fa-chevron-right"></i><span>${p}</span></li>`).join('')}
                         </ul>
                         <div class="exp-side">
-                            <div class="ota-flow">
-                                <div class="exp-sub-title"><i class="fas fa-cloud-arrow-down"></i> OTA Update Flow</div>
-                                <ol class="ota-steps">
-                                    ${e.ota.map(s => `<li class="${s.fail ? 'fail' : ''}">${s.t}</li>`).join('')}
-                                </ol>
-                            </div>
                             <div class="exp-win">
                                 <div class="exp-sub-title"><i class="fas fa-trophy"></i> Engineering Win</div>
                                 <p>${e.win}</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="exp-stack">
-                        <div class="exp-sub-title">Tech used on the job</div>
-                        <div class="skill-tags">
-                            ${e.stack.map(t => `<span class="skill-tag">${t}</span>`).join('')}
                         </div>
                     </div>
                 </article>
@@ -3429,10 +3751,17 @@
                         <div class="icon"><i class="fas ${s.icon}"></i></div>
                         <h4>${s.title}</h4>
                     </div>
-                    <div class="skill-tags">
-                        ${s.tags.map(t => `<span class="skill-tag">${t}</span>`).join('')}
-                    </div>
-                    ${s.used ? `<div class="used-in"><b>Used in →</b> ${s.used}</div>` : ''}
+                    ${s.groups
+                        ? s.groups.map(g => `
+                            <div class="skill-group">
+                                <div class="skill-group-label">${g.label}</div>
+                                <div class="skill-tags">
+                                    ${g.tags.map(t => `<span class="skill-tag">${t}</span>`).join('')}
+                                </div>
+                            </div>`).join('')
+                        : `<div class="skill-tags">
+                               ${s.tags.map(t => `<span class="skill-tag">${t}</span>`).join('')}
+                           </div>`}
                 </div>
             `).join('');
 
@@ -3461,27 +3790,51 @@
         const catLabels = { featured: 'Featured', embedded: 'Bare Metal', freertos: 'FreeRTOS', ai: 'Edge AI' };
         let currentFilter = 'all';
 
+        // Projects that also belong to other filters (a project can be in more than one)
+        const projectAlso = {
+            'Distributed ECU Network with CAN, FreeRTOS & UDS': ['automotive'],
+            'Autonomous Vehicle Safety Supervisor': ['automotive'],
+            'CAN Bus Driver Suite': ['automotive'],
+            'CAN Bus TX — FreeRTOS Task': ['automotive'],
+            'CAN Bus RX — FreeRTOS Task': ['automotive']
+        };
+
         function renderProjects(filter) {
             const grid = document.getElementById('projectsGrid');
             if (!grid) return;
-            const keys = filter === 'all' ? Object.keys(projectsData) : [filter];
             let html = '';
-            keys.forEach(cat => {
-                if (projectsData[cat]) {
-                    projectsData[cat].forEach(p => {
-                        const badge = catLabels[cat] || cat.toUpperCase();
+
+            // Build the list: "All" interleaves categories (one from each in turn)
+            // so it looks mixed, not grouped like the individual filters.
+            const cats = Object.keys(projectsData);
+            let list = [];
+            if (filter === 'all') {
+                const longest = Math.max(...cats.map(c => projectsData[c].length));
+                for (let i = 0; i < longest; i++) {
+                    cats.forEach(c => { if (projectsData[c][i]) list.push({ cat: c, p: projectsData[c][i] }); });
+                }
+            } else {
+                cats.forEach(c => projectsData[c].forEach(p => {
+                    if (c === filter || (projectAlso[p.title] || []).includes(filter)) list.push({ cat: c, p });
+                }));
+            }
+
+            list.forEach(({ cat, p }) => {
+                {
+                    const badge = catLabels[cat] || cat.toUpperCase();
                         html += `
                             <div class="project-card" data-cat="${cat}">
                                 <div class="meta">
-                                    <span class="project-domain-tag"><i class="fas fa-layer-group"></i> ${p.domain || badge}</span>
-                                    ${p.badge ? `<span class="highlight-badge"><i class="fas fa-trophy"></i> ${p.badge}</span>` : ''}
+                                    <span class="project-domain-tag" title="${p.domain || badge}"><i class="fas fa-layer-group"></i> <span class="txt">${p.domain || badge}</span></span>
                                 </div>
                                 ${p.img
                                     ? `<div class="media" onclick="window.open('${p.url}','_blank','noopener')">
                                            <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.style.display='none'" />
+                                           ${p.badge ? `<span class="highlight-badge"><i class="fas fa-trophy"></i> ${p.badge}</span>` : ''}
                                        </div>`
                                     : `<div class="media placeholder" onclick="window.open('${p.url}','_blank','noopener')">
                                            <i class="fas ${p.icon || 'fa-microchip'}"></i>
+                                           ${p.badge ? `<span class="highlight-badge"><i class="fas fa-trophy"></i> ${p.badge}</span>` : ''}
                                        </div>`}
                                 <div class="body">
                                     <div class="title" onclick="window.open('${p.url}','_blank','noopener')">${p.title}</div>
@@ -3493,7 +3846,6 @@
                                 </div>
                             </div>
                         `;
-                    });
                 }
             });
             grid.innerHTML = html || '<p style="grid-column:1/-1;text-align:center;color:var(--color-text-3);padding:2rem;">No projects in this category.</p>';
@@ -3502,8 +3854,8 @@
         function initFilters() {
             const bar = document.getElementById('filterBar');
             if (!bar) return;
-            const filters = ['all', 'featured', 'embedded', 'freertos', 'ai'];
-            const labels = { all: 'All Modules', featured: '★ Featured', embedded: 'Bare Metal', freertos: 'FreeRTOS', ai: 'Edge AI' };
+            const filters = ['all', 'featured', 'embedded', 'automotive'];
+            const labels = { all: 'All Modules', featured: '★ Featured', embedded: 'Bare Metal', automotive: 'Automotive' };
             bar.innerHTML = filters.map(f =>
                 `<button class="filter-btn ${f==='all'?'active':''}" data-filter="${f}">${labels[f]||f}</button>`
             ).join('');
@@ -3524,7 +3876,8 @@
             grid.innerHTML = certsData.map((c, i) => `
                 <div class="cert-card" onclick="openLightbox(${i})">
                     <div class="frame">
-                        <img src="${c.img}" alt="${c.name}" loading="lazy" onerror="this.style.display='none'" />
+                        <img src="${c.img}" alt="${c.name}" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('missing')" />
+                        <div class="no-img"><i class="fas fa-award"></i><small>Certificate image coming soon</small></div>
                         <div class="overlay"><span><i class="fas fa-search-plus"></i> Inspect Certificate</span></div>
                     </div>
                     <div class="info">
