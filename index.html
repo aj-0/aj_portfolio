@@ -428,10 +428,10 @@
            HERO
            ═══════════════════════════════════════════════════ */
         .hero {
-            min-height: 88vh;
+            min-height: 72vh;
             display: flex;
-            align-items: center;
-            padding: 100px 0 40px;
+            align-items: flex-start;
+            padding: 150px 0 40px;
             position: relative;
         }
 
@@ -503,9 +503,9 @@
         }
 
         .hero-headline {
-            font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+            font-size: clamp(2.7rem, 5.9vw, 5rem);
             font-weight: 900;
-            letter-spacing: -2px;
+            letter-spacing: -2.5px;
             line-height: 1.08;
             color: var(--color-text);
             margin-bottom: 16px;
@@ -992,7 +992,7 @@
                 display: none;
             }
             .hero-headline {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
         }
 
@@ -1190,6 +1190,28 @@
             font-size: 0.88rem;
             color: var(--color-text-2);
             line-height: 1.5;
+        }
+
+        /* Profile card fills the row height; mindset box takes the spare space */
+        .profile-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-card .mindset-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profile-card .mindset-box ul {
+            flex: 1;
+            justify-content: space-evenly;
+        }
+
+        .profile-card .mindset-box ul li {
+            font-size: 0.95rem;
         }
 
         .mindset-box ul li i {
@@ -2773,11 +2795,11 @@
                     <div class="hero-tagline">
                         <i class="fas fa-bolt"></i> Embedded Firmware Engineer · Industry Experienced
                     </div>
-                    <p class="hero-desc">
+                    <!-- <p class="hero-desc">
                         I work where hardware meets software. I read the datasheet,
                         trace the signal and find the root cause, because reliable embedded systems come
                         from understanding the system, not guessing at it.
-                    </p>
+                    </p> -->
                     <div class="hero-actions">
                         <a href="#projects" class="btn-primary">
                             <i class="fas fa-code-branch"></i> Explore Firmware
@@ -2867,7 +2889,7 @@
 
             <div class="about-grid">
                 <!-- Main Profile -->
-                <div class="glass-card">
+                <div class="glass-card profile-card">
                     <div class="card-header">
                         <div class="left">
                             <i class="fas fa-fingerprint"></i>
@@ -2878,10 +2900,7 @@
 
                     <div class="about-text">
                         <p>
-                            I'm an industry-experienced fresher in real-time embedded systems, with firmware experience on industrial gateway products as an <strong>Embedded Intern at MachDatum (ThingConnect)</strong>.
-                        </p>
-                        <p style="margin-top:12px;">
-                            I work mostly on the <strong>STM32 NUCLEO-F411RE</strong>, <strong>STM32F407 Discovery</strong> and <strong>STM32G0</strong> platforms, plus <strong>QNX Neutrino</strong> on Raspberry Pi 5, and I enjoy building complete systems, from peripheral drivers and RTOS tasks up to multi-node communication.
+                            I'm an industry-experienced fresher in real-time embedded systems, with practical exposure to firmware development, debugging and hardware validation on industrial gateway products. I read the datasheet, trace the signal and find the root cause, understanding the system at every level to build firmware that is reliable in the field.
                         </p>
                     </div>
 
@@ -2894,11 +2913,6 @@
                             <li><i class="fas fa-check-circle"></i> <strong>System-Level Thinking</strong> &gt; Isolated Feature Development</li>
                             <li><i class="fas fa-check-circle"></i> <strong>Reliability &amp; Quality</strong> &gt; Quick Output</li>
                         </ul>
-
-                        <div class="pipeline-box">
-                            <span class="tag">⚙ DEBUGGING PIPELINE EXECUTION:</span>
-                            Observe System Behavior → Analyze Runtime Data → Identify Root Cause → Implement Solution → Verify Stability
-                        </div>
                     </div>
                 </div>
 
@@ -2938,11 +2952,8 @@
                         <div class="spec-item">
                             <div class="label"><i class="fas fa-briefcase"></i> Industry Internship</div>
                             <div class="value">
-                                <strong>Embedded Intern</strong> ·
-                                <a href="https://machdatum.com" target="_blank" rel="noopener">MachDatum (ThingConnect)</a>, Coimbatore<br />
-                                <!-- TODO: replace with real dates -->
-                                MMM 2026 – MMM 2026 · 2 Months · Paid<br />
-                                <a href="#skills" onclick="window.showSkillsTab &amp;&amp; window.showSkillsTab('exp')">View internship work →</a>
+                                <div><strong>Embedded Intern</strong> · <a href="https://machdatum.com" target="_blank" rel="noopener">MachDatum (ThingConnect)</a></div>
+                                <div style="margin-top:8px;"><a href="#skills" onclick="window.showSkillsTab &amp;&amp; window.showSkillsTab('exp')">View internship work →</a></div>
                             </div>
                         </div>
                     </div>
@@ -3379,11 +3390,11 @@
             icon: 'fa-arrows-spin',
             title: 'RTOS',
             groups: [{
-                label: 'FreeRTOS',
-                tags: ['Tasks', 'Queues', 'Semaphores', 'Mutexes', 'ISR Sync', 'Software Timers']
+                label: 'FreeRTOS · MCU kernel on STM32',
+                tags: ['Task Priorities & Preemption', 'Queues', 'Semaphores & Mutexes', 'FromISR APIs', 'Software Timers (Timer Task)', 'Task Notifications']
             }, {
-                label: 'QNX Neutrino',
-                tags: ['Priority Scheduling', 'Message-Passing IPC', 'Watchdog / Heartbeat', 'Memory Locking']
+                label: 'QNX Neutrino · POSIX microkernel OS',
+                tags: ['Microkernel Architecture', 'POSIX Threads', 'Channels & Pulses', 'Resource Managers', 'Process Isolation']
             }],
         }, {
             icon: 'fa-magnifying-glass-chart',
