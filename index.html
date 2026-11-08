@@ -1198,8 +1198,9 @@
             font-size: 0.75rem;
         }
 
+        /* Follows the theme (light box in light mode, dark box in dark mode) */
         .pipeline-box {
-            background: #070E1A;
+            background: var(--color-surface-2);
             border-radius: 12px;
             padding: 16px 20px;
             margin-top: 16px;
@@ -1207,12 +1208,13 @@
             font-size: 0.78rem;
             line-height: 1.7;
             border: 1px solid var(--color-border);
+            border-left: 3px solid var(--color-accent-2);
             color: var(--color-text-2);
         }
 
         .pipeline-box .tag {
-            color: var(--color-accent-2);
-            font-weight: 700;
+            color: var(--color-text);
+            font-weight: 800;
         }
 
         /* ─── Specs ─── */
@@ -2772,9 +2774,9 @@
                         <i class="fas fa-bolt"></i> Embedded Firmware Engineer · Industry Experienced
                     </div>
                     <p class="hero-desc">
-                        I build and debug real-time firmware on STM32. During my internship I shipped
-                        <strong>OTA firmware updates with dual-bank flash and CRC-32/SHA-256 verification</strong>
-                        for an industrial Modbus-to-GSM gateway. I also work with FreeRTOS, CAN/UDS and QNX Neutrino.
+                        I work where hardware meets software. I read the datasheet,
+                        trace the signal and find the root cause, because reliable embedded systems come
+                        from understanding the system, not guessing at it.
                     </p>
                     <div class="hero-actions">
                         <a href="#projects" class="btn-primary">
@@ -2784,7 +2786,7 @@
                             <i class="fas fa-magnifying-glass-chart"></i> Debugging
                         </a>
                         <!-- Resume button with glow animation & bouncing download icon -->
-                        <a href="AJAY_C_RESUME%20.pdf" target="_blank" download class="btn-resume" title="Download Official Resume PDF">
+                        <a href="AJAY_C_RESUME.pdf" target="_blank" download class="btn-resume" title="Download Official Resume PDF">
                             <i class="fas fa-file-arrow-down resume-icon"></i>
                             <span>Download Resume</span>
                             <span class="resume-badge">PDF</span>
@@ -2876,17 +2878,16 @@
 
                     <div class="about-text">
                         <p>
-                            I'm an industry-experienced fresher in real-time embedded systems. As an <strong>Embedded Intern at MachDatum (ThingConnect)</strong>, I worked on firmware for industrial gateway products: OTA updates, dual-bank flash management, FreeRTOS task design and PCB-level functional testing.
+                            I'm an industry-experienced fresher in real-time embedded systems, with firmware experience on industrial gateway products as an <strong>Embedded Intern at MachDatum (ThingConnect)</strong>.
                         </p>
                         <p style="margin-top:12px;">
-                            I work mostly on the <strong>STM32 NUCLEO-F411RE</strong>, <strong>STM32F407 Discovery</strong> and <strong>STM32G0</strong> platforms, plus <strong>QNX Neutrino</strong> on Raspberry Pi 5. I look at firmware at the system level: how the hardware and software interact, and how to trace a bug across that boundary with a debugger and logic analyzer until I find the root cause.
+                            I work mostly on the <strong>STM32 NUCLEO-F411RE</strong>, <strong>STM32F407 Discovery</strong> and <strong>STM32G0</strong> platforms, plus <strong>QNX Neutrino</strong> on Raspberry Pi 5, and I enjoy building complete systems, from peripheral drivers and RTOS tasks up to multi-node communication.
                         </p>
                     </div>
 
                     <div class="mindset-box">
                         <div class="title"><i class="fas fa-compass-drafting"></i> My Core Engineering Mindset</div>
                         <ul>
-                            <li><i class="fas fa-check-circle"></i> <strong>Practical Skills</strong> &gt; Collecting Certificates</li>
                             <li><i class="fas fa-check-circle"></i> <strong>Debugging &amp; Root Cause Analysis</strong> &gt; Trial-and-Error Coding</li>
                             <li><i class="fas fa-check-circle"></i> <strong>Understanding Logic</strong> &gt; Copy-Paste Programming</li>
                             <li><i class="fas fa-check-circle"></i> <strong>Learning by Building</strong> &gt; Learning by Watching Tutorials</li>
@@ -2896,7 +2897,7 @@
 
                         <div class="pipeline-box">
                             <span class="tag">⚙ DEBUGGING PIPELINE EXECUTION:</span>
-                            Observe System Behavior → Analyze Runtime Data → Identify Root Cause → Implement Solution → Verify System Stability Output
+                            Observe System Behavior → Analyze Runtime Data → Identify Root Cause → Implement Solution → Verify Stability
                         </div>
                     </div>
                 </div>
@@ -2927,16 +2928,10 @@
                         <div class="spec-item">
                             <div class="label"><i class="fas fa-chart-line"></i> Academic Metrics</div>
                             <div class="value">
-                                <div class="gauge-row"><span><strong>CGPA:</strong> 7.6 / 10</span> <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--color-accent-2);">76%</span></div>
-                                <div class="gauge-track"><div class="gauge-fill" style="width:76%;"></div></div>
-
-                                <div class="gauge-row"><span><strong>12th Grade:</strong> 84.16% (State Board)</span> <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--color-accent-2);">84.16%</span></div>
-                                <div class="gauge-track"><div class="gauge-fill" style="width:84.16%;"></div></div>
-
-                                <div class="gauge-row"><span><strong>10th Grade:</strong> 75.8% (State Board)</span> <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--color-accent-2);">75.8%</span></div>
-                                <div class="gauge-track"><div class="gauge-fill" style="width:75.8%;"></div></div>
-
-                                <strong>Year:</strong> 3rd Year 5th Sem (Pursuing)
+                                <strong>CGPA:</strong> 7.6 / 10<br />
+                                <strong>12th Grade:</strong> 84.16% (State Board)<br />
+                                <strong>10th Grade:</strong> 75.8% (State Board)<br />
+                                <strong>Year:</strong> 3rd Year 5th Sem
                             </div>
                         </div>
 
@@ -3068,13 +3063,13 @@
                 <p class="message">
                     I'm looking for <strong>Embedded Firmware</strong> roles (internship or full-time) where I can
                     work on <strong>MCUs, RTOS and communication stacks</strong>, especially in
-                    automotive or industrial products. I've shipped OTA and gateway firmware in industry,
-                    and I'm ready to contribute from day one. Feel free to reach out!
+                    automotive or industrial products, and I'm ready to contribute from day one.
+                    Feel free to reach out!
                 </p>
 
                 <div class="contact-channels">
                     <a href="mailto:connect.ajayc@gmail.com" class="primary">
-                        <i class="fas fa-envelope"></i> Email Transmission
+                        <i class="fas fa-envelope"></i> Email Me
                     </a>
                     <a href="https://linkedin.com/in/mr-aj" target="_blank" rel="noopener">
                         <i class="fab fa-linkedin"></i> LinkedIn
@@ -3506,19 +3501,12 @@
                 tech: ['W5500', 'SPI', 'FreeRTOS', 'Ethernet'],
                 url: 'https://github.com/aj-0/FreeRTOS/tree/main/Spi_to_Ethernet_Webserver'
             }, {
-                domain: 'Real-Time Bus TX',
+                domain: 'Real-Time Bus',
                 img: 'https://github.com/user-attachments/assets/6c976d71-35bf-4eb3-9bae-3d69eff1a1d8',
-                title: 'CAN Bus TX — FreeRTOS Task',
-                caption: 'CAN transmission wrapped in a dedicated FreeRTOS task',
-                tech: ['CAN', 'FreeRTOS', 'Tasks'],
-                url: 'https://github.com/aj-0/FreeRTOS/tree/main/CAN%20Bus_Freertos_Tx'
-            }, {
-                domain: 'Real-Time Bus RX',
-                img: 'https://github.com/user-attachments/assets/6c976d71-35bf-4eb3-9bae-3d69eff1a1d8',
-                title: 'CAN Bus RX — FreeRTOS Task',
-                caption: 'ISR-to-task signaling for CAN reception via binary semaphore',
-                tech: ['CAN', 'FreeRTOS', 'ISR-safe API'],
-                url: 'https://github.com/aj-0/FreeRTOS/tree/main/CANBUS_Freertos_Rx'
+                title: 'CAN on FreeRTOS (TX / RX)',
+                caption: 'CAN transmission in a dedicated FreeRTOS task, and reception through ISR-to-task signaling with a binary semaphore.',
+                tech: ['CAN', 'FreeRTOS', 'Tasks', 'ISR-safe API', 'Semaphore'],
+                url: 'https://github.com/aj-0/FreeRTOS'
             }],
             ai: [{
                 domain: 'Edge AI / Neural Inference',
@@ -3795,8 +3783,7 @@
             'Distributed ECU Network with CAN, FreeRTOS & UDS': ['automotive'],
             'Autonomous Vehicle Safety Supervisor': ['automotive'],
             'CAN Bus Driver Suite': ['automotive'],
-            'CAN Bus TX — FreeRTOS Task': ['automotive'],
-            'CAN Bus RX — FreeRTOS Task': ['automotive']
+            'CAN on FreeRTOS (TX / RX)': ['automotive']
         };
 
         function renderProjects(filter) {
