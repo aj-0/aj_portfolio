@@ -1609,8 +1609,12 @@
            ═══════════════════════════════════════════════════ */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .skills-grid { grid-template-columns: minmax(0, 1fr); }
         }
 
         .skill-module {
@@ -1718,6 +1722,149 @@
             font-weight: 800;
             color: var(--color-text);
             margin-bottom: 8px;
+        }
+
+        /* ─── Platforms & Tools: logo tiles ─── */
+        .kb-heading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-accent-2);
+            margin: 0 0 14px;
+        }
+
+        .kb-heading::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--color-border);
+        }
+
+        /* Logo groups: no boxes, just big logos + name */
+        .tool-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px 24px;
+            margin-bottom: 40px;
+        }
+
+        .tool-group {
+            flex: 1 1 auto;
+            border: 1px solid var(--color-border-strong);
+            border-radius: 20px;
+            padding: 18px 24px 22px;
+        }
+
+        .tool-group.tag-group {
+            flex: 1 1 300px;
+            max-width: 440px;
+        }
+
+        .tool-group.tag-group .skill-tags { margin-top: 0; }
+
+        .tool-group-label {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--color-text);
+            margin-bottom: 18px;
+        }
+
+        .tool-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 22px 16px;
+        }
+
+        .tool-tile {
+            --brand: var(--color-accent-2);
+            width: 112px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+        }
+
+        .tool-logo {
+            width: 64px;
+            height: 64px;
+            display: grid;
+            place-items: center;
+            transition: transform var(--duration-med) var(--ease-spring), filter var(--duration-med);
+        }
+
+        .tool-tile:hover .tool-logo {
+            transform: translateY(-4px) scale(1.08);
+            filter: drop-shadow(0 8px 16px color-mix(in srgb, var(--brand) 45%, transparent));
+        }
+
+        .tool-logo .si {
+            width: 56px;
+            height: 56px;
+            background: var(--brand);
+            -webkit-mask: var(--icon) center / contain no-repeat;
+            mask: var(--icon) center / contain no-repeat;
+        }
+
+        .tool-logo .fa-icon {
+            font-size: 2.6rem;
+            color: var(--brand);
+        }
+
+        .tool-logo .mono {
+            font-family: var(--font-mono);
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--brand);
+            letter-spacing: 0.5px;
+        }
+
+        .tool-name {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.25;
+        }
+
+        .tool-sub {
+            font-family: var(--font-mono);
+            font-size: 0.64rem;
+            color: var(--color-text-3);
+            line-height: 1.4;
+            margin-top: -4px;
+        }
+
+        /* RTOS card spans the full row, FreeRTOS | QNX side by side */
+        .skill-module.wide { grid-column: 1 / -1; }
+        .skill-module.wide .skill-groups {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+        .skill-module.wide .skill-group + .skill-group {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+            padding-left: 24px;
+            border-left: 1px dashed var(--color-border-strong);
+        }
+
+        @media (max-width: 700px) {
+            .tool-items { gap: 18px 12px; }
+            .tool-tile { width: calc(33.333% - 8px); }
+            .skill-module.wide .skill-groups { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+            .skill-module.wide .skill-group + .skill-group {
+                padding-left: 0;
+                border-left: none;
+                padding-top: 12px;
+                border-top: 1px dashed var(--color-border-strong);
+            }
         }
 
         /* ─── Skills sub-section switch ─── */
@@ -2529,35 +2676,84 @@
         /* ═══════════════════════════════════════════════════
            CONTACT
            ═══════════════════════════════════════════════════ */
-        .contact-box {
-            max-width: 720px;
+        .contact-wrap {
+            max-width: 980px;
             margin: 0 auto;
-            background: var(--color-surface-glass);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--color-border);
-            border-radius: 28px;
-            padding: 44px 40px 40px;
-            box-shadow: var(--shadow-float);
-            text-align: center;
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            gap: 64px;
+            align-items: center;
         }
 
-        .contact-box .message {
-            font-size: 1.05rem;
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 26px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-decoration: none;
+            color: inherit;
+            width: fit-content;
+        }
+
+        .contact-row .c-icon {
+            flex-shrink: 0;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 8px 22px rgba(10, 22, 40, 0.18);
+            font-size: 1.55rem;
+            transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+        }
+
+        .contact-row .c-icon svg { width: 28px; height: 28px; }
+        .contact-row .c-icon .fa-linkedin { color: #0A66C2; }
+        .contact-row .c-icon .fa-github { color: var(--color-text); }
+        .contact-row .c-icon .fa-location-dot { color: #EA4335; }
+
+        a.contact-row:hover .c-icon {
+            transform: translateY(-3px) scale(1.05);
+            border-color: var(--color-accent);
+            box-shadow: 0 12px 30px rgba(56, 132, 255, 0.30);
+        }
+
+        .contact-row .c-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-text-3);
+            margin-bottom: 4px;
+        }
+
+        .contact-row .c-value {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--color-text);
+            word-break: break-word;
+            transition: color var(--duration-fast) var(--ease-out);
+        }
+
+        a.contact-row:hover .c-value { color: var(--color-link-hover); }
+
+        .contact-pitch .message {
+            font-size: 1.08rem;
             color: var(--color-text-2);
             line-height: 1.9;
-            margin-bottom: 32px;
         }
 
-        .contact-box .message strong {
-            color: var(--color-text);
-        }
+        .contact-pitch .message strong { color: var(--color-text); }
 
         .contact-channels {
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
-            margin-bottom: 32px;
         }
 
         .contact-channels a {
@@ -2565,21 +2761,11 @@
             align-items: center;
             gap: 10px;
             padding: 14px 28px;
-            background: var(--color-surface-2);
-            border: 1px solid var(--color-border);
             border-radius: 60px;
-            color: var(--color-text-2);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
             transition: all var(--duration-fast) var(--ease-out);
-        }
-
-        .contact-channels a:hover {
-            border-color: var(--color-accent);
-            color: #fff;
-            background: var(--color-accent-dim);
-            transform: translateY(-3px);
         }
 
         .contact-channels a.primary {
@@ -2594,33 +2780,18 @@
             transform: translateY(-3px);
         }
 
-        .contact-box .signature {
-            padding-top: 24px;
-            border-top: 1px solid var(--color-border);
-            font-family: var(--font-mono);
-            font-size: 0.82rem;
-            color: var(--color-text-3);
-            line-height: 1.8;
-        }
-
-        .contact-box .signature strong {
-            color: var(--color-text);
-            font-size: 0.95rem;
-        }
-
-        .contact-box .signature a {
-            color: var(--color-accent-2);
-            text-decoration: none;
+        @media (max-width: 860px) {
+            .contact-wrap {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 40px;
+            }
+            .contact-pitch { order: -1; }
         }
 
         @media (max-width: 600px) {
-            .contact-box {
-                padding: 28px 20px;
-            }
-            .contact-channels a {
-                padding: 12px 20px;
-                font-size: 0.82rem;
-            }
+            .contact-row .c-icon { width: 54px; height: 54px; font-size: 1.3rem; }
+            .contact-row .c-icon svg { width: 24px; height: 24px; }
+            .contact-row .c-value { font-size: 1rem; }
         }
 
         /* ═══════════════════════════════════════════════════
@@ -3010,6 +3181,9 @@
 
             <!-- Sub-section B: Technical Knowledge -->
             <div class="skills-panel" id="skillsPanelKnow" role="tabpanel">
+                <div class="kb-heading">Platforms &amp; Tools</div>
+                <div class="tool-grid" id="toolGrid"></div>
+                <div class="kb-heading">Firmware Knowledge</div>
                 <div class="skills-grid" id="skillsGrid"></div>
                 <!-- Currently Exploring — hidden for now. Uncomment to show again.
                 <div class="exploring-box">
@@ -3070,30 +3244,33 @@
                 <p class="section-sub">Open to Embedded Firmware roles in automotive, industrial IoT and real-time systems.</p>
             </div>
 
-            <div class="contact-box">
-                <p class="message">
-                    I'm looking for <strong>Embedded Firmware</strong> roles (internship or full-time) where I can
-                    work on <strong>MCUs, RTOS and communication stacks</strong>, especially in
-                    automotive or industrial products, and I'm ready to contribute from day one.
-                    Feel free to reach out!
-                </p>
-
-                <div class="contact-channels">
-                    <a href="mailto:connect.ajayc@gmail.com" class="primary">
-                        <i class="fas fa-envelope"></i> Email Me
+            <div class="contact-wrap">
+                <div class="contact-list">
+                    <a class="contact-row" href="mailto:connect.ajayc@gmail.com">
+                        <span class="c-icon"><svg viewBox="52 42 88 66" aria-hidden="true"><path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/><path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/><path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/><path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/><path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/></svg></span>
+                        <span><div class="c-label">Email Me</div><div class="c-value">connect.ajayc@gmail.com</div></span>
                     </a>
-                    <a href="https://linkedin.com/in/mr-aj" target="_blank" rel="noopener">
-                        <i class="fab fa-linkedin"></i> LinkedIn
+                    <a class="contact-row" href="https://linkedin.com/in/mr-aj" target="_blank" rel="noopener">
+                        <span class="c-icon"><i class="fab fa-linkedin"></i></span>
+                        <span><div class="c-label">LinkedIn</div><div class="c-value">linkedin.com/in/mr-aj</div></span>
                     </a>
-                    <a href="https://github.com/aj-0" target="_blank" rel="noopener">
-                        <i class="fab fa-github"></i> GitHub Repos
+                    <a class="contact-row" href="https://github.com/aj-0" target="_blank" rel="noopener">
+                        <span class="c-icon"><i class="fab fa-github"></i></span>
+                        <span><div class="c-label">GitHub</div><div class="c-value">github.com/aj-0</div></span>
                     </a>
+                    <div class="contact-row">
+                        <span class="c-icon"><i class="fas fa-location-dot"></i></span>
+                        <span><div class="c-label">Location</div><div class="c-value">Tiruppur, Tamil Nadu</div></span>
+                    </div>
                 </div>
 
-                <div class="signature">
-                    <strong>Ajay C</strong><br />
-                    Tiruppur, Tamil Nadu &nbsp;·&nbsp;
-                    <a href="mailto:connect.ajayc@gmail.com">connect.ajayc@gmail.com</a>
+                <div class="contact-pitch">
+                    <p class="message">
+                        I'm looking for <strong>Embedded Firmware</strong> roles (internship or full-time) where I can
+                        work on <strong>MCUs, RTOS and communication stacks</strong>, especially in
+                        automotive or industrial products, and I'm ready to contribute from day one.
+                        Feel free to reach out!
+                    </p>
                 </div>
             </div>
         </section>
@@ -3370,25 +3547,60 @@
         }];
 
         // Technical Knowledge (Skills → sub-section B)
+        // Logo tiles (Simple Icons, drawn as a CSS mask in the brand colour).
+        // Items without a public logo use a short monogram instead.
+        const SI = 'https://cdn.jsdelivr.net/npm/simple-icons@16.30.0/icons/';
+        const toolGroups = [{
+            label: 'Firmware Languages',
+            items: [
+                { name: 'C', sub: 'Embedded C · HAL', si: 'c', color: '#659AD2' },
+                { name: 'Python', sub: 'Scripts & testing', si: 'python', color: '#3776AB' },
+                { name: 'Rust', sub: 'Basics', si: 'rust', color: 'var(--color-text)' }
+            ]
+        }, {
+            label: 'Embedded Hardware',
+            items: [
+                { name: 'STM32', sub: 'F411 · F407 · F030 · G0B0 · G0C1 · C5', si: 'stmicroelectronics', color: '#3CB4E6' },
+                { name: 'Arm Cortex-M', sub: 'M0+ · M4', si: 'arm', color: '#0091BD' },
+                { name: 'ESP32', sub: 'Wi-Fi bridge', si: 'espressif', color: '#E7352C' },
+                { name: 'Arduino', sub: 'Prototyping', si: 'arduino', color: '#00979D' },
+                { name: 'Raspberry Pi 5', sub: 'QNX target', si: 'raspberrypi', color: '#C51A4A' }
+            ]
+        }, {
+            label: 'Tools & IDEs',
+            items: [
+                { name: 'STM32CubeIDE', sub: 'CubeMX · CubeProg', mono: 'IDE', color: '#3CB4E6' },
+                { name: 'QNX Momentics', sub: 'QNX IDE', mono: 'QNX', color: '#E5484D' },
+                { name: 'VS Code', sub: 'Editor', iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/vscode/vscode-plain.svg', color: '#3B8EEA' },
+                { name: 'ARM GNU Toolchain', sub: 'arm-none-eabi-gcc', si: 'gnu', color: '#C0392B' },
+                { name: 'Git / GitHub', sub: 'Branching · commits', si: 'git', color: '#F05032' }
+            ]
+        }, {
+            label: 'Protocols & Networking',
+            items: [
+                { name: 'UART', sub: 'Async serial', fa: 'fa-right-left', color: '#3B8EEA' },
+                { name: 'I2C', sub: '2-wire bus', fa: 'fa-link', color: '#00B894' },
+                { name: 'SPI', sub: '4-wire bus', fa: 'fa-diagram-project', color: '#8E7CF0' },
+                { name: 'CAN 2.0', sub: 'Vehicle bus', fa: 'fa-car', color: '#F5A623' },
+                { name: 'UDS', sub: 'Diagnostics', fa: 'fa-stethoscope', color: '#E5484D' },
+                { name: 'Modbus', sub: 'RTU / TCP', fa: 'fa-industry', color: '#14A3B8' },
+                { name: 'Ethernet', sub: 'TCP · HTTPS', fa: 'fa-ethernet', color: '#3CB4E6' },
+                { name: 'MQTT', sub: 'IoT messaging', si: 'mqtt', color: '#A05FC8' }
+            ]
+        }];
+
         const skillsData = [{
-            icon: 'fa-code',
-            title: 'Languages & Firmware',
-            tags: ['C / Embedded C / HAL', 'Python', 'Bootloader (Dual-Bank)', 'OTA Updates'],
-        }, {
-            icon: 'fa-microchip',
-            title: 'MCUs & Boards',
-            tags: ['STM32 (F411RE · F407 · F030 · G0B0RE · G0C1 · C5)', 'ARM Cortex-M0+ & M4', 'ESP32 · Arduino', 'Raspberry Pi 5'],
-        }, {
-            icon: 'fa-satellite-dish',
-            title: 'Protocols & Networking',
-            tags: ['UART', 'I2C', 'SPI', 'CAN 2.0', 'UDS', 'Modbus RTU / TCP', 'Ethernet (TCP, HTTPS)', 'MQTT', 'GSM'],
-        }, {
             icon: 'fa-sliders',
             title: 'Peripherals',
             tags: ['GPIO', 'EXTI', 'DMA', 'ADC', 'DAC', 'Timers / PWM', 'RTC', 'Watchdog', 'RCC Clock Tree', 'Flash'],
         }, {
+            icon: 'fa-magnifying-glass-chart',
+            title: 'Debugging & Analysis',
+            tags: ['ST-LINK', 'Breakpoints & Step', 'Register / Memory View', 'SWV Trace', 'Logic Analyzer (PulseView)', 'Multimeter', 'Datasheets & Errata'],
+        }, {
             icon: 'fa-arrows-spin',
             title: 'RTOS',
+            wide: true,
             groups: [{
                 label: 'FreeRTOS · MCU kernel on STM32',
                 tags: ['Task Priorities & Preemption', 'Queues', 'Semaphores & Mutexes', 'FromISR APIs', 'Software Timers (Timer Task)', 'Task Notifications']
@@ -3396,14 +3608,6 @@
                 label: 'QNX Neutrino · POSIX microkernel OS',
                 tags: ['Microkernel Architecture', 'POSIX Threads', 'Channels & Pulses', 'Resource Managers', 'Process Isolation']
             }],
-        }, {
-            icon: 'fa-magnifying-glass-chart',
-            title: 'Debugging & Analysis',
-            tags: ['ST-LINK', 'Breakpoints & Step', 'Register / Memory View', 'SWV Trace', 'Logic Analyzer (PulseView)', 'Multimeter', 'Datasheets & Errata'],
-        }, {
-            icon: 'fa-screwdriver-wrench',
-            title: 'Tools & IDEs',
-            tags: ['STM32CubeIDE', 'Keil', 'QNX Momentics', 'VS Code', 'ARM GNU Toolchain', 'Git / GitHub', 'KiCad'],
         }];
 
         const exploringData = ['Rust (basics)', 'C++ (basics)', 'TinyML / TFLite Micro', 'X-CUBE-AI'];
@@ -3744,20 +3948,42 @@
         (function renderSkills() {
             const grid = document.getElementById('skillsGrid');
             if (!grid) return;
+            const tg = document.getElementById('toolGrid');
+            const tile = t => `
+                <div class="tool-tile" style="--brand:${t.color}">
+                    <div class="tool-logo">
+                        ${(t.si || t.iconUrl)
+                            ? `<span class="si" style="--icon:url('${t.iconUrl || SI + t.si + '.svg'}')" role="img" aria-label="${t.name} logo"></span>`
+                            : t.fa
+                                ? `<i class="fas ${t.fa} fa-icon" aria-hidden="true"></i>`
+                                : `<span class="mono">${t.mono}</span>`}
+                    </div>
+                    <div class="tool-name">${t.name}</div>
+                    <div class="tool-sub">${t.sub}</div>
+                </div>`;
+            if (tg) tg.innerHTML = toolGroups.map(g => `
+                <div class="tool-group${g.tags ? ' tag-group' : ''}">
+                    <div class="tool-group-label">${g.label}</div>
+                    ${g.items
+                        ? `<div class="tool-items">${g.items.map(tile).join('')}</div>`
+                        : `<div class="skill-tags">${g.tags.map(t => `<span class="skill-tag">${t}</span>`).join('')}</div>`}
+                </div>
+            `).join('');
+
             grid.innerHTML = skillsData.map(s => `
-                <div class="skill-module">
+                <div class="skill-module${s.wide ? ' wide' : ''}">
                     <div class="head">
                         <div class="icon"><i class="fas ${s.icon}"></i></div>
                         <h4>${s.title}</h4>
                     </div>
                     ${s.groups
-                        ? s.groups.map(g => `
+                        ? `<div class="skill-groups">` + s.groups.map(g => `
                             <div class="skill-group">
                                 <div class="skill-group-label">${g.label}</div>
                                 <div class="skill-tags">
                                     ${g.tags.map(t => `<span class="skill-tag">${t}</span>`).join('')}
                                 </div>
-                            </div>`).join('')
+                            </div>`).join('') + `</div>`
                         : `<div class="skill-tags">
                                ${s.tags.map(t => `<span class="skill-tag">${t}</span>`).join('')}
                            </div>`}
