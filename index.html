@@ -3181,9 +3181,7 @@
 
             <!-- Sub-section B: Technical Knowledge -->
             <div class="skills-panel" id="skillsPanelKnow" role="tabpanel">
-                <div class="kb-heading">Platforms &amp; Tools</div>
                 <div class="tool-grid" id="toolGrid"></div>
-                <div class="kb-heading">Firmware Knowledge</div>
                 <div class="skills-grid" id="skillsGrid"></div>
                 <!-- Currently Exploring — hidden for now. Uncomment to show again.
                 <div class="exploring-box">
@@ -3958,7 +3956,7 @@
                                 : `<span class="mono">${t.mono}</span>`}
                     </div>
                     <div class="tool-name">${t.name}</div>
-                    <div class="tool-sub">${t.sub}</div>
+                    ${t.sub ? `<div class="tool-sub">${t.sub}</div>` : ''}
                 </div>`;
             if (tg) tg.innerHTML = toolGroups.map(g => `
                 <div class="tool-group${g.tags ? ' tag-group' : ''}">
